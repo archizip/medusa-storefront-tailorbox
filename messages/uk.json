@@ -1,0 +1,51 @@
+{
+  "common": {
+    "addToCart": "Додати до кошика",
+    "checkout": "Оформити замовлення",
+    "cart": "Кошик",
+    "products": "Товари",
+    "categories": "Категорії",
+    "collections": "Колекції",
+    "account": "Акаунт",
+    "search": "Пошук",
+    "menu": "Меню",
+    "close": "Закрити",
+    "loading": "Завантаження...",
+    "error": "Помилка",
+    "success": "Успіх",
+    "selectVariant": "Виберіть варіант",
+    "outOfStock": "Немає в наявності",
+    "quantity": "Кількість",
+    "remove": "Видалити",
+    "subtotal": "Підсумок",
+    "subtotalExclTaxes": "Підсумок (без податків)",
+    "goToCart": "Перейти до кошика",
+    "emptyBag": "Ваша корзина порожня.",
+    "exploreProducts": "Переглянути товари",
+    "goToAllProducts": "Перейти до всіх товарів"
+  },
+  "checkout": {
+    "shipping": "Доставка",
+    "payment": "Оплата",
+    "review": "Перегляд",
+    "shippingAddress": "Адреса доставки",
+    "billingAddress": "Адреса оплати",
+    "continueToPayment": "Перейти до оплати",
+    "placeOrder": "Оформити замовлення"
+  },
+  "cart": {
+    "empty": "Ваш кошик порожній",
+    "subtotal": "Підсумок",
+    "total": "Всього",
+    "remove": "Видалити",
+    "update": "Оновити"
+  },
+  "product": {
+    "addToCart": "Додати до кошика",
+    "quantity": "Кількість",
+    "description": "Опис",
+    "specifications": "Характеристики",
+    "reviews": "Відгуки"
+  }
+}
+

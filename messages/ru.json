@@ -1,0 +1,51 @@
+{
+  "common": {
+    "addToCart": "Добавить в корзину",
+    "checkout": "Оформить заказ",
+    "cart": "Корзина",
+    "products": "Товары",
+    "categories": "Категории",
+    "collections": "Коллекции",
+    "account": "Аккаунт",
+    "search": "Поиск",
+    "menu": "Меню",
+    "close": "Закрыть",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "success": "Успех",
+    "selectVariant": "Выберите вариант",
+    "outOfStock": "Нет в наличии",
+    "quantity": "Количество",
+    "remove": "Удалить",
+    "subtotal": "Подытог",
+    "subtotalExclTaxes": "Подытог (без налогов)",
+    "goToCart": "Перейти в корзину",
+    "emptyBag": "Ваша корзина пуста.",
+    "exploreProducts": "Посмотреть товары",
+    "goToAllProducts": "Перейти ко всем товарам"
+  },
+  "checkout": {
+    "shipping": "Доставка",
+    "payment": "Оплата",
+    "review": "Просмотр",
+    "shippingAddress": "Адрес доставки",
+    "billingAddress": "Адрес оплаты",
+    "continueToPayment": "Перейти к оплате",
+    "placeOrder": "Оформить заказ"
+  },
+  "cart": {
+    "empty": "Ваша корзина пуста",
+    "subtotal": "Подытог",
+    "total": "Итого",
+    "remove": "Удалить",
+    "update": "Обновить"
+  },
+  "product": {
+    "addToCart": "Добавить в корзину",
+    "quantity": "Количество",
+    "description": "Описание",
+    "specifications": "Характеристики",
+    "reviews": "Отзывы"
+  }
+}
+

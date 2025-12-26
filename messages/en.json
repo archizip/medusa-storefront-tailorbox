@@ -1,0 +1,51 @@
+{
+  "common": {
+    "addToCart": "Add to Cart",
+    "checkout": "Checkout",
+    "cart": "Cart",
+    "products": "Products",
+    "categories": "Categories",
+    "collections": "Collections",
+    "account": "Account",
+    "search": "Search",
+    "menu": "Menu",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "selectVariant": "Select variant",
+    "outOfStock": "Out of stock",
+    "quantity": "Quantity",
+    "remove": "Remove",
+    "subtotal": "Subtotal",
+    "subtotalExclTaxes": "Subtotal (excl. taxes)",
+    "goToCart": "Go to cart",
+    "emptyBag": "Your shopping bag is empty.",
+    "exploreProducts": "Explore products",
+    "goToAllProducts": "Go to all products page"
+  },
+  "checkout": {
+    "shipping": "Shipping",
+    "payment": "Payment",
+    "review": "Review",
+    "shippingAddress": "Shipping Address",
+    "billingAddress": "Billing Address",
+    "continueToPayment": "Continue to Payment",
+    "placeOrder": "Place Order"
+  },
+  "cart": {
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "remove": "Remove",
+    "update": "Update"
+  },
+  "product": {
+    "addToCart": "Add to Cart",
+    "quantity": "Quantity",
+    "description": "Description",
+    "specifications": "Specifications",
+    "reviews": "Reviews"
+  }
+}
+

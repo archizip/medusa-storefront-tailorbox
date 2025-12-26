@@ -1,0 +1,51 @@
+{
+  "common": {
+    "addToCart": "Ajouter au panier",
+    "checkout": "Passer la commande",
+    "cart": "Panier",
+    "products": "Produits",
+    "categories": "Catégories",
+    "collections": "Collections",
+    "account": "Compte",
+    "search": "Rechercher",
+    "menu": "Menu",
+    "close": "Fermer",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "selectVariant": "Sélectionner une variante",
+    "outOfStock": "Rupture de stock",
+    "quantity": "Quantité",
+    "remove": "Retirer",
+    "subtotal": "Sous-total",
+    "subtotalExclTaxes": "Sous-total (hors taxes)",
+    "goToCart": "Aller au panier",
+    "emptyBag": "Votre panier est vide.",
+    "exploreProducts": "Explorer les produits",
+    "goToAllProducts": "Aller à la page de tous les produits"
+  },
+  "checkout": {
+    "shipping": "Livraison",
+    "payment": "Paiement",
+    "review": "Révision",
+    "shippingAddress": "Adresse de livraison",
+    "billingAddress": "Adresse de facturation",
+    "continueToPayment": "Continuer vers le paiement",
+    "placeOrder": "Passer la commande"
+  },
+  "cart": {
+    "empty": "Votre panier est vide",
+    "subtotal": "Sous-total",
+    "total": "Total",
+    "remove": "Retirer",
+    "update": "Mettre à jour"
+  },
+  "product": {
+    "addToCart": "Ajouter au panier",
+    "quantity": "Quantité",
+    "description": "Description",
+    "specifications": "Spécifications",
+    "reviews": "Avis"
+  }
+}
+

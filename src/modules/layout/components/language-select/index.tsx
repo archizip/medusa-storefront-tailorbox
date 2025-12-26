@@ -14,6 +14,7 @@ import ReactCountryFlag from "react-country-flag"
 import { StateType } from "@lib/hooks/use-toggle-state"
 import { updateLocale } from "@lib/data/locale-actions"
 import { Locale } from "@lib/data/locales"
+import { normalizeLocale } from "@lib/util/normalize-locale"
 
 type LanguageOption = {
   code: string
@@ -95,8 +96,9 @@ const LanguageSelect = ({
 
   useEffect(() => {
     if (currentLocale) {
+      const normalizedCurrent = normalizeLocale(currentLocale);
       const option = options.find(
-        (o) => o.code.toLowerCase() === currentLocale.toLowerCase()
+        (o) => normalizeLocale(o.code) === normalizedCurrent
       )
       setCurrent(option ?? DEFAULT_OPTION)
     } else {
@@ -105,25 +107,49 @@ const LanguageSelect = ({
   }, [options, currentLocale])
 
   const handleChange = (option: LanguageOption) => {
-    startTransition(async () => {
-      await updateLocale(option.code)
+    const normalizedOptionCode = normalizeLocale(option.code || "");
+    const normalizedCurrent = normalizeLocale(currentLocale || "");
+    
+    // Не обновляем, если выбран тот же язык
+    if (normalizedOptionCode === normalizedCurrent) {
       close()
-      router.refresh()
+      return
+    }
+
+    startTransition(async () => {
+      try {
+        // Сохраняем нормализованный код (fr, uk, ru, en)
+        await updateLocale(normalizedOptionCode)
+        // Не закрываем меню сразу, чтобы пользователь видел выбор
+        // Обновляем страницу для применения нового locale
+        router.refresh()
+        // Закрываем меню после небольшой задержки
+        setTimeout(() => {
+          close()
+        }, 100)
+      } catch (error) {
+        console.error("Failed to update locale:", error)
+        close()
+      }
     })
   }
+
+  // Определяем текущее значение для контролируемого компонента
+  const selectedValue = useMemo(() => {
+    if (currentLocale) {
+      return options.find(
+        (o) => o.code.toLowerCase() === currentLocale.toLowerCase()
+      ) ?? DEFAULT_OPTION
+    }
+    return DEFAULT_OPTION
+  }, [currentLocale, options])
 
   return (
     <div>
       <Listbox
         as="span"
+        value={selectedValue}
         onChange={handleChange}
-        defaultValue={
-          currentLocale
-            ? options.find(
-                (o) => o.code.toLowerCase() === currentLocale.toLowerCase()
-              ) ?? DEFAULT_OPTION
-            : DEFAULT_OPTION
-        }
         disabled={isPending}
       >
         <ListboxButton className="py-1 w-full">

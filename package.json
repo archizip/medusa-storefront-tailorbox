@@ -8,7 +8,8 @@
     "medusa-storefront"
   ],
   "scripts": {
-    "dev": "next dev --turbopack -p 8000",
+    "dev": "node scripts/dev-with-env.js",
+    "dev:original": "next dev --turbopack -p 8000",
     "build": "next build",
     "start": "next start -p 8000",
     "lint": "next lint",
@@ -23,6 +24,7 @@
     "@stripe/stripe-js": "^8.2.0",
     "lodash": "^4.17.21",
     "next": "15.3.8",
+    "next-intl": "^4.6.1",
     "pg": "^8.11.3",
     "qs": "^6.12.1",
     "react": "19.0.3",
@@ -59,5 +61,6 @@
   "overrides": {
     "react": "19.0.3",
     "react-dom": "19.0.3"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

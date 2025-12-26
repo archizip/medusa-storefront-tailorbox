@@ -1,4 +1,5 @@
 const checkEnvVariables = require("./check-env-variables")
+const createNextIntlPlugin = require('next-intl/plugin');
 
 checkEnvVariables()
 
@@ -7,6 +8,8 @@ checkEnvVariables()
  */
 const S3_HOSTNAME = process.env.MEDUSA_CLOUD_S3_HOSTNAME
 const S3_PATHNAME = process.env.MEDUSA_CLOUD_S3_PATHNAME
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 /**
  * @type {import('next').NextConfig}
@@ -55,4 +58,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withNextIntl(nextConfig)
