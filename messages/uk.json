@@ -22,7 +22,17 @@
     "goToCart": "Перейти до кошика",
     "emptyBag": "Ваша корзина порожня.",
     "exploreProducts": "Переглянути товари",
-    "goToAllProducts": "Перейти до всіх товарів"
+    "goToAllProducts": "Перейти до всіх товарів",
+    "home": "Головна",
+    "store": "Магазин",
+    "language": "Мова",
+    "country": "Країна",
+    "selectCountry": "Виберіть країну",
+    "new": "Новинки",
+    "search": "Пошук",
+    "signIn": "Увійти",
+    "help": "Допомога",
+    "findStore": "Знайти магазин"
   },
   "checkout": {
     "shipping": "Доставка",

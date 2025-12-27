@@ -22,7 +22,17 @@
     "goToCart": "Go to cart",
     "emptyBag": "Your shopping bag is empty.",
     "exploreProducts": "Explore products",
-    "goToAllProducts": "Go to all products page"
+    "goToAllProducts": "Go to all products page",
+    "home": "Home",
+    "store": "Store",
+    "language": "Language",
+    "country": "Country",
+    "selectCountry": "Select country",
+    "new": "New",
+    "search": "Search",
+    "signIn": "Sign In",
+    "help": "Help",
+    "findStore": "Find a Store"
   },
   "checkout": {
     "shipping": "Shipping",

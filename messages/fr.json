@@ -22,7 +22,17 @@
     "goToCart": "Aller au panier",
     "emptyBag": "Votre panier est vide.",
     "exploreProducts": "Explorer les produits",
-    "goToAllProducts": "Aller à la page de tous les produits"
+    "goToAllProducts": "Aller à la page de tous les produits",
+    "home": "Accueil",
+    "store": "Boutique",
+    "language": "Langue",
+    "country": "Pays",
+    "selectCountry": "Sélectionner un pays",
+    "new": "Nouveau",
+    "search": "Rechercher",
+    "signIn": "S'identifier",
+    "help": "Aide",
+    "findStore": "Trouver un magasin"
   },
   "checkout": {
     "shipping": "Livraison",
