@@ -141,6 +141,27 @@
       "title": "Our Collections",
       "viewAll": "View All Collections"
     }
+  },
+  "footer": {
+    "findStore": "Find a Store",
+    "findStoreDescription": "Find a Nike store near you",
+    "getHelp": "Get Help",
+    "orderStatus": "Order Status",
+    "delivery": "Delivery",
+    "returns": "Returns",
+    "paymentOptions": "Payment Options",
+    "contactUs": "Contact Us",
+    "about": "About",
+    "news": "News",
+    "careers": "Careers",
+    "investors": "Investors",
+    "sustainability": "Sustainability",
+    "categories": "Categories",
+    "collections": "Collections",
+    "allRightsReserved": "All rights reserved.",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "cookies": "Cookies"
   }
 }
 

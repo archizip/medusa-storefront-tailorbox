@@ -3,91 +3,113 @@ import { HttpTypes } from "@medusajs/types"
 import {
   Container,
   Typography,
-  Grid,
-  Card,
-  CardContent,
-  CardActionArea,
   Box,
+  Button,
 } from "@mui/material"
 import { getTranslations } from "next-intl/server"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import { Category, ArrowForward } from "@mui/icons-material"
 
 async function CategoriesGrid() {
-  const categories = await listCategories({ limit: 6 })
-  const t = await getTranslations("home.categories")
+  try {
+    const categories = await listCategories({ limit: 100 })
+    const t = await getTranslations("home.categories")
 
-  // Фильтруем только родительские категории
-  const parentCategories = categories?.filter((c) => !c.parent_category) || []
+    if (!categories || categories.length === 0) {
+      return null
+    }
 
-  if (!parentCategories.length) {
-    return null
-  }
+    // Показываем все категории с handle (не фильтруем по parent_category)
+    const displayCategories = categories.filter((c) => c.handle && c.name) || []
 
-  return (
-    <Container maxWidth="lg" sx={{ py: { xs: 6, md: 10 } }}>
-      <Box sx={{ mb: 4, textAlign: "center" }}>
-        <Typography
-          variant="h3"
-          component="h2"
-          sx={{
-            fontWeight: 600,
-            mb: 1,
-            fontSize: { xs: "1.75rem", md: "2.25rem" },
-          }}
-        >
-          {t("title")}
-        </Typography>
-      </Box>
-      <Grid container spacing={3}>
-        {parentCategories.slice(0, 6).map((category) => (
-          <Grid item xs={6} sm={4} md={2} key={category.id}>
-            <Card
-              sx={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                transition: "all 0.3s ease",
-                "&:hover": {
-                  transform: "translateY(-8px)",
-                  boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-                },
-              }}
-            >
-              <CardActionArea
+    // Если нет категорий, не показываем секцию
+    if (displayCategories.length === 0) {
+      return null
+    }
+
+    return (
+      <Box sx={{ py: { xs: 8, md: 12 }, backgroundColor: "#f5f5f5" }}>
+        <Container maxWidth="xl">
+          <Typography
+            variant="h3"
+            component="h2"
+            sx={{
+              fontWeight: 700,
+              mb: 6,
+              fontSize: { xs: "1.75rem", md: "2.5rem" },
+              textAlign: "center",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            {t("title")}
+          </Typography>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "repeat(1, 1fr)",
+                sm: "repeat(2, 1fr)",
+                md: "repeat(4, 1fr)",
+              },
+              gap: 2,
+            }}
+          >
+            {displayCategories.slice(0, 4).map((category) => (
+              <Box
+                key={category.id}
                 component={LocalizedClientLink}
                 href={`/categories/${category.handle}`}
                 sx={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  p: 2,
-                  textAlign: "center",
+                  display: "block",
+                  position: "relative",
+                  height: { xs: 300, md: 400 },
+                  backgroundColor: "#000",
+                  borderRadius: 0,
+                  overflow: "hidden",
+                  textDecoration: "none",
+                  "&:hover": {
+                    "& .category-overlay": {
+                      opacity: 1,
+                    },
+                    "& .category-title": {
+                      transform: "translateY(-5px)",
+                    },
+                  },
+                  transition: "all 0.3s ease",
                 }}
               >
                 <Box
+                  className="category-overlay"
                   sx={{
-                    width: 64,
-                    height: 64,
-                    borderRadius: "50%",
-                    backgroundColor: "primary.light",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    mx: "auto",
-                    mb: 2,
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%)",
+                    opacity: 0.7,
+                    transition: "opacity 0.3s ease",
+                  }}
+                />
+                <Box
+                  sx={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    p: 4,
+                    zIndex: 1,
                   }}
                 >
-                  <Category sx={{ fontSize: 32, color: "white" }} />
-                </Box>
-                <CardContent sx={{ flexGrow: 1, p: 0 }}>
                   <Typography
-                    variant="h6"
+                    className="category-title"
+                    variant="h4"
                     component="h3"
                     sx={{
-                      fontWeight: 600,
-                      fontSize: "1rem",
+                      fontWeight: 700,
+                      color: "white",
+                      fontSize: { xs: "1.5rem", md: "2rem" },
                       mb: 1,
+                      transition: "transform 0.3s ease",
                     }}
                   >
                     {category.name}
@@ -95,44 +117,49 @@ async function CategoriesGrid() {
                   {category.description && (
                     <Typography
                       variant="body2"
-                      color="text.secondary"
                       sx={{
+                        color: "rgba(255,255,255,0.9)",
                         fontSize: "0.875rem",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
                       }}
                     >
                       {category.description}
                     </Typography>
                   )}
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-      <Box sx={{ textAlign: "center", mt: 4 }}>
-        <LocalizedClientLink
-          href="/categories"
-          style={{
-            textDecoration: "none",
-            color: "inherit",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-            fontWeight: 500,
-          }}
-        >
-          <Typography variant="body1" sx={{ fontWeight: 500 }}>
-            {t("viewAll")}
-          </Typography>
-          <ArrowForward sx={{ fontSize: 20 }} />
-        </LocalizedClientLink>
+                </Box>
+              </Box>
+            ))}
+          </Box>
+          <Box sx={{ textAlign: "center", mt: 6 }}>
+            <Button
+              component={LocalizedClientLink}
+              href="/store"
+              variant="outlined"
+              sx={{
+                px: 4,
+                py: 1.5,
+                fontSize: "0.875rem",
+                fontWeight: 500,
+                borderRadius: "30px",
+                textTransform: "none",
+                borderColor: "black",
+                color: "black",
+                "&:hover": {
+                  borderColor: "black",
+                  backgroundColor: "black",
+                  color: "white",
+                },
+              }}
+            >
+              {t("viewAll")}
+            </Button>
+          </Box>
+        </Container>
       </Box>
-    </Container>
-  )
+    )
+  } catch (error) {
+    console.error("Error loading categories:", error)
+    return null
+  }
 }
 
 export default CategoriesGrid

@@ -141,6 +141,27 @@
       "title": "Nos collections",
       "viewAll": "Voir toutes les collections"
     }
+  },
+  "footer": {
+    "findStore": "Trouver un magasin",
+    "findStoreDescription": "Trouvez un magasin près de chez vous",
+    "getHelp": "Obtenir de l'aide",
+    "orderStatus": "Statut de la commande",
+    "delivery": "Livraison",
+    "returns": "Retours",
+    "paymentOptions": "Options de paiement",
+    "contactUs": "Nous contacter",
+    "about": "À propos",
+    "news": "Actualités",
+    "careers": "Carrières",
+    "investors": "Investisseurs",
+    "sustainability": "Durabilité",
+    "categories": "Catégories",
+    "collections": "Collections",
+    "allRightsReserved": "Tous droits réservés.",
+    "terms": "Conditions",
+    "privacy": "Confidentialité",
+    "cookies": "Cookies"
   }
 }
 

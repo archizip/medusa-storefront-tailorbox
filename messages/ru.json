@@ -141,6 +141,27 @@
       "title": "Наши коллекции",
       "viewAll": "Все коллекции"
     }
+  },
+  "footer": {
+    "findStore": "Найти магазин",
+    "findStoreDescription": "Найдите магазин рядом с вами",
+    "getHelp": "Помощь",
+    "orderStatus": "Статус заказа",
+    "delivery": "Доставка",
+    "returns": "Возвраты",
+    "paymentOptions": "Способы оплаты",
+    "contactUs": "Связаться с нами",
+    "about": "О нас",
+    "news": "Новости",
+    "careers": "Карьера",
+    "investors": "Инвесторам",
+    "sustainability": "Устойчивое развитие",
+    "categories": "Категории",
+    "collections": "Коллекции",
+    "allRightsReserved": "Все права защищены.",
+    "terms": "Условия",
+    "privacy": "Конфиденциальность",
+    "cookies": "Cookies"
   }
 }
 

@@ -1,157 +1,445 @@
 import { listCategories } from "@lib/data/categories"
 import { listCollections } from "@lib/data/collections"
-import { Text, clx } from "@medusajs/ui"
-
+import {
+  Container,
+  Box,
+  Typography,
+  Link as MuiLink,
+  Divider,
+} from "@mui/material"
+import { getTranslations } from "next-intl/server"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import MedusaCTA from "@modules/layout/components/medusa-cta"
 
 export default async function Footer() {
   const { collections } = await listCollections({
     fields: "*products",
   })
   const productCategories = await listCategories()
+  const t = await getTranslations("footer")
+
+  // Фильтруем только родительские категории
+  const parentCategories =
+    productCategories?.filter((c) => !c.parent_category && c.handle) || []
 
   return (
-    <footer className="border-t border-ui-border-base w-full">
-      <div className="content-container flex flex-col w-full">
-        <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-40">
-          <div>
-            <LocalizedClientLink
-              href="/"
-              className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
+    <Box
+      component="footer"
+      sx={{
+        backgroundColor: "#f5f5f5",
+        borderTop: "1px solid",
+        borderColor: "divider",
+        mt: "auto",
+      }}
+    >
+      <Container maxWidth="xl" sx={{ py: { xs: 6, md: 8 } }}>
+        {/* Main Footer Links */}
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "repeat(2, 1fr)",
+              sm: "repeat(3, 1fr)",
+              md: "repeat(4, 1fr)",
+              lg: "repeat(5, 1fr)",
+            },
+            gap: { xs: 4, md: 6 },
+            mb: 6,
+          }}
+        >
+          {/* Find a Store */}
+          <Box>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                fontWeight: 600,
+                mb: 2,
+                fontSize: "0.875rem",
+                color: "text.primary",
+              }}
             >
-              Medusa Store
-            </LocalizedClientLink>
-          </div>
-          <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
-            {productCategories && productCategories?.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Categories
-                </span>
-                <ul
-                  className="grid grid-cols-1 gap-2"
-                  data-testid="footer-categories"
-                >
-                  {productCategories?.slice(0, 6).map((c) => {
-                    if (c.parent_category) {
-                      return
-                    }
+              {t("findStore")}
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                fontSize: "0.875rem",
+                color: "text.secondary",
+                lineHeight: 1.6,
+              }}
+            >
+              {t("findStoreDescription")}
+            </Typography>
+          </Box>
 
-                    const children =
-                      c.category_children?.map((child) => ({
-                        name: child.name,
-                        handle: child.handle,
-                        id: child.id,
-                      })) || null
-
-                    return (
-                      <li
-                        className="flex flex-col gap-2 text-ui-fg-subtle txt-small"
-                        key={c.id}
-                      >
-                        <LocalizedClientLink
-                          className={clx(
-                            "hover:text-ui-fg-base",
-                            children && "txt-small-plus"
-                          )}
-                          href={`/categories/${c.handle}`}
-                          data-testid="category-link"
-                        >
-                          {c.name}
-                        </LocalizedClientLink>
-                        {children && (
-                          <ul className="grid grid-cols-1 ml-3 gap-2">
-                            {children &&
-                              children.map((child) => (
-                                <li key={child.id}>
-                                  <LocalizedClientLink
-                                    className="hover:text-ui-fg-base"
-                                    href={`/categories/${child.handle}`}
-                                    data-testid="category-link"
-                                  >
-                                    {child.name}
-                                  </LocalizedClientLink>
-                                </li>
-                              ))}
-                          </ul>
-                        )}
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-            )}
-            {collections && collections.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Collections
-                </span>
-                <ul
-                  className={clx(
-                    "grid grid-cols-1 gap-2 text-ui-fg-subtle txt-small",
-                    {
-                      "grid-cols-2": (collections?.length || 0) > 3,
-                    }
-                  )}
+          {/* Get Help */}
+          <Box>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                fontWeight: 600,
+                mb: 2,
+                fontSize: "0.875rem",
+                color: "text.primary",
+              }}
+            >
+              {t("getHelp")}
+            </Typography>
+            <Box
+              component="ul"
+              sx={{
+                listStyle: "none",
+                p: 0,
+                m: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: 1.5,
+              }}
+            >
+              <li>
+                <MuiLink
+                  component={LocalizedClientLink}
+                  href="/account"
+                  sx={{
+                    fontSize: "0.875rem",
+                    color: "text.secondary",
+                    textDecoration: "none",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
                 >
-                  {collections?.slice(0, 6).map((c) => (
-                    <li key={c.id}>
-                      <LocalizedClientLink
-                        className="hover:text-ui-fg-base"
-                        href={`/collections/${c.handle}`}
-                      >
-                        {c.title}
-                      </LocalizedClientLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <div className="flex flex-col gap-y-2">
-              <span className="txt-small-plus txt-ui-fg-base">Medusa</span>
-              <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">
-                <li>
-                  <a
-                    href="https://github.com/medusajs"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.medusajs.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    Documentation
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/medusajs/nextjs-starter-medusa"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    Source code
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
-          <Text className="txt-compact-small">
-            © {new Date().getFullYear()} Medusa Store. All rights reserved.
-          </Text>
-          <MedusaCTA />
-        </div>
-      </div>
-    </footer>
+                  {t("orderStatus")}
+                </MuiLink>
+              </li>
+              <li>
+                <MuiLink
+                  component={LocalizedClientLink}
+                  href="/account"
+                  sx={{
+                    fontSize: "0.875rem",
+                    color: "text.secondary",
+                    textDecoration: "none",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
+                >
+                  {t("delivery")}
+                </MuiLink>
+              </li>
+              <li>
+                <MuiLink
+                  component={LocalizedClientLink}
+                  href="/account"
+                  sx={{
+                    fontSize: "0.875rem",
+                    color: "text.secondary",
+                    textDecoration: "none",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
+                >
+                  {t("returns")}
+                </MuiLink>
+              </li>
+              <li>
+                <MuiLink
+                  component={LocalizedClientLink}
+                  href="/account"
+                  sx={{
+                    fontSize: "0.875rem",
+                    color: "text.secondary",
+                    textDecoration: "none",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
+                >
+                  {t("paymentOptions")}
+                </MuiLink>
+              </li>
+              <li>
+                <MuiLink
+                  component={LocalizedClientLink}
+                  href="/account"
+                  sx={{
+                    fontSize: "0.875rem",
+                    color: "text.secondary",
+                    textDecoration: "none",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
+                >
+                  {t("contactUs")}
+                </MuiLink>
+              </li>
+            </Box>
+          </Box>
+
+          {/* About */}
+          <Box>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                fontWeight: 600,
+                mb: 2,
+                fontSize: "0.875rem",
+                color: "text.primary",
+              }}
+            >
+              {t("about")}
+            </Typography>
+            <Box
+              component="ul"
+              sx={{
+                listStyle: "none",
+                p: 0,
+                m: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: 1.5,
+              }}
+            >
+              <li>
+                <MuiLink
+                  href="https://github.com/medusajs"
+                  target="_blank"
+                  rel="noreferrer"
+                  sx={{
+                    fontSize: "0.875rem",
+                    color: "text.secondary",
+                    textDecoration: "none",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
+                >
+                  {t("news")}
+                </MuiLink>
+              </li>
+              <li>
+                <MuiLink
+                  href="https://docs.medusajs.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  sx={{
+                    fontSize: "0.875rem",
+                    color: "text.secondary",
+                    textDecoration: "none",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
+                >
+                  {t("careers")}
+                </MuiLink>
+              </li>
+              <li>
+                <MuiLink
+                  href="https://github.com/medusajs/nextjs-starter-medusa"
+                  target="_blank"
+                  rel="noreferrer"
+                  sx={{
+                    fontSize: "0.875rem",
+                    color: "text.secondary",
+                    textDecoration: "none",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
+                >
+                  {t("investors")}
+                </MuiLink>
+              </li>
+              <li>
+                <MuiLink
+                  component={LocalizedClientLink}
+                  href="/store"
+                  sx={{
+                    fontSize: "0.875rem",
+                    color: "text.secondary",
+                    textDecoration: "none",
+                    "&:hover": {
+                      textDecoration: "underline",
+                    },
+                  }}
+                >
+                  {t("sustainability")}
+                </MuiLink>
+              </li>
+            </Box>
+          </Box>
+
+          {/* Categories */}
+          {parentCategories.length > 0 && (
+            <Box>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  fontWeight: 600,
+                  mb: 2,
+                  fontSize: "0.875rem",
+                  color: "text.primary",
+                }}
+              >
+                {t("categories")}
+              </Typography>
+              <Box
+                component="ul"
+                sx={{
+                  listStyle: "none",
+                  p: 0,
+                  m: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 1.5,
+                }}
+              >
+                {parentCategories.slice(0, 5).map((category) => (
+                  <li key={category.id}>
+                    <MuiLink
+                      component={LocalizedClientLink}
+                      href={`/categories/${category.handle}`}
+                      sx={{
+                        fontSize: "0.875rem",
+                        color: "text.secondary",
+                        textDecoration: "none",
+                        "&:hover": {
+                          textDecoration: "underline",
+                        },
+                      }}
+                    >
+                      {category.name}
+                    </MuiLink>
+                  </li>
+                ))}
+              </Box>
+            </Box>
+          )}
+
+          {/* Collections */}
+          {collections && collections.length > 0 && (
+            <Box>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  fontWeight: 600,
+                  mb: 2,
+                  fontSize: "0.875rem",
+                  color: "text.primary",
+                }}
+              >
+                {t("collections")}
+              </Typography>
+              <Box
+                component="ul"
+                sx={{
+                  listStyle: "none",
+                  p: 0,
+                  m: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 1.5,
+                }}
+              >
+                {collections.slice(0, 5).map((collection) => (
+                  <li key={collection.id}>
+                    <MuiLink
+                      component={LocalizedClientLink}
+                      href={`/collections/${collection.handle}`}
+                      sx={{
+                        fontSize: "0.875rem",
+                        color: "text.secondary",
+                        textDecoration: "none",
+                        "&:hover": {
+                          textDecoration: "underline",
+                        },
+                      }}
+                    >
+                      {collection.title}
+                    </MuiLink>
+                  </li>
+                ))}
+              </Box>
+            </Box>
+          )}
+        </Box>
+
+        <Divider sx={{ my: 4 }} />
+
+        {/* Copyright */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            justifyContent: "space-between",
+            alignItems: { xs: "flex-start", sm: "center" },
+            gap: 2,
+          }}
+        >
+          <Typography
+            variant="body2"
+            sx={{
+              fontSize: "0.75rem",
+              color: "text.secondary",
+            }}
+          >
+            © {new Date().getFullYear()} Medusa Store. {t("allRightsReserved")}
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              gap: 2,
+              flexWrap: "wrap",
+            }}
+          >
+            <MuiLink
+              component={LocalizedClientLink}
+              href="/store"
+              sx={{
+                fontSize: "0.75rem",
+                color: "text.secondary",
+                textDecoration: "none",
+                "&:hover": {
+                  textDecoration: "underline",
+                },
+              }}
+            >
+              {t("terms")}
+            </MuiLink>
+            <MuiLink
+              component={LocalizedClientLink}
+              href="/store"
+              sx={{
+                fontSize: "0.75rem",
+                color: "text.secondary",
+                textDecoration: "none",
+                "&:hover": {
+                  textDecoration: "underline",
+                },
+              }}
+            >
+              {t("privacy")}
+            </MuiLink>
+            <MuiLink
+              component={LocalizedClientLink}
+              href="/store"
+              sx={{
+                fontSize: "0.75rem",
+                color: "text.secondary",
+                textDecoration: "none",
+                "&:hover": {
+                  textDecoration: "underline",
+                },
+              }}
+            >
+              {t("cookies")}
+            </MuiLink>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
   )
 }

@@ -141,6 +141,27 @@
       "title": "Наші колекції",
       "viewAll": "Всі колекції"
     }
+  },
+  "footer": {
+    "findStore": "Знайти магазин",
+    "findStoreDescription": "Знайдіть магазин поруч з вами",
+    "getHelp": "Допомога",
+    "orderStatus": "Статус замовлення",
+    "delivery": "Доставка",
+    "returns": "Повернення",
+    "paymentOptions": "Способи оплати",
+    "contactUs": "Зв'язатися з нами",
+    "about": "Про нас",
+    "news": "Новини",
+    "careers": "Кар'єра",
+    "investors": "Інвесторам",
+    "sustainability": "Сталий розвиток",
+    "categories": "Категорії",
+    "collections": "Колекції",
+    "allRightsReserved": "Всі права захищені.",
+    "terms": "Умови",
+    "privacy": "Конфіденційність",
+    "cookies": "Cookies"
   }
 }
 
