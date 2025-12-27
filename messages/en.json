@@ -111,6 +111,26 @@
     "discount": "Discount",
     "taxes": "Taxes",
     "total": "Total"
+  },
+  "home": {
+    "hero": {
+      "title": "Welcome to Our Store",
+      "subtitle": "Discover amazing products at great prices",
+      "shopNow": "Shop Now",
+      "explore": "Explore Collection"
+    },
+    "categories": {
+      "title": "Shop by Category",
+      "viewAll": "View All Categories"
+    },
+    "featured": {
+      "title": "Featured Products",
+      "viewAll": "View All"
+    },
+    "collections": {
+      "title": "Our Collections",
+      "viewAll": "View All Collections"
+    }
   }
 }
 

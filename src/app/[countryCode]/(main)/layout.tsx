@@ -11,6 +11,7 @@ import Footer from "@modules/layout/templates/footer"
 import Nav from "@modules/layout/templates/nav"
 import FreeShippingPriceNudge from "@modules/shipping/components/free-shipping-price-nudge"
 import { NextIntlProvider } from "../../../components/next-intl-provider"
+import { MuiThemeProvider } from "../../../components/mui-theme-provider"
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
@@ -36,21 +37,23 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
   }
 
   return (
-    <NextIntlProvider initialLocale={locale} initialMessages={messages}>
-      <Nav />
-      {customer && cart && (
-        <CartMismatchBanner customer={customer} cart={cart} />
-      )}
+    <MuiThemeProvider>
+      <NextIntlProvider initialLocale={locale} initialMessages={messages}>
+        <Nav />
+        {customer && cart && (
+          <CartMismatchBanner customer={customer} cart={cart} />
+        )}
 
-      {cart && (
-        <FreeShippingPriceNudge
-          variant="popup"
-          cart={cart}
-          shippingOptions={shippingOptions}
-        />
-      )}
-      {props.children}
-      <Footer />
-    </NextIntlProvider>
+        {cart && (
+          <FreeShippingPriceNudge
+            variant="popup"
+            cart={cart}
+            shippingOptions={shippingOptions}
+          />
+        )}
+        {props.children}
+        <Footer />
+      </NextIntlProvider>
+    </MuiThemeProvider>
   )
 }
