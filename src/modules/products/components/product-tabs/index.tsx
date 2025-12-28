@@ -1,9 +1,12 @@
 "use client"
 
+import { useLocale } from "next-intl"
 import { useTranslations } from "@lib/util/i18n"
+import { getCountryName } from "@lib/util/country-names"
 import Back from "@modules/common/icons/back"
 import FastDelivery from "@modules/common/icons/fast-delivery"
 import Refresh from "@modules/common/icons/refresh"
+import ReactCountryFlag from "react-country-flag"
 
 import Accordion from "./accordion"
 import { HttpTypes } from "@medusajs/types"
@@ -24,7 +27,6 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
       component: <ShippingInfoTab />,
     },
   ]
-
   return (
     <div className="w-full">
       <Accordion type="multiple">
@@ -45,6 +47,12 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
 
 const ProductInfoTab = ({ product }: ProductTabsProps) => {
   const t = useTranslations('product')
+  const locale = useLocale()
+  const normalizedLocale = locale.split('-')[0] || 'en' // Получаем базовый locale (en, fr, uk, ru)
+  
+  const countryCode = product.origin_country?.toUpperCase()
+  const countryName = countryCode ? getCountryName(countryCode, normalizedLocale) : null
+  
   return (
     <div className="text-small-regular py-8">
       <div className="grid grid-cols-2 gap-x-8">
@@ -55,25 +63,31 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
           </div>
           <div>
             <span className="font-semibold">{t('countryOfOrigin')}</span>
-            <p>{product.origin_country ? product.origin_country : "-"}</p>
-          </div>
-          <div>
-            <span className="font-semibold">{t('type')}</span>
-            <p>{product.type ? product.type.value : "-"}</p>
+            {countryCode ? (
+              <div className="flex items-center gap-x-2">
+                <ReactCountryFlag
+                  svg
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                  }}
+                  countryCode={countryCode}
+                />
+                <p>{countryName || countryCode}</p>
+              </div>
+            ) : (
+              <p>-</p>
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-y-4">
           <div>
-            <span className="font-semibold">{t('weight')}</span>
-            <p>{product.weight ? `${product.weight} g` : "-"}</p>
+            <span className="font-semibold">{t('width')}</span>
+            <p>{product.width ? `${product.width} cm` : "-"}</p>
           </div>
           <div>
-            <span className="font-semibold">{t('dimensions')}</span>
-            <p>
-              {product.length && product.width && product.height
-                ? `${product.length}L x ${product.width}W x ${product.height}H`
-                : "-"}
-            </p>
+            <span className="font-semibold">{t('type')}</span>
+            <p>{product.type ? product.type.value : "-"}</p>
           </div>
         </div>
       </div>
