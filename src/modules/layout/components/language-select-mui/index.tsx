@@ -103,7 +103,9 @@ const LanguageSelectMui = ({
     setCurrent(selectedCode)
     startTransition(async () => {
       try {
-        await updateLocale(normalizedOptionCode)
+        // Сохраняем полный формат locale (ua-UA, fr-FR) для Medusa API
+        // normalizeLocale используется только для сравнения, но сохраняем полный формат
+        await updateLocale(selectedCode)
         router.refresh()
       } catch (error) {
         console.error("Failed to update locale:", error)

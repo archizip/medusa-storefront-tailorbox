@@ -23,7 +23,6 @@ export default async function CategoryTemplate({
 }) {
   const pageNumber = page ? parseInt(page) : 1
   const sort = sortBy || "created_at"
-  const tCategories = await getTranslations("categories")
 
   if (!category || !countryCode) notFound()
 
@@ -54,20 +53,20 @@ export default async function CategoryTemplate({
                   href={`/categories/${parent.handle}`}
                   data-testid="sort-by-link"
                 >
-                  {parent.handle ? (tCategories(parent.handle) || parent.name) : parent.name}
+                  {parent.handle ?  parent.name : parent.name}
                 </LocalizedClientLink>
                 /
               </span>
             ))}
           <h1 data-testid="category-page-title">
-            {category.handle ? (tCategories(category.handle) || category.name) : category.name}
+            {category.handle ? category.name : category.name}
           </h1>
         </div>
         {category.description && (
           <div className="mb-8 text-base-regular">
             <p>
               {category.handle 
-                ? (tCategories(`${category.handle}-description`) || category.description) 
+                ? category.description 
                 : category.description}
             </p>
           </div>
@@ -78,7 +77,7 @@ export default async function CategoryTemplate({
               {category.category_children?.map((c) => (
                 <li key={c.id}>
                   <InteractiveLink href={`/categories/${c.handle}`}>
-                    {c.handle ? (tCategories(c.handle) || c.name) : c.name}
+                    {c.handle ? c.name : c.name}
                   </InteractiveLink>
                 </li>
               ))}

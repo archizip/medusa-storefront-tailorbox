@@ -118,8 +118,9 @@ const LanguageSelect = ({
 
     startTransition(async () => {
       try {
-        // Сохраняем нормализованный код (fr, uk, ru, en)
-        await updateLocale(normalizedOptionCode)
+        // Сохраняем полный формат locale (ua-UA, fr-FR) для Medusa API
+        // normalizeLocale используется только для сравнения, но сохраняем полный формат
+        await updateLocale(option.code || "")
         // Не закрываем меню сразу, чтобы пользователь видел выбор
         // Обновляем страницу для применения нового locale
         router.refresh()

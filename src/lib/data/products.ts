@@ -5,6 +5,7 @@ import { sortProducts } from "@lib/util/sort-products"
 import { HttpTypes } from "@medusajs/types"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import { getAuthHeaders, getCacheOptions } from "./cookies"
+import { getLocale } from "./locale-actions"
 import { getRegion, retrieveRegion } from "./regions"
 
 export const listProducts = async ({
@@ -53,6 +54,9 @@ export const listProducts = async ({
     ...(await getCacheOptions("products")),
   }
 
+  // Get locale for localization
+  const locale = await getLocale()
+
   return sdk.client
     .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
       `/store/products`,
@@ -62,6 +66,7 @@ export const listProducts = async ({
           limit,
           offset,
           region_id: region?.id,
+          ...(locale && { locale }), // Add locale query parameter if available
           fields:
             "*variants.calculated_price,+variants.inventory_quantity,*variants.images,+metadata,+tags,",
           ...queryParams,

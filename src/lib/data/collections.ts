@@ -3,16 +3,23 @@
 import { sdk } from "@lib/config"
 import { HttpTypes } from "@medusajs/types"
 import { getCacheOptions } from "./cookies"
+import { getLocale } from "./locale-actions"
 
 export const retrieveCollection = async (id: string) => {
   const next = {
     ...(await getCacheOptions("collections")),
   }
 
+  // Get locale for localization
+  const locale = await getLocale()
+
   return sdk.client
     .fetch<{ collection: HttpTypes.StoreCollection }>(
       `/store/collections/${id}`,
       {
+        query: {
+          ...(locale && { locale }), // Add locale query parameter if available
+        },
         next,
         cache: "force-cache",
       }
@@ -30,11 +37,17 @@ export const listCollections = async (
   queryParams.limit = queryParams.limit || "100"
   queryParams.offset = queryParams.offset || "0"
 
+  // Get locale for localization
+  const locale = await getLocale()
+
   return sdk.client
     .fetch<{ collections: HttpTypes.StoreCollection[]; count: number }>(
       "/store/collections",
       {
-        query: queryParams,
+        query: {
+          ...queryParams,
+          ...(locale && { locale }), // Add locale query parameter if available
+        },
         next,
         cache: "force-cache",
       }
@@ -49,9 +62,16 @@ export const getCollectionByHandle = async (
     ...(await getCacheOptions("collections")),
   }
 
+  // Get locale for localization
+  const locale = await getLocale()
+
   return sdk.client
     .fetch<HttpTypes.StoreCollectionListResponse>(`/store/collections`, {
-      query: { handle, fields: "*products" },
+      query: {
+        handle,
+        fields: "*products",
+        ...(locale && { locale }), // Add locale query parameter if available
+      },
       next,
       cache: "force-cache",
     })

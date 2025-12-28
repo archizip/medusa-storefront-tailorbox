@@ -13,8 +13,7 @@ async function CategoriesGrid() {
   try {
     const categories = await listCategories({ limit: 100 })
     const t = await getTranslations("home.categories")
-    const tCategories = await getTranslations("categories")
-
+    console.log(categories)
     if (!categories || categories.length === 0) {
       return null
     }
@@ -137,7 +136,7 @@ async function CategoriesGrid() {
                       transition: "transform 0.3s ease",
                     }}
                   >
-                    {category.handle ? (tCategories(category.handle) || category.name) : category.name}
+                       { category.name}
                   </Typography>
                   {category.description && (
                     <Typography
@@ -147,9 +146,7 @@ async function CategoriesGrid() {
                         fontSize: "0.875rem",
                       }}
                     >
-                      {category.handle 
-                        ? (tCategories(`${category.handle}-description`) || category.description) 
-                        : category.description}
+                      {category.description}
                     </Typography>
                   )}
                 </Box>

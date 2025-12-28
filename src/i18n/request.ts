@@ -1,9 +1,12 @@
 import { getRequestConfig } from 'next-intl/server';
 import { getLocale } from '@lib/data/locale-actions';
+import { normalizeLocale } from '@lib/util/normalize-locale';
 
 export default getRequestConfig(async () => {
   // Получаем locale из cookie (через существующую функцию)
-  const locale = await getLocale() || 'en';
+  const rawLocale = await getLocale() || 'en';
+  // Нормализуем для загрузки файла (fr-FR -> fr)
+  const locale = normalizeLocale(rawLocale);
   
   return {
     locale,

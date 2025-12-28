@@ -4,6 +4,7 @@
  */
 
 import { useTranslations as useNextIntlTranslations } from 'next-intl';
+import { normalizeLocale } from './normalize-locale';
 
 /**
  * Хук для использования переводов в клиентских компонентах
@@ -15,11 +16,13 @@ export function useTranslations(namespace?: string) {
 
 /**
  * Функция для получения переводов в серверных компонентах
- * @param locale - текущий locale
+ * @param locale - текущий locale (может быть в формате fr-FR или fr)
  * @param namespace - пространство имен для переводов
  */
 export async function getTranslations(locale: string, namespace?: string) {
-  const messages = (await import(`../../../messages/${locale}.json`)).default;
+  // Нормализуем locale для загрузки файла (fr-FR -> fr)
+  const normalizedLocale = normalizeLocale(locale);
+  const messages = (await import(`../../../messages/${normalizedLocale}.json`)).default;
   
   if (namespace) {
     return (key: string) => {
