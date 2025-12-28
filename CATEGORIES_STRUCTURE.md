@@ -16,14 +16,14 @@
 
 ```
 Knit Fabrics / Tricot / Трикотаж
-├── Jersey / Jersey / Джерсі
-│   ├── Single Jersey / Jersey simple / Джерсі
-│   └── Stretch Jersey / Jersey extensible / Джерсі стрейч
-├── Fleece / Molleton / Моллетон
+├── Jersey / Jersey / Кулірка
+│   ├── Single Jersey / Jersey simple / Кулірка
+│   └── Stretch Jersey / Jersey extensible / Кулірка стрейч
+├── Fleece / Molleton / Футер
 │   ├── Two-Thread Fleece / Double fil / Двонитка
 │   ├── Brushed Two-Thread / Double fil gratté / Двонитка з начосом
-│   ├── French Terry / French Terry / Френч террі
-│   └── Brushed Fleece / Molleton gratté / Моллетон з начосом
+│   ├── French Terry / French Terry / Трьохнитка петля
+│   └── Brushed Fleece / Molleton gratté / Трьохнитка з начосом
 └── Other Knits / Autres mailles / Інші види трикотажу
     ├── Interlock / Interlock / Інтерлок
     ├── Rib / Côte / Рібана
@@ -42,11 +42,11 @@ Knit Fabrics / Tricot / Трикотаж
   - FR: Tissus en maille pour vêtements
   - UK: Трикотажні тканини для одягу
 
-#### 2. **Jersey / Jersey / Джерсі**
+#### 2. **Jersey / Jersey / Кулірка**
 - **Handle**: `jersey`
 - **EN**: Jersey
 - **FR**: Jersey
-- **UK**: Джерсі
+- **UK**: Кулірка
 - **Описание**: 
   - EN: Single-layer knit with smooth face
   - FR: Tricot simple face avec surface lisse
@@ -55,19 +55,19 @@ Knit Fabrics / Tricot / Трикотаж
   - **Handle**: `single-jersey`
     - EN: Single Jersey
     - FR: Jersey simple
-    - UK: Джерсі
-    - Описание: EN: Basic single-layer jersey knit / FR: Maille jersey simple de base / UK: Базовий односторонній джерсі
+    - UK: Кулірка
+    - Описание: EN: Basic single-layer jersey knit / FR: Maille jersey simple de base / UK: Базовий односторонній трикотаж
   - **Handle**: `stretch-jersey`
     - EN: Stretch Jersey
     - FR: Jersey extensible
-    - UK: Джерсі стрейч
-    - Описание: EN: Jersey knit with added elastane for stretch / FR: Maille jersey avec élasthanne ajouté pour l'élasticité / UK: Джерсі з додаванням еластану для розтягування
+    - UK: Кулірка стрейч
+    - Описание: EN: Jersey knit with added elastane for stretch / FR: Maille jersey avec élasthanne ajouté pour l'élasticité / UK: Кулірка з додаванням еластану для розтягування
 
-#### 3. **Fleece / Molleton / Моллетон**
+#### 3. **Fleece / Molleton / Футер**
 - **Handle**: `fleece`
 - **EN**: Fleece
 - **FR**: Molleton
-- **UK**: Моллетон
+- **UK**: Футер
 - **Описание**: 
   - EN: Two or three-layer knit with back side
   - FR: Tricot double ou triple face avec envers
@@ -77,22 +77,22 @@ Knit Fabrics / Tricot / Трикотаж
     - EN: Two-Thread Fleece
     - FR: Double fil
     - UK: Двонитка
-    - Описание: EN: Two-layer fleece / FR: Molleton à deux fils / UK: Двошаровий моллетон
+    - Описание: EN: Two-layer fleece / FR: Molleton à deux fils / UK: Двошаровий футер
   - **Handle**: `brushed-two-thread`
     - EN: Brushed Two-Thread
     - FR: Double fil gratté
     - UK: Двонитка з начосом
-    - Описание: EN: Two-layer fleece with brushing / FR: Molleton à deux fils avec grattage / UK: Двошаровий моллетон з начосом
+    - Описание: EN: Two-layer fleece with brushing / FR: Molleton à deux fils avec grattage / UK: Двошаровий футер з начосом
   - **Handle**: `french-terry`
     - EN: French Terry
     - FR: French Terry
-    - UK: Френч террі
-    - Описание: EN: Three-layer fleece with loops / FR: Molleton à trois fils avec boucles / UK: Тришаровий моллетон з петлями
+    - UK: Трьохнитка петля
+    - Описание: EN: Three-layer fleece with loops / FR: Molleton à trois fils avec boucles / UK: Тришаровий футер з петлями
   - **Handle**: `brushed-fleece`
     - EN: Brushed Fleece
     - FR: Molleton gratté
-    - UK: Моллетон з начосом
-    - Описание: EN: Three-layer fleece with brushing / FR: Molleton à trois fils avec grattage / UK: Тришаровий моллетон з начосом
+    - UK: Трьохнитка з начосом
+    - Описание: EN: Three-layer fleece with brushing / FR: Molleton à trois fils avec grattage / UK: Тришаровий футер з начосом
 
 #### 4. **Other Knits / Autres mailles / Інші види трикотажу**
 - **Handle**: `other-knits`
@@ -237,21 +237,21 @@ Knit Fabrics / Tricot / Трикотаж
 
 ## 📊 Примеры использования
 
-### Пример 1: Ткань "Brushed Fleece / Molleton gratté / Моллетон з начосом с цветочным принтом"
+### Пример 1: Ткань "Brushed Fleece / Molleton gratté / Трьохнитка з начосом с цветочным принтом"
 - **Категория**: 
   - Handle: `fleece > brushed-fleece`
   - EN: `Fleece > Brushed Fleece`
   - FR: `Molleton > Molleton gratté`
-  - UK: `Моллетон > Моллетон з начосом`
+  - UK: `Футер > Трьохнитка з начосом`
 - **Теги**: 
   - `floral`, `roses`, `pink`, `pastel`, `all-season`, `medium`, `clothing`, `children`
 
-### Пример 2: Ткань "Stretch Jersey / Jersey extensible / Джерсі стрейч с детским принтом"
+### Пример 2: Ткань "Stretch Jersey / Jersey extensible / Кулірка стрейч с детским принтом"
 - **Категория**: 
   - Handle: `jersey > stretch-jersey`
   - EN: `Jersey > Stretch Jersey`
   - FR: `Jersey > Jersey extensible`
-  - UK: `Джерсі > Джерсі стрейч`
+  - UK: `Кулірка > Кулірка стрейч`
 - **Теги**: 
   - `kids`, `animals`, `cartoon`, `bright`, `summer`, `light`, `stretch`, `children`
 
@@ -260,15 +260,15 @@ Knit Fabrics / Tricot / Трикотаж
   - Handle: `fleece > two-thread-fleece`
   - EN: `Fleece > Two-Thread Fleece`
   - FR: `Molleton > Double fil`
-  - UK: `Моллетон > Двонитка`
+  - UK: `Футер > Двонитка`
 - **Теги**: 
   - `geometric`, `polka-dot`, `blue`, `neutral`, `all-season`, `medium`, `clothing`, `adult`
 
 ## 🔍 Рекомендации по поиску и фильтрации
 
 ### Фильтры по категориям
-- Основной фильтр: Тип трикотажа (Кулирка, Футер)
-- Вторичный фильтр: Конкретный вид (Двунитка, Трехнитка и т.д.)
+- Основной фильтр: Тип трикотажа (Кулірка, Футер)
+- Вторичный фильтр: Конкретный вид (Двонитка, Трьохнитка петля, Трьохнитка з начосом и т.д.)
 
 ### Фильтры по тегам
 - **Принт**: Геометрические, Цветочные, Детские, Абстрактные
@@ -423,18 +423,31 @@ purpose-sportswear
 {
   "categories": {
     "knit-fabrics": "Трикотаж",
-    "jersey": "Джерсі",
-    "single-jersey": "Джерсі",
-    "stretch-jersey": "Джерсі стрейч",
-    "fleece": "Моллетон",
+    "knit-fabrics-description": "Трикотажні тканини для одягу",
+    "jersey": "Кулірка",
+    "jersey-description": "Односторонній трикотаж з гладкою поверхнею",
+    "single-jersey": "Кулірка",
+    "single-jersey-description": "Базовий односторонній трикотаж",
+    "stretch-jersey": "Кулірка стрейч",
+    "stretch-jersey-description": "Кулірка з додаванням еластану для розтягування",
+    "fleece": "Футер",
+    "fleece-description": "Дво- або тришаровий трикотаж з виворітним боком",
     "two-thread-fleece": "Двонитка",
+    "two-thread-fleece-description": "Двошаровий футер",
     "brushed-two-thread": "Двонитка з начосом",
-    "french-terry": "Френч террі",
-    "brushed-fleece": "Моллетон з начосом",
+    "brushed-two-thread-description": "Двошаровий футер з начосом",
+    "french-terry": "Трьохнитка петля",
+    "french-terry-description": "Тришаровий футер з петлями",
+    "brushed-fleece": "Трьохнитка з начосом",
+    "brushed-fleece-description": "Тришаровий футер з начосом",
     "other-knits": "Інші види трикотажу",
+    "other-knits-description": "Інші види трикотажних тканин",
     "interlock": "Інтерлок",
+    "interlock-description": "Подвійний трикотаж з гладкою поверхнею з обох сторін",
     "rib": "Рібана",
-    "pique": "Піке"
+    "rib-description": "Ребристий трикотаж з вертикальними смугами, дуже еластичний",
+    "pique": "Піке",
+    "pique-description": "Текстурований трикотаж з рельєфними геометричними візерунками"
   }
 }
 ```
@@ -500,4 +513,9 @@ export default function CategoryName({ category }: CategoryNameProps) {
    - Создайте категорию в Medusa с английским названием
    - Добавьте переводы в `messages/en.json`, `messages/fr.json`, `messages/uk.json`
    - Используйте handle категории как ключ для перевода
+
+9. **Product Types и Tags**: 
+   - См. `PRODUCT_TYPES_AND_TAGS.md` для детальной структуры Product Types и оптимизированной системы тегов
+   - Product Types используются для высокоуровневой классификации (Fabric, Accessories, Tools)
+   - Product Tags используются для детальной фильтрации с префиксами (print-, color-, season-, и т.д.)
 
