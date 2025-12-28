@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
+import { getTranslations } from "next-intl/server"
 
 import InteractiveLink from "@modules/common/components/interactive-link"
 import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
@@ -9,7 +10,7 @@ import PaginatedProducts from "@modules/store/templates/paginated-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
 
-export default function CategoryTemplate({
+export default async function CategoryTemplate({
   category,
   sortBy,
   page,
@@ -22,6 +23,7 @@ export default function CategoryTemplate({
 }) {
   const pageNumber = page ? parseInt(page) : 1
   const sort = sortBy || "created_at"
+  const tCategories = await getTranslations("categories")
 
   if (!category || !countryCode) notFound()
 
@@ -52,16 +54,22 @@ export default function CategoryTemplate({
                   href={`/categories/${parent.handle}`}
                   data-testid="sort-by-link"
                 >
-                  {parent.name}
+                  {parent.handle ? (tCategories(parent.handle) || parent.name) : parent.name}
                 </LocalizedClientLink>
                 /
               </span>
             ))}
-          <h1 data-testid="category-page-title">{category.name}</h1>
+          <h1 data-testid="category-page-title">
+            {category.handle ? (tCategories(category.handle) || category.name) : category.name}
+          </h1>
         </div>
         {category.description && (
           <div className="mb-8 text-base-regular">
-            <p>{category.description}</p>
+            <p>
+              {category.handle 
+                ? (tCategories(`${category.handle}-description`) || category.description) 
+                : category.description}
+            </p>
           </div>
         )}
         {category.category_children && (
@@ -70,7 +78,7 @@ export default function CategoryTemplate({
               {category.category_children?.map((c) => (
                 <li key={c.id}>
                   <InteractiveLink href={`/categories/${c.handle}`}>
-                    {c.name}
+                    {c.handle ? (tCategories(c.handle) || c.name) : c.name}
                   </InteractiveLink>
                 </li>
               ))}

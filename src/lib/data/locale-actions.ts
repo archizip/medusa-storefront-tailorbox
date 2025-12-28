@@ -3,7 +3,7 @@
 import { sdk } from "@lib/config"
 import { revalidateTag } from "next/cache"
 import { cookies as nextCookies } from "next/headers"
-import { getAuthHeaders, getCacheTag, getCartId } from "./cookies"
+import { getAuthHeaders, getCacheTag, getCartId, removeCartId } from "./cookies"
 
 const LOCALE_COOKIE_NAME = "_medusa_locale"
 
@@ -42,15 +42,35 @@ export const updateLocale = async (localeCode: string): Promise<string> => {
   // Update cart with the new locale if a cart exists
   const cartId = await getCartId()
   if (cartId) {
-    const headers = {
-      ...(await getAuthHeaders()),
-    }
+    try {
+      const headers = {
+        ...(await getAuthHeaders()),
+      }
 
-    await sdk.store.cart.update(cartId, { locale: localeCode }, {}, headers)
+      await sdk.store.cart.update(cartId, { locale: localeCode }, {}, headers)
 
-    const cartCacheTag = await getCacheTag("carts")
-    if (cartCacheTag) {
-      revalidateTag(cartCacheTag)
+      const cartCacheTag = await getCacheTag("carts")
+      if (cartCacheTag) {
+        revalidateTag(cartCacheTag)
+      }
+    } catch (error: any) {
+      // If cart is not found, remove the cart ID from cookies
+      const errorMessage = error?.message || error?.error?.message || String(error || "")
+      const isCartNotFound = 
+        errorMessage.includes("not found") ||
+        errorMessage.includes("Cart id not found") ||
+        error?.status === 404 ||
+        error?.response?.status === 404
+
+      if (isCartNotFound) {
+        await removeCartId()
+        console.warn(`Cart ${cartId} not found, removed from cookies`)
+        // Don't throw error, just continue with locale update
+      } else {
+        // Re-throw other errors
+        console.error("Error updating cart locale:", error)
+        throw error
+      }
     }
   }
 

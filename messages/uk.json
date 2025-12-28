@@ -162,6 +162,34 @@
     "terms": "Умови",
     "privacy": "Конфіденційність",
     "cookies": "Cookies"
+  },
+  "categories": {
+    "knit-fabrics": "Трикотаж",
+    "knit-fabrics-description": "Трикотажні тканини для одягу",
+    "jersey": "Джерсі",
+    "jersey-description": "Односторонній трикотаж з гладкою поверхнею",
+    "single-jersey": "Джерсі",
+    "single-jersey-description": "Базовий односторонній джерсі",
+    "stretch-jersey": "Джерсі стрейч",
+    "stretch-jersey-description": "Джерсі з додаванням еластану для розтягування",
+    "fleece": "Моллетон",
+    "fleece-description": "Дво- або тришаровий трикотаж з виворітним боком",
+    "two-thread-fleece": "Двонитка",
+    "two-thread-fleece-description": "Двошаровий моллетон",
+    "brushed-two-thread": "Двонитка з начосом",
+    "brushed-two-thread-description": "Двошаровий моллетон з начосом",
+    "french-terry": "Френч террі",
+    "french-terry-description": "Тришаровий моллетон з петлями",
+    "brushed-fleece": "Моллетон з начосом",
+    "brushed-fleece-description": "Тришаровий моллетон з начосом",
+    "other-knits": "Інші види трикотажу",
+    "other-knits-description": "Інші види трикотажних тканин",
+    "interlock": "Інтерлок",
+    "interlock-description": "Подвійний трикотаж з гладкою поверхнею з обох сторін",
+    "rib": "Рібана",
+    "rib-description": "Ребристий трикотаж з вертикальними смугами, дуже еластичний",
+    "pique": "Піке",
+    "pique-description": "Текстурований трикотаж з рельєфними геометричними візерунками"
   }
 }
 

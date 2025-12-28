@@ -162,6 +162,34 @@
     "terms": "Terms",
     "privacy": "Privacy",
     "cookies": "Cookies"
+  },
+  "categories": {
+    "knit-fabrics": "Knit Fabrics",
+    "knit-fabrics-description": "Knitted fabrics for clothing",
+    "jersey": "Jersey",
+    "jersey-description": "Single-layer knit with smooth face",
+    "single-jersey": "Single Jersey",
+    "single-jersey-description": "Basic single-layer jersey knit",
+    "stretch-jersey": "Stretch Jersey",
+    "stretch-jersey-description": "Jersey knit with added elastane for stretch",
+    "fleece": "Fleece",
+    "fleece-description": "Two or three-layer knit with back side",
+    "two-thread-fleece": "Two-Thread Fleece",
+    "two-thread-fleece-description": "Two-layer fleece",
+    "brushed-two-thread": "Brushed Two-Thread",
+    "brushed-two-thread-description": "Two-layer fleece with brushing",
+    "french-terry": "French Terry",
+    "french-terry-description": "Three-layer fleece with loops",
+    "brushed-fleece": "Brushed Fleece",
+    "brushed-fleece-description": "Three-layer fleece with brushing",
+    "other-knits": "Other Knits",
+    "other-knits-description": "Other types of knitted fabrics",
+    "interlock": "Interlock",
+    "interlock-description": "Double-knit fabric with smooth surface on both sides",
+    "rib": "Rib",
+    "rib-description": "Ribbed knit with vertical ridges, highly elastic",
+    "pique": "Piqué",
+    "pique-description": "Textured knit with raised geometric patterns"
   }
 }
 

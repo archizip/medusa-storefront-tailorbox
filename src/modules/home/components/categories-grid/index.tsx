@@ -13,15 +13,39 @@ async function CategoriesGrid() {
   try {
     const categories = await listCategories({ limit: 100 })
     const t = await getTranslations("home.categories")
+    const tCategories = await getTranslations("categories")
 
     if (!categories || categories.length === 0) {
       return null
     }
 
-    // Показываем все категории с handle (не фильтруем по parent_category)
-    const displayCategories = categories.filter((c) => c.handle && c.name) || []
+    // Находим главную категорию (без parent_category) - например "Knit Fabrics"
+    const mainCategory = categories.find(
+      (c) => c?.handle && c?.name && !c?.parent_category
+    )
 
-    // Если нет категорий, не показываем секцию
+    // Если есть главная категория, показываем её прямые подкатегории (первого уровня)
+    // Иначе показываем все категории без parent_category
+    let displayCategories = mainCategory
+      ? categories.filter(
+          (c) =>
+            c?.handle &&
+            c?.name &&
+            c?.parent_category?.id === mainCategory.id
+        )
+      : categories.filter(
+          (c) => c?.handle && c?.name && !c?.parent_category
+        )
+
+    // Сортируем категории по имени для консистентного отображения
+    displayCategories.sort((a, b) => {
+      if (a?.name && b?.name) {
+        return a.name.localeCompare(b.name)
+      }
+      return 0
+    })
+
+    // Если нет категорий для отображения, не показываем секцию
     if (displayCategories.length === 0) {
       return null
     }
@@ -48,12 +72,13 @@ async function CategoriesGrid() {
               gridTemplateColumns: {
                 xs: "repeat(1, 1fr)",
                 sm: "repeat(2, 1fr)",
-                md: "repeat(4, 1fr)",
+                md: displayCategories.length >= 3 ? "repeat(3, 1fr)" : `repeat(${displayCategories.length}, 1fr)`,
+                lg: displayCategories.length >= 4 ? "repeat(4, 1fr)" : `repeat(${displayCategories.length}, 1fr)`,
               },
               gap: 2,
             }}
           >
-            {displayCategories.slice(0, 4).map((category) => (
+            {displayCategories.map((category) => (
               <Box
                 key={category.id}
                 component={LocalizedClientLink}
@@ -112,7 +137,7 @@ async function CategoriesGrid() {
                       transition: "transform 0.3s ease",
                     }}
                   >
-                    {category.name}
+                    {category.handle ? (tCategories(category.handle) || category.name) : category.name}
                   </Typography>
                   {category.description && (
                     <Typography
@@ -122,7 +147,9 @@ async function CategoriesGrid() {
                         fontSize: "0.875rem",
                       }}
                     >
-                      {category.description}
+                      {category.handle 
+                        ? (tCategories(`${category.handle}-description`) || category.description) 
+                        : category.description}
                     </Typography>
                   )}
                 </Box>

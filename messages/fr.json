@@ -162,6 +162,34 @@
     "terms": "Conditions",
     "privacy": "Confidentialité",
     "cookies": "Cookies"
+  },
+  "categories": {
+    "knit-fabrics": "Tricot",
+    "knit-fabrics-description": "Tissus en maille pour vêtements",
+    "jersey": "Jersey",
+    "jersey-description": "Tricot simple face avec surface lisse",
+    "single-jersey": "Jersey simple",
+    "single-jersey-description": "Maille jersey simple de base",
+    "stretch-jersey": "Jersey extensible",
+    "stretch-jersey-description": "Maille jersey avec élasthanne ajouté pour l'élasticité",
+    "fleece": "Molleton",
+    "fleece-description": "Tricot double ou triple face avec envers",
+    "two-thread-fleece": "Double fil",
+    "two-thread-fleece-description": "Molleton à deux fils",
+    "brushed-two-thread": "Double fil gratté",
+    "brushed-two-thread-description": "Molleton à deux fils avec grattage",
+    "french-terry": "French Terry",
+    "french-terry-description": "Molleton à trois fils avec boucles",
+    "brushed-fleece": "Molleton gratté",
+    "brushed-fleece-description": "Molleton à trois fils avec grattage",
+    "other-knits": "Autres mailles",
+    "other-knits-description": "Autres types de tissus en maille",
+    "interlock": "Interlock",
+    "interlock-description": "Tissu double maille avec surface lisse des deux côtés",
+    "rib": "Côte",
+    "rib-description": "Maille côtelée avec côtes verticales, très élastique",
+    "pique": "Piqué",
+    "pique-description": "Maille texturée avec motifs géométriques en relief"
   }
 }
 
