@@ -9,11 +9,7 @@ import {
   Typography,
   Divider,
 } from "@mui/material"
-import {
-  Search,
-  ShoppingBag,
-  PersonOutline,
-} from "@mui/icons-material"
+import { Search, ShoppingBag, PersonOutline } from "@mui/icons-material"
 import { Suspense } from "react"
 import { HttpTypes } from "@medusajs/types"
 import { Locale } from "@lib/data/locales"
@@ -55,36 +51,54 @@ export default function NavClient({
         zIndex: 1100,
       }}
     >
-      {/* Top bar - Help, Find Store, Sign In */}
+      {/* Top utility bar */}
       <Box
         sx={{
           display: { xs: "none", md: "flex" },
           justifyContent: "flex-end",
           alignItems: "center",
           px: { md: 4, lg: 6 },
-          py: 0.5,
+          py: 0.75,
           gap: 2,
           borderBottom: "1px solid",
           borderColor: "divider",
-          backgroundColor: "#f5f5f5",
+          backgroundColor: "#F5F0E8",
         }}
       >
         <LocalizedClientLink
           href="/store"
-          style={{ textDecoration: "none", color: "inherit", fontSize: "0.75rem" }}
+          style={{
+            textDecoration: "none",
+            color: "#6B4E30",
+            fontSize: "0.72rem",
+            fontWeight: 500,
+            letterSpacing: "0.03em",
+          }}
         >
           {translations.findStore}
         </LocalizedClientLink>
         <LocalizedClientLink
           href="/account"
-          style={{ textDecoration: "none", color: "inherit", fontSize: "0.75rem" }}
+          style={{
+            textDecoration: "none",
+            color: "#6B4E30",
+            fontSize: "0.72rem",
+            fontWeight: 500,
+            letterSpacing: "0.03em",
+          }}
         >
           {translations.help}
         </LocalizedClientLink>
-        <Divider orientation="vertical" flexItem />
+        <Divider orientation="vertical" flexItem sx={{ borderColor: "#C8B49A" }} />
         <LocalizedClientLink
           href="/account"
-          style={{ textDecoration: "none", color: "inherit", fontSize: "0.75rem" }}
+          style={{
+            textDecoration: "none",
+            color: "#6B4E30",
+            fontSize: "0.72rem",
+            fontWeight: 500,
+            letterSpacing: "0.03em",
+          }}
         >
           {translations.signIn}
         </LocalizedClientLink>
@@ -104,7 +118,7 @@ export default function NavClient({
       <Toolbar
         disableGutters
         sx={{
-          minHeight: { xs: 60, md: 70 },
+          minHeight: { xs: 60, md: 68 },
           px: { xs: 2, md: 4, lg: 6 },
           justifyContent: "space-between",
           borderBottom: "1px solid",
@@ -123,34 +137,71 @@ export default function NavClient({
         </Box>
 
         {/* Logo */}
-        <Typography
+        <Box
           component={LocalizedClientLink}
           href="/"
-          variant="h5"
           sx={{
-            fontWeight: 700,
             textDecoration: "none",
-            color: "text.primary",
-            fontSize: { xs: "1.25rem", md: "1.5rem" },
-            letterSpacing: "-0.02em",
-            "&:hover": { opacity: 0.7 },
+            display: "flex",
+            alignItems: "center",
+            gap: 0.75,
+            "&:hover": { opacity: 0.8 },
           }}
           data-testid="nav-store-link"
         >
-          MEDUSA
-        </Typography>
+          {/* Logo mark */}
+          <Box
+            sx={{
+              width: 28,
+              height: 28,
+              backgroundColor: "#1A1208",
+              borderRadius: "3px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <Box
+              sx={{
+                width: 14,
+                height: 14,
+                border: "2px solid #C4A882",
+                borderRadius: "1px",
+              }}
+            />
+          </Box>
+          <Typography
+            variant="h5"
+            component="span"
+            sx={{
+              fontWeight: 800,
+              color: "#1A1208",
+              fontSize: { xs: "1.15rem", md: "1.35rem" },
+              letterSpacing: "-0.03em",
+              lineHeight: 1,
+            }}
+          >
+            Tailor
+            <Box component="span" sx={{ color: "#8B6847" }}>
+              Box
+            </Box>
+          </Typography>
+        </Box>
 
         {/* Desktop Navigation Menu */}
-        <Box sx={{ flexGrow: 1, display: { xs: "none", lg: "flex" }, justifyContent: "center" }}>
+        <Box
+          sx={{ flexGrow: 1, display: { xs: "none", lg: "flex" }, justifyContent: "center" }}
+        >
           <NavMenu categories={categories} collections={collections} />
         </Box>
 
-        {/* Right side - Search, Cart, Account */}
-        <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+        {/* Right side icons */}
+        <Stack direction="row" spacing={0.5} sx={{ alignItems: "center" }}>
           <IconButton
             sx={{
-              color: "text.primary",
-              "&:hover": { backgroundColor: "transparent", color: "text.secondary" },
+              color: "#1A1208",
+              "&:hover": { backgroundColor: "#F5F0E8", color: "#6B4E30" },
             }}
             aria-label="search"
           >
@@ -163,8 +214,8 @@ export default function NavClient({
                 component={LocalizedClientLink}
                 href="/cart"
                 sx={{
-                  color: "text.primary",
-                  "&:hover": { backgroundColor: "transparent", color: "text.secondary" },
+                  color: "#1A1208",
+                  "&:hover": { backgroundColor: "#F5F0E8", color: "#6B4E30" },
                 }}
                 data-testid="nav-cart-link"
               >
@@ -179,9 +230,9 @@ export default function NavClient({
             component={LocalizedClientLink}
             href="/account"
             sx={{
-              color: "text.primary",
+              color: "#1A1208",
               display: { xs: "none", sm: "flex" },
-              "&:hover": { backgroundColor: "transparent", color: "text.secondary" },
+              "&:hover": { backgroundColor: "#F5F0E8", color: "#6B4E30" },
             }}
             data-testid="nav-account-link"
           >

@@ -123,22 +123,39 @@
   },
   "home": {
     "hero": {
-      "title": "Welcome to Our Store",
-      "subtitle": "Discover amazing products at great prices",
-      "shopNow": "Shop Now",
-      "explore": "Explore Collection"
+      "title": "Fabrics for your creativity",
+      "subtitle": "Wide selection of natural and quality fabrics — cotton, linen, silk, wool and more. For sewing, decor and design.",
+      "shopNow": "Browse Catalogue",
+      "explore": "Fabric Types",
+      "badge": "2025 Collection · Natural Fabrics"
     },
     "categories": {
-      "title": "Shop by Category",
-      "viewAll": "View All Categories"
+      "title": "Fabric Types",
+      "viewAll": "All Fabric Types",
+      "subtitle": "Find exactly what you need"
     },
     "featured": {
-      "title": "Featured Products",
-      "viewAll": "View All"
+      "title": "New Arrivals",
+      "viewAll": "View All",
+      "subtitle": "Fresh fabrics in stock"
     },
     "collections": {
       "title": "Our Collections",
       "viewAll": "View All Collections"
+    },
+    "trust": {
+      "quality": "Natural Materials",
+      "qualitySub": "100% certified raw materials",
+      "delivery": "Fast Delivery",
+      "deliverySub": "1 to 3 business days",
+      "returns": "Easy Returns",
+      "returnsSub": "14 days no questions asked",
+      "support": "Expert Advice",
+      "supportSub": "We'll help you choose fabric"
+    },
+    "fabricTypes": {
+      "label": "Fabric types:",
+      "all": "All fabrics"
     }
   },
   "footer": {
