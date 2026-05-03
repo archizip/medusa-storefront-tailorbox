@@ -20,3 +20,12 @@ export function normalizeLocale(locale: string | null | undefined): string {
   return localeMap[normalized] || 'en';
 }
 
+export function denormalizeLocale(locale: string): string {
+  const localeMap: Record<string, string> = {
+    'ua': 'uk-UA',
+    'ru': 'ru-RU',
+    'fr': 'fr-FR',
+    'en': 'en-US',
+  };
+  return localeMap[locale] || 'en-US';
+}

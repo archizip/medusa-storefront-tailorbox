@@ -10,11 +10,11 @@ import {
   Typography,
 } from "@mui/material"
 import ReactCountryFlag from "react-country-flag"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { updateLocale } from "@lib/data/locale-actions"
 import { Locale } from "@lib/data/locales"
-import { normalizeLocale } from "@lib/util/normalize-locale"
+import { denormalizeLocale, normalizeLocale } from "@lib/util/normalize-locale"
 
 type LanguageOption = {
   code: string
@@ -65,7 +65,7 @@ const LanguageSelectMui = ({
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
   const t = useTranslations("common")
-
+  const { countryCode } = useParams()
   const options = useMemo(() => {
     return locales.map((locale) => ({
       code: locale.code,
@@ -90,6 +90,13 @@ const LanguageSelectMui = ({
       }
     }
   }, [options, currentLocale])
+
+  useEffect(() => {
+    if (countryCode) {
+      const denormalizedCountryCode = denormalizeLocale(countryCode as string);
+      setCurrent(denormalizedCountryCode)
+    }
+  }, [countryCode])
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     const selectedCode = event.target.value

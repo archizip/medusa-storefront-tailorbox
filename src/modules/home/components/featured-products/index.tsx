@@ -1,6 +1,5 @@
 import { HttpTypes } from "@medusajs/types"
 import ProductRail from "@modules/home/components/featured-products/product-rail"
-import { Box } from "@mui/material"
 
 export default async function FeaturedProducts({
   collections,
@@ -12,9 +11,9 @@ export default async function FeaturedProducts({
   return (
     <>
       {collections.map((collection) => (
-        <Box key={collection.id} component="section">
+        <section key={collection.id}>
           <ProductRail collection={collection} region={region} />
-        </Box>
+        </section>
       ))}
     </>
   )

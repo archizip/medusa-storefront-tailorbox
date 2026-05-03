@@ -8,7 +8,7 @@ import {
   Transition,
 } from "@headlessui/react"
 import { Fragment, useEffect, useMemo, useState, useTransition } from "react"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import ReactCountryFlag from "react-country-flag"
 
 import { StateType } from "@lib/hooks/use-toggle-state"
@@ -77,6 +77,7 @@ const LanguageSelect = ({
   const [current, setCurrent] = useState<LanguageOption | undefined>(undefined)
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
+  const { countryCode } = useParams()
 
   const { state, close } = toggleState
 
@@ -106,11 +107,16 @@ const LanguageSelect = ({
     }
   }, [options, currentLocale])
 
+  useEffect(() => {
+    if (countryCode) {
+      console.log('countryCode', countryCode)
+    }
+  }, [options, countryCode])
+
   const handleChange = (option: LanguageOption) => {
     const normalizedOptionCode = normalizeLocale(option.code || "");
     const normalizedCurrent = normalizeLocale(currentLocale || "");
     
-    // Не обновляем, если выбран тот же язык
     if (normalizedOptionCode === normalizedCurrent) {
       close()
       return
@@ -118,13 +124,8 @@ const LanguageSelect = ({
 
     startTransition(async () => {
       try {
-        // Сохраняем полный формат locale (ua-UA, fr-FR) для Medusa API
-        // normalizeLocale используется только для сравнения, но сохраняем полный формат
-        await updateLocale(option.code || "")
-        // Не закрываем меню сразу, чтобы пользователь видел выбор
-        // Обновляем страницу для применения нового locale
+        await updateLocale(option.code || "")ф  
         router.refresh()
-        // Закрываем меню после небольшой задержки
         setTimeout(() => {
           close()
         }, 100)
@@ -135,7 +136,6 @@ const LanguageSelect = ({
     })
   }
 
-  // Определяем текущее значение для контролируемого компонента
   const selectedValue = useMemo(() => {
     if (currentLocale) {
       return options.find(

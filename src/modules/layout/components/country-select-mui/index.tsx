@@ -126,7 +126,7 @@ const CountrySelectMui = ({ regions }: CountrySelectMuiProps) => {
                   width: "16px",
                   height: "16px",
                 }}
-                countryCode={o.country}
+                countryCode={o?.country}
               />
               <Typography variant="body2">{o.label}</Typography>
             </Box>
