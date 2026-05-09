@@ -34,6 +34,20 @@ module.exports = {
           80: "#1F2937",
           90: "#111827",
         },
+        tb: {
+          bg: "#f4ede0",
+          "bg-deep": "#ece2d0",
+          "bg-card": "#faf5ea",
+          ink: "#1f1a14",
+          "ink-2": "#4a3f33",
+          "ink-3": "#7a6b58",
+          "ink-4": "#a89880",
+          accent: "#b85a3b",
+          "accent-soft": "#e8c3b0",
+          sage: "#6b7a52",
+          line: "#d8cab2",
+          "line-soft": "#e6dcc6",
+        },
       },
       borderRadius: {
         none: "0px",
@@ -60,7 +74,8 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          "Inter",
+          "Manrope",
+          "Public Sans",
           "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",
@@ -68,6 +83,19 @@ module.exports = {
           "Helvetica Neue",
           "Ubuntu",
           "sans-serif",
+        ],
+        serif: [
+          "Instrument Serif",
+          "Cormorant Garamond",
+          "Georgia",
+          "serif",
+        ],
+        mono: [
+          "JetBrains Mono",
+          "IBM Plex Mono",
+          "ui-monospace",
+          "Menlo",
+          "monospace",
         ],
       },
       keyframes: {

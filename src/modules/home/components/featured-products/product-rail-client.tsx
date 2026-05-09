@@ -1,9 +1,6 @@
 "use client"
 
 import { HttpTypes } from "@medusajs/types"
-import { Container, Typography, Box, Button } from "@mui/material"
-import { East } from "@mui/icons-material"
-import { useTranslations } from "next-intl"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import ProductPreview from "@modules/products/components/product-preview"
 
@@ -14,126 +11,78 @@ type ProductRailClientProps = {
 }
 
 export default function ProductRailClient({ collection, region, products }: ProductRailClientProps) {
-  const t = useTranslations("home.featured")
-
   return (
-    <Box sx={{ py: { xs: 8, md: 12 }, backgroundColor: "white" }}>
-      <Container maxWidth="xl">
-        {/* Section header */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            mb: 6,
-            pb: 3,
-            borderBottom: "1px solid #E8DDD0",
-          }}
-        >
-          <Box>
-            <Typography
-              sx={{
-                fontSize: "0.68rem",
-                fontWeight: 700,
-                letterSpacing: "0.18em",
-                color: "#8B6847",
-                textTransform: "uppercase",
-                mb: 1,
-              }}
-            >
-              {t("subtitle")}
-            </Typography>
-            <Typography
-              variant="h3"
-              component="h2"
-              sx={{
-                fontWeight: 800,
-                fontSize: { xs: "1.6rem", md: "2.25rem" },
-                letterSpacing: "-0.025em",
-                color: "#1A1208",
-                lineHeight: 1.15,
-              }}
-            >
-              {collection.title}
-            </Typography>
-          </Box>
-          <Button
-            component={LocalizedClientLink}
-            href={`/collections/${collection.handle}`}
-            endIcon={<East sx={{ fontSize: "1rem !important" }} />}
-            sx={{
-              display: { xs: "none", sm: "inline-flex" },
-              color: "#6B4E30",
-              textTransform: "none",
-              fontSize: "0.875rem",
-              fontWeight: 500,
-              "&:hover": { backgroundColor: "transparent", color: "#1A1208" },
+    <section
+      style={{
+        maxWidth: 1360,
+        margin: "0 auto",
+        padding: "60px 32px 40px",
+      }}
+    >
+      {/* Section header */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
+          marginBottom: 32,
+        }}
+      >
+        <div>
+          <div className="uppercase-label" style={{ marginBottom: 10 }}>02 — Новинки</div>
+          <h2
+            className="serif"
+            style={{
+              fontSize: "clamp(32px, 4vw, 48px)",
+              margin: 0,
+              lineHeight: 1,
+              letterSpacing: "-0.02em",
+              color: "var(--ink)",
             }}
           >
-            {t("viewAll")}
-          </Button>
-        </Box>
-
-        {/* Products grid */}
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "repeat(2, 1fr)",
-              sm: "repeat(2, 1fr)",
-              md: "repeat(3, 1fr)",
-              lg: "repeat(4, 1fr)",
-            },
-            gap: { xs: 2, md: 3 },
+            Щойно з рулону
+          </h2>
+        </div>
+        <LocalizedClientLink
+          href={`/collections/${collection.handle}`}
+          style={{
+            fontSize: 13,
+            color: "var(--ink-2)",
+            borderBottom: "1px solid var(--ink-2)",
+            paddingBottom: 2,
+            whiteSpace: "nowrap",
           }}
         >
-          {products.map((product) => (
-            <Box
-              key={product.id}
-              sx={{
-                "& .group": {
-                  display: "block",
-                  textDecoration: "none",
-                },
-                "& [data-testid='product-wrapper']": {
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                  transition: "transform 0.2s ease",
-                  "&:hover": { transform: "translateY(-2px)" },
-                },
-              }}
-            >
-              <ProductPreview product={product} region={region} isFeatured />
-            </Box>
-          ))}
-        </Box>
+          Усі новинки →
+        </LocalizedClientLink>
+      </div>
 
-        {/* Mobile view all */}
-        <Box sx={{ textAlign: "center", mt: 5, display: { xs: "block", sm: "none" } }}>
-          <Button
-            component={LocalizedClientLink}
-            href={`/collections/${collection.handle}`}
-            variant="outlined"
-            sx={{
-              px: 5,
-              py: 1.5,
-              fontSize: "0.875rem",
-              fontWeight: 500,
-              borderRadius: "3px",
-              textTransform: "none",
-              borderColor: "#8B6847",
-              color: "#6B4E30",
-              "&:hover": {
-                borderColor: "#1A1208",
-                backgroundColor: "#1A1208",
-                color: "white",
-              },
-            }}
-          >
-            {t("viewAll")}
-          </Button>
-        </Box>
-      </Container>
-    </Box>
+      {/* Products grid */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: 20,
+        }}
+        className="products-grid"
+      >
+        {products.map((product) => (
+          <ProductPreview key={product.id} product={product} region={region} isFeatured />
+        ))}
+      </div>
+
+      <style>{`
+        @media (max-width: 1024px) {
+          .products-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .products-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+      `}</style>
+    </section>
   )
 }

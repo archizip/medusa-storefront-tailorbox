@@ -1,8 +1,6 @@
 "use client"
 
 import { HttpTypes } from "@medusajs/types"
-import { Box, Container, Typography } from "@mui/material"
-import { useTranslations } from "next-intl"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 type Props = {
@@ -10,98 +8,87 @@ type Props = {
 }
 
 export default function FabricTypesNavClient({ categories }: Props) {
-  const t = useTranslations("home.fabricTypes")
-
   return (
-    <Box
-      sx={{
-        backgroundColor: "#FAF8F5",
-        borderBottom: "1px solid #E8DDD0",
-        borderTop: "1px solid #E8DDD0",
-        py: 1.75,
+    <div
+      style={{
+        background: "var(--bg-deep)",
+        borderBottom: "1px solid var(--line-soft)",
+        borderTop: "1px solid var(--line-soft)",
+        padding: "12px 0",
       }}
     >
-      <Container maxWidth="xl">
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-            overflowX: "auto",
-            scrollbarWidth: "none",
-            "&::-webkit-scrollbar": { display: "none" },
+      <div
+        style={{
+          maxWidth: 1360,
+          margin: "0 auto",
+          padding: "0 32px",
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          overflowX: "auto",
+          scrollbarWidth: "none",
+        }}
+      >
+        <div
+          className="mono"
+          style={{
+            fontSize: "0.7rem",
+            color: "var(--ink-3)",
+            textTransform: "uppercase",
+            letterSpacing: "0.12em",
+            whiteSpace: "nowrap",
+            marginRight: 4,
+            flexShrink: 0,
           }}
         >
-          <Typography
-            sx={{
-              fontSize: "0.7rem",
-              fontWeight: 700,
-              color: "#8B6847",
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-              whiteSpace: "nowrap",
-              mr: 0.5,
-              flexShrink: 0,
-            }}
-          >
-            {t("label")}
-          </Typography>
+          Тип:
+        </div>
 
-          {/* All fabrics pill */}
-          <Box
-            component={LocalizedClientLink}
-            href="/store"
-            sx={{
+        {/* All fabrics */}
+        <LocalizedClientLink
+          href="/store"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            padding: "5px 14px",
+            borderRadius: 999,
+            background: "var(--ink)",
+            color: "var(--bg-card)",
+            fontSize: "0.8rem",
+            fontWeight: 600,
+            fontFamily: "var(--mono)",
+            letterSpacing: "0.02em",
+            whiteSpace: "nowrap",
+            flexShrink: 0,
+            transition: "background-color 0.15s",
+          }}
+        >
+          Всі
+        </LocalizedClientLink>
+
+        {categories.map((category) => (
+          <LocalizedClientLink
+            key={category.id}
+            href={`/categories/${category.handle}`}
+            style={{
               display: "inline-flex",
               alignItems: "center",
-              px: 2,
-              py: 0.6,
-              borderRadius: "3px",
-              backgroundColor: "#1A1208",
-              color: "#F5F0E8",
+              padding: "5px 14px",
+              borderRadius: 999,
+              border: "1px solid var(--line)",
+              color: "var(--ink-2)",
               fontSize: "0.8rem",
-              fontWeight: 600,
+              fontFamily: "var(--mono)",
+              letterSpacing: "0.02em",
               whiteSpace: "nowrap",
-              textDecoration: "none",
               flexShrink: 0,
-              transition: "background-color 0.15s",
-              "&:hover": { backgroundColor: "#2D2010" },
+              transition: "all 0.15s",
             }}
           >
-            {t("all")}
-          </Box>
-
-          {categories.map((category) => (
-            <Box
-              key={category.id}
-              component={LocalizedClientLink}
-              href={`/categories/${category.handle}`}
-              sx={{
-                display: "inline-flex",
-                alignItems: "center",
-                px: 2,
-                py: 0.6,
-                borderRadius: "3px",
-                border: "1px solid #C8B49A",
-                color: "#4A3828",
-                fontSize: "0.8rem",
-                fontWeight: 400,
-                whiteSpace: "nowrap",
-                textDecoration: "none",
-                flexShrink: 0,
-                transition: "all 0.15s",
-                "&:hover": {
-                  backgroundColor: "#F0E8DC",
-                  borderColor: "#8B6847",
-                  color: "#3A2818",
-                },
-              }}
-            >
-              {category.name}
-            </Box>
-          ))}
-        </Box>
-      </Container>
-    </Box>
+            {category.name}
+          </LocalizedClientLink>
+        ))}
+      </div>
+    </div>
   )
 }

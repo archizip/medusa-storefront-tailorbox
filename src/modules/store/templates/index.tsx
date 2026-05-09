@@ -20,21 +20,42 @@ const StoreTemplate = ({
 
   return (
     <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
+      style={{
+        maxWidth: 1360,
+        margin: "0 auto",
+        padding: "40px 32px",
+      }}
       data-testid="category-container"
     >
-      <RefinementList sortBy={sort} />
-      <div className="w-full">
-        <div className="mb-8 text-2xl-semi">
-          <h1 data-testid="store-page-title">All products</h1>
+      {/* Page header */}
+      <div style={{ marginBottom: 40 }}>
+        <div className="uppercase-label" style={{ marginBottom: 12 }}>Каталог тканин</div>
+        <h1
+          className="serif"
+          style={{
+            fontSize: "clamp(36px, 5vw, 64px)",
+            margin: 0,
+            lineHeight: 1,
+            letterSpacing: "-0.025em",
+            color: "var(--ink)",
+          }}
+          data-testid="store-page-title"
+        >
+          Всі тканини
+        </h1>
+      </div>
+
+      <div style={{ display: "flex", gap: 40, alignItems: "flex-start" }}>
+        <RefinementList sortBy={sort} />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <Suspense fallback={<SkeletonProductGrid />}>
+            <PaginatedProducts
+              sortBy={sort}
+              page={pageNumber}
+              countryCode={countryCode}
+            />
+          </Suspense>
         </div>
-        <Suspense fallback={<SkeletonProductGrid />}>
-          <PaginatedProducts
-            sortBy={sort}
-            page={pageNumber}
-            countryCode={countryCode}
-          />
-        </Suspense>
       </div>
     </div>
   )

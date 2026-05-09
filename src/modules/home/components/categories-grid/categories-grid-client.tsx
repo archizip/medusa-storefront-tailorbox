@@ -1,253 +1,139 @@
 "use client"
 
 import { HttpTypes } from "@medusajs/types"
-import { Container, Typography, Box, Button } from "@mui/material"
-import { useTranslations } from "next-intl"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import { East } from "@mui/icons-material"
 
 type CategoriesGridClientProps = {
   categories: HttpTypes.StoreProductCategory[]
 }
 
-const FABRIC_ACCENTS = [
-  "#8B6847",
-  "#5C7A5A",
-  "#7A5C8B",
-  "#5A6B8B",
-  "#8B5A5A",
-  "#6B7A5A",
-  "#8B7A47",
-  "#5A7A7A",
+const SWATCH_PATTERNS = [
+  { bg: "#e8c8b8", pattern: `repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(184,90,59,0.12) 6px, rgba(184,90,59,0.12) 7px)` },
+  { bg: "#c8d4b8", pattern: `repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(107,122,82,0.15) 8px, rgba(107,122,82,0.15) 9px)` },
+  { bg: "#c8d0d8", pattern: `repeating-linear-gradient(-45deg, transparent, transparent 6px, rgba(74,90,120,0.12) 6px, rgba(74,90,120,0.12) 7px)` },
+  { bg: "#d8c8a8", pattern: `repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(120,100,60,0.12) 10px, rgba(120,100,60,0.12) 11px)` },
+  { bg: "#d4b8b8", pattern: `repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(160,60,60,0.1) 8px, rgba(160,60,60,0.1) 9px)` },
+  { bg: "#b8d0c8", pattern: `repeating-linear-gradient(135deg, transparent, transparent 6px, rgba(60,130,110,0.12) 6px, rgba(60,130,110,0.12) 7px)` },
 ]
 
 export default function CategoriesGridClient({ categories }: CategoriesGridClientProps) {
-  const t = useTranslations("home.categories")
+  const displayCategories = categories.slice(0, 6)
 
   return (
-    <Box sx={{ py: { xs: 8, md: 12 }, backgroundColor: "#FAF8F5" }}>
-      <Container maxWidth="xl">
-        {/* Section header */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            mb: 6,
-          }}
-        >
-          <Box>
-            <Typography
-              sx={{
-                fontSize: "0.68rem",
-                fontWeight: 700,
-                letterSpacing: "0.18em",
-                color: "#8B6847",
-                textTransform: "uppercase",
-                mb: 1,
-              }}
-            >
-              {t("subtitle")}
-            </Typography>
-            <Typography
-              variant="h3"
-              component="h2"
-              sx={{
-                fontWeight: 800,
-                fontSize: { xs: "1.75rem", md: "2.5rem" },
-                letterSpacing: "-0.025em",
-                color: "#1A1208",
-                lineHeight: 1.15,
-              }}
-            >
-              {t("title")}
-            </Typography>
-          </Box>
-          <Button
-            component={LocalizedClientLink}
-            href="/store"
-            endIcon={<East sx={{ fontSize: "1rem !important" }} />}
-            sx={{
-              display: { xs: "none", sm: "inline-flex" },
-              color: "#6B4E30",
-              textTransform: "none",
-              fontSize: "0.875rem",
-              fontWeight: 500,
-              "&:hover": { backgroundColor: "transparent", color: "#1A1208" },
+    <section
+      style={{
+        maxWidth: 1360,
+        margin: "0 auto",
+        padding: "80px 32px 40px",
+      }}
+    >
+      {/* Section header */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
+          marginBottom: 32,
+        }}
+      >
+        <div>
+          <div className="uppercase-label" style={{ marginBottom: 10 }}>01 — Категорії</div>
+          <h2
+            className="serif"
+            style={{
+              fontSize: "clamp(32px, 4vw, 48px)",
+              margin: 0,
+              lineHeight: 1,
+              letterSpacing: "-0.02em",
+              color: "var(--ink)",
             }}
           >
-            {t("viewAll")}
-          </Button>
-        </Box>
-
-        {/* Categories grid */}
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "repeat(2, 1fr)",
-              sm: "repeat(2, 1fr)",
-              md: categories.length >= 3 ? "repeat(3, 1fr)" : `repeat(${categories.length}, 1fr)`,
-              lg: categories.length >= 4 ? "repeat(4, 1fr)" : `repeat(${categories.length}, 1fr)`,
-            },
-            gap: { xs: 1.5, md: 2 },
+            За типом трикотажу
+          </h2>
+        </div>
+        <LocalizedClientLink
+          href="/store"
+          style={{
+            fontSize: 13,
+            color: "var(--ink-2)",
+            borderBottom: "1px solid var(--ink-2)",
+            paddingBottom: 2,
+            whiteSpace: "nowrap",
           }}
         >
-          {categories.map((category, index) => {
-            const accent = FABRIC_ACCENTS[index % FABRIC_ACCENTS.length]
-            return (
-              <Box
-                key={category.id}
-                component={LocalizedClientLink}
-                href={`/categories/${category.handle}`}
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  position: "relative",
-                  height: { xs: 220, sm: 280, md: 340 },
-                  backgroundColor: "#EDE8DF",
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                  textDecoration: "none",
-                  border: "1px solid #E0D8CC",
-                  transition: "transform 0.25s ease, box-shadow 0.25s ease",
-                  "&:hover": {
-                    transform: "translateY(-3px)",
-                    boxShadow: "0 12px 32px rgba(26,18,8,0.12)",
-                    "& .cat-bar": { width: "100%" },
-                    "& .cat-arrow": { opacity: 1, transform: "translateX(0)" },
-                  },
+          Дивитися всі →
+        </LocalizedClientLink>
+      </div>
+
+      {/* Categories grid */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: 20,
+        }}
+        className="categories-grid"
+      >
+        {displayCategories.map((category, index) => {
+          const swatch = SWATCH_PATTERNS[index % SWATCH_PATTERNS.length]
+          const childCount = category.category_children?.length ?? 0
+
+          return (
+            <LocalizedClientLink
+              key={category.id}
+              href={`/categories/${category.handle}`}
+              style={{ display: "flex", flexDirection: "column", textDecoration: "none", color: "var(--ink)" }}
+            >
+              {/* Swatch */}
+              <div
+                style={{
+                  width: "100%",
+                  aspectRatio: "1",
+                  background: `${swatch.pattern}, ${swatch.bg}`,
+                  borderRadius: 2,
+                  transition: "opacity 200ms",
                 }}
-              >
-                {/* Accent color bar at top */}
-                <Box
-                  sx={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: "4px",
-                    backgroundColor: accent,
-                  }}
-                />
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+              />
 
-                {/* Large fabric-swatch background colour block */}
-                <Box
-                  sx={{
-                    position: "absolute",
-                    top: 4,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: `linear-gradient(160deg, ${accent}18 0%, ${accent}08 100%)`,
-                  }}
-                />
+              {/* Text below */}
+              <div style={{ padding: "16px 4px 0" }}>
+                {category.parent_category && (
+                  <div className="uppercase-label" style={{ marginBottom: 4 }}>
+                    {category.parent_category.name}
+                  </div>
+                )}
+                <div className="serif" style={{ fontSize: 22, marginBottom: 6 }}>{category.name}</div>
+                {category.description && (
+                  <div style={{ fontSize: 13, color: "var(--ink-3)", lineHeight: 1.4, marginBottom: 8 }}>
+                    {category.description}
+                  </div>
+                )}
+                <div
+                  className="mono"
+                  style={{ fontSize: 11, color: "var(--ink-4)", letterSpacing: "0.06em" }}
+                >
+                  {childCount > 0 ? `${childCount} підкатегорій →` : "Переглянути →"}
+                </div>
+              </div>
+            </LocalizedClientLink>
+          )
+        })}
+      </div>
 
-                {/* Subtle weave pattern */}
-                <Box
-                  sx={{
-                    position: "absolute",
-                    top: 4,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background:
-                      "repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,0.015) 20px, rgba(0,0,0,0.015) 21px)",
-                  }}
-                />
-
-                {/* Animated bottom bar */}
-                <Box
-                  className="cat-bar"
-                  sx={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    height: "3px",
-                    width: "0%",
-                    backgroundColor: accent,
-                    transition: "width 0.35s ease",
-                  }}
-                />
-
-                {/* Content */}
-                <Box sx={{ position: "relative", p: { xs: 2.5, md: 3.5 }, zIndex: 1 }}>
-                  <Typography
-                    variant="h4"
-                    component="h3"
-                    sx={{
-                      fontWeight: 700,
-                      color: "#1A1208",
-                      fontSize: { xs: "1.1rem", md: "1.4rem" },
-                      mb: category.description ? 0.75 : 0,
-                      letterSpacing: "-0.01em",
-                      lineHeight: 1.25,
-                    }}
-                  >
-                    {category.name}
-                  </Typography>
-                  {category.description && (
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: "#6B5A48",
-                        fontSize: "0.8rem",
-                        lineHeight: 1.5,
-                        mb: 1.5,
-                      }}
-                    >
-                      {category.description}
-                    </Typography>
-                  )}
-                  <Box
-                    className="cat-arrow"
-                    sx={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 0.5,
-                      color: accent,
-                      fontSize: "0.75rem",
-                      fontWeight: 600,
-                      opacity: 0,
-                      transform: "translateX(-8px)",
-                      transition: "all 0.25s ease",
-                    }}
-                  >
-                    Смотреть <East sx={{ fontSize: "0.85rem" }} />
-                  </Box>
-                </Box>
-              </Box>
-            )
-          })}
-        </Box>
-
-        {/* Mobile view all link */}
-        <Box sx={{ textAlign: "center", mt: 5, display: { xs: "block", sm: "none" } }}>
-          <Button
-            component={LocalizedClientLink}
-            href="/store"
-            variant="outlined"
-            sx={{
-              px: 5,
-              py: 1.5,
-              fontSize: "0.875rem",
-              fontWeight: 500,
-              borderRadius: "3px",
-              textTransform: "none",
-              borderColor: "#8B6847",
-              color: "#6B4E30",
-              "&:hover": {
-                borderColor: "#1A1208",
-                backgroundColor: "#1A1208",
-                color: "white",
-              },
-            }}
-          >
-            {t("viewAll")}
-          </Button>
-        </Box>
-      </Container>
-    </Box>
+      <style>{`
+        @media (max-width: 1024px) {
+          .categories-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .categories-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+      `}</style>
+    </section>
   )
 }

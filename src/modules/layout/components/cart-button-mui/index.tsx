@@ -94,22 +94,32 @@ const CartButtonMui = ({
 
   return (
     <Box>
-      <IconButton
-        onClick={open}
-        onMouseEnter={handleMouseEnter}
-        sx={{
-          color: "text.primary",
-          "&:hover": {
-            backgroundColor: "transparent",
-            color: "text.secondary",
-          },
-        }}
+      <button
+        onClick={open as any}
+        onMouseEnter={handleMouseEnter as any}
+        className="btn btn-soft btn-sm"
+        style={{ borderRadius: 999, display: "flex", alignItems: "center", gap: 8 }}
         data-testid="nav-cart-link"
       >
-        <Badge badgeContent={totalItems} color="primary">
-          <ShoppingBag />
-        </Badge>
-      </IconButton>
+        <svg width={16} height={16} viewBox="0 0 16 16" fill="none">
+          <path d="M2 4 H4 L5.5 12 H13 L14 6 H5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinejoin="round" />
+          <circle cx="6" cy="14" r="0.8" fill="currentColor" />
+          <circle cx="12" cy="14" r="0.8" fill="currentColor" />
+        </svg>
+        Кошик
+        {totalItems > 0 && (
+          <span style={{
+            background: "var(--accent)",
+            color: "white",
+            borderRadius: 999,
+            padding: "1px 7px",
+            fontSize: 11,
+            fontFamily: "var(--mono)",
+          }}>
+            {totalItems}
+          </span>
+        )}
+      </button>
       <Popover
         open={openDropdown}
         anchorEl={anchorEl}

@@ -1,14 +1,7 @@
 "use client"
 
 import { HttpTypes } from "@medusajs/types"
-import {
-  Container,
-  Box,
-  Typography,
-  Link as MuiLink,
-  Divider,
-} from "@mui/material"
-import { useTranslations } from "next-intl"
+import { useState } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 type FooterClientProps = {
@@ -16,161 +9,163 @@ type FooterClientProps = {
   parentCategories: HttpTypes.StoreProductCategory[]
 }
 
+function Logo() {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+      <svg width={28} height={28} viewBox="0 0 32 32">
+        <rect x="2" y="2" width="28" height="28" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M2 12 L30 12 M2 20 L30 20 M12 2 L12 30 M20 2 L20 30" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+        <circle cx="16" cy="16" r="3" fill="currentColor" />
+      </svg>
+      <span className="serif" style={{ fontSize: 22, letterSpacing: "-0.01em" }}>TailorBox</span>
+    </div>
+  )
+}
+
 export default function FooterClient({ collections, parentCategories }: FooterClientProps) {
-  const t = useTranslations("footer")
+  const [email, setEmail] = useState("")
+
+  const shopLinks = [
+    { label: "Кулірка", href: "/store" },
+    { label: "Футер", href: "/store" },
+    { label: "Інтерлок", href: "/store" },
+    { label: "Рібана", href: "/store" },
+    { label: "Зразки тканин", href: "/store" },
+  ]
+
+  const helpLinks = [
+    { label: "Як обрати тканину", href: "/store" },
+    { label: "Доставка та оплата", href: "/store" },
+    { label: "Повернення", href: "/store" },
+    { label: "FAQ для початківців", href: "/store" },
+  ]
+
+  const aboutLinks = [
+    { label: "Наша історія", href: "/store" },
+    { label: "Як ми працюємо", href: "/store" },
+    { label: "Гуртом", href: "/store" },
+    { label: "Контакти", href: "/store" },
+  ]
 
   return (
-    <Box
-      component="footer"
-      sx={{
-        backgroundColor: "#f5f5f5",
-        borderTop: "1px solid",
-        borderColor: "divider",
-        mt: "auto",
-      }}
-    >
-      <Container maxWidth="xl" sx={{ py: { xs: 6, md: 8 } }}>
-        <Box
-          sx={{
+    <footer style={{ background: "var(--bg-ink)", color: "#d8c8a8", padding: "60px 0 30px", marginTop: 80 }}>
+      <div style={{ maxWidth: 1360, margin: "0 auto", padding: "0 32px" }}>
+        {/* Main grid */}
+        <div
+          style={{
             display: "grid",
-            gridTemplateColumns: {
-              xs: "repeat(2, 1fr)",
-              sm: "repeat(3, 1fr)",
-              md: "repeat(4, 1fr)",
-              lg: "repeat(5, 1fr)",
-            },
-            gap: { xs: 4, md: 6 },
-            mb: 6,
+            gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr",
+            gap: 40,
+            marginBottom: 50,
           }}
         >
-          <Box>
-            <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 2, fontSize: "0.875rem", color: "text.primary" }}>
-              {t("findStore")}
-            </Typography>
-            <Typography variant="body2" sx={{ fontSize: "0.875rem", color: "text.secondary", lineHeight: 1.6 }}>
-              {t("findStoreDescription")}
-            </Typography>
-          </Box>
+          {/* Brand column */}
+          <div style={{ color: "var(--bg-card)" }}>
+            <Logo />
+            <p className="serif" style={{ fontSize: 22, lineHeight: 1.35, marginTop: 18, color: "var(--bg-card)" }}>
+              Трикотаж для тих, хто шиє маленькими партіями та з душею.
+            </p>
+            <div style={{ marginTop: 24, fontSize: 13, color: "#a89880" }}>
+              📞 +38 (067) 555-12-34 · ✉ hello@tailorbox.ua
+            </div>
+          </div>
 
-          <Box>
-            <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 2, fontSize: "0.875rem", color: "text.primary" }}>
-              {t("getHelp")}
-            </Typography>
-            <Box component="ul" sx={{ listStyle: "none", p: 0, m: 0, display: "flex", flexDirection: "column", gap: 1.5 }}>
-              {[
-                { key: "orderStatus", href: "/account" },
-                { key: "delivery", href: "/account" },
-                { key: "returns", href: "/account" },
-                { key: "paymentOptions", href: "/account" },
-                { key: "contactUs", href: "/account" },
-              ].map(({ key, href }) => (
-                <li key={key}>
-                  <MuiLink
-                    component={LocalizedClientLink}
-                    href={href}
-                    sx={{ fontSize: "0.875rem", color: "text.secondary", textDecoration: "none", "&:hover": { textDecoration: "underline" } }}
-                  >
-                    {t(key as any)}
-                  </MuiLink>
-                </li>
+          {/* Магазин */}
+          <div>
+            <div className="uppercase-label" style={{ color: "#a89880", marginBottom: 16 }}>Магазин</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {(parentCategories.length > 0
+                ? parentCategories.slice(0, 5).map((c) => ({ label: c.name, href: `/categories/${c.handle}` }))
+                : shopLinks
+              ).map((link) => (
+                <LocalizedClientLink
+                  key={link.label}
+                  href={link.href}
+                  style={{ fontSize: 13, color: "#d8c8a8" }}
+                >
+                  {link.label}
+                </LocalizedClientLink>
               ))}
-            </Box>
-          </Box>
+            </div>
+          </div>
 
-          <Box>
-            <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 2, fontSize: "0.875rem", color: "text.primary" }}>
-              {t("about")}
-            </Typography>
-            <Box component="ul" sx={{ listStyle: "none", p: 0, m: 0, display: "flex", flexDirection: "column", gap: 1.5 }}>
-              {[
-                { key: "news", href: "https://github.com/medusajs", external: true },
-                { key: "careers", href: "https://docs.medusajs.com", external: true },
-                { key: "investors", href: "https://github.com/medusajs/nextjs-starter-medusa", external: true },
-                { key: "sustainability", href: "/store", external: false },
-              ].map(({ key, href, external }) => (
-                <li key={key}>
-                  <MuiLink
-                    {...(external ? { href, target: "_blank", rel: "noreferrer" } : { component: LocalizedClientLink, href })}
-                    sx={{ fontSize: "0.875rem", color: "text.secondary", textDecoration: "none", "&:hover": { textDecoration: "underline" } }}
-                  >
-                    {t(key as any)}
-                  </MuiLink>
-                </li>
+          {/* Допомога */}
+          <div>
+            <div className="uppercase-label" style={{ color: "#a89880", marginBottom: 16 }}>Допомога</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {helpLinks.map((link) => (
+                <LocalizedClientLink
+                  key={link.label}
+                  href={link.href}
+                  style={{ fontSize: 13, color: "#d8c8a8" }}
+                >
+                  {link.label}
+                </LocalizedClientLink>
               ))}
-            </Box>
-          </Box>
+            </div>
+          </div>
 
-          {parentCategories.length > 0 && (
-            <Box>
-              <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 2, fontSize: "0.875rem", color: "text.primary" }}>
-                {t("categories")}
-              </Typography>
-              <Box component="ul" sx={{ listStyle: "none", p: 0, m: 0, display: "flex", flexDirection: "column", gap: 1.5 }}>
-                {parentCategories.slice(0, 5).map((category) => (
-                  <li key={category.id}>
-                    <MuiLink
-                      component={LocalizedClientLink}
-                      href={`/categories/${category.handle}`}
-                      sx={{ fontSize: "0.875rem", color: "text.secondary", textDecoration: "none", "&:hover": { textDecoration: "underline" } }}
-                    >
-                      {category.name}
-                    </MuiLink>
-                  </li>
-                ))}
-              </Box>
-            </Box>
-          )}
+          {/* Про нас */}
+          <div>
+            <div className="uppercase-label" style={{ color: "#a89880", marginBottom: 16 }}>Про нас</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {aboutLinks.map((link) => (
+                <LocalizedClientLink
+                  key={link.label}
+                  href={link.href}
+                  style={{ fontSize: 13, color: "#d8c8a8" }}
+                >
+                  {link.label}
+                </LocalizedClientLink>
+              ))}
+            </div>
+          </div>
 
-          {collections && collections.length > 0 && (
-            <Box>
-              <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 2, fontSize: "0.875rem", color: "text.primary" }}>
-                {t("collections")}
-              </Typography>
-              <Box component="ul" sx={{ listStyle: "none", p: 0, m: 0, display: "flex", flexDirection: "column", gap: 1.5 }}>
-                {collections.slice(0, 5).map((collection) => (
-                  <li key={collection.id}>
-                    <MuiLink
-                      component={LocalizedClientLink}
-                      href={`/collections/${collection.handle}`}
-                      sx={{ fontSize: "0.875rem", color: "text.secondary", textDecoration: "none", "&:hover": { textDecoration: "underline" } }}
-                    >
-                      {collection.title}
-                    </MuiLink>
-                  </li>
-                ))}
-              </Box>
-            </Box>
-          )}
-        </Box>
-
-        <Divider sx={{ my: 4 }} />
-
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", sm: "row" },
-            justifyContent: "space-between",
-            alignItems: { xs: "flex-start", sm: "center" },
-            gap: 2,
-          }}
-        >
-          <Typography variant="body2" sx={{ fontSize: "0.75rem", color: "text.secondary" }}>
-            © {new Date().getFullYear()} Medusa Store. {t("allRightsReserved")}
-          </Typography>
-          <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
-            {["terms", "privacy", "cookies"].map((key) => (
-              <MuiLink
-                key={key}
-                component={LocalizedClientLink}
-                href="/store"
-                sx={{ fontSize: "0.75rem", color: "text.secondary", textDecoration: "none", "&:hover": { textDecoration: "underline" } }}
+          {/* Newsletter */}
+          <div>
+            <div className="uppercase-label" style={{ color: "#a89880", marginBottom: 16 }}>Підписка</div>
+            <div style={{ fontSize: 13, color: "#d8c8a8", marginBottom: 12, lineHeight: 1.5 }}>
+              Нові надходження — раз на тиждень. Без спаму.
+            </div>
+            <div style={{ display: "flex", gap: 6 }}>
+              <input
+                className="tb-input"
+                placeholder="email@..."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                style={{
+                  background: "rgba(255,255,255,0.06)",
+                  borderColor: "rgba(255,255,255,0.15)",
+                  color: "#fff",
+                  borderRadius: 4,
+                }}
+              />
+              <button
+                className="btn btn-primary btn-sm"
+                style={{ background: "var(--accent)", borderRadius: 4, flexShrink: 0 }}
               >
-                {t(key as any)}
-              </MuiLink>
-            ))}
-          </Box>
-        </Box>
-      </Container>
-    </Box>
+                →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div
+          style={{
+            paddingTop: 24,
+            borderTop: "1px solid rgba(255,255,255,0.1)",
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: 12,
+            color: "#7a6b58",
+            fontFamily: "var(--mono)",
+          }}
+        >
+          <div>© {new Date().getFullYear()} TAILORBOX · ВСІ ПРАВА ЗАХИЩЕНІ</div>
+          <div>МАЙСТЕРНЯ В КИЄВІ · ВІДПРАВЛЯЄМО ПО УКРАЇНІ ТА ЄС</div>
+        </div>
+      </div>
+    </footer>
   )
 }
