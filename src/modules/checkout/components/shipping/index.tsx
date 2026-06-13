@@ -22,7 +22,19 @@ type ShippingProps = {
   availableShippingMethods: HttpTypes.StoreCartShippingOption[] | null
 }
 
-function formatAddress(address: HttpTypes.StoreCartAddress) {
+// `service_zone` is populated by the backend but not present on the SDK type.
+type ShippingOptionWithServiceZone = HttpTypes.StoreCartShippingOption & {
+  service_zone?: {
+    fulfillment_set?: {
+      type?: string
+      location?: {
+        address?: HttpTypes.StoreCartAddress
+      }
+    }
+  }
+}
+
+function formatAddress(address?: HttpTypes.StoreCartAddress) {
   if (!address) {
     return ""
   }
@@ -52,7 +64,7 @@ const Shipping: React.FC<ShippingProps> = ({
   cart,
   availableShippingMethods,
 }) => {
-  const t = useTranslations('checkout')
+  const t = useTranslations("checkout")
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadingPrices, setIsLoadingPrices] = useState(true)
 
@@ -73,11 +85,15 @@ const Shipping: React.FC<ShippingProps> = ({
   const isOpen = searchParams.get("step") === "delivery"
 
   const _shippingMethods = availableShippingMethods?.filter(
-    (sm) => sm.service_zone?.fulfillment_set?.type !== "pickup"
+    (sm) =>
+      (sm as ShippingOptionWithServiceZone).service_zone?.fulfillment_set
+        ?.type !== "pickup"
   )
 
   const _pickupMethods = availableShippingMethods?.filter(
-    (sm) => sm.service_zone?.fulfillment_set?.type === "pickup"
+    (sm) =>
+      (sm as ShippingOptionWithServiceZone).service_zone?.fulfillment_set
+        ?.type === "pickup"
   )
 
   const hasPickupOptions = !!_pickupMethods?.length
@@ -151,19 +167,19 @@ const Shipping: React.FC<ShippingProps> = ({
   }, [isOpen])
 
   return (
-    <div className="bg-white">
+    <div className="bg-tb-bg-card border border-tb-line-soft rounded px-6 py-6">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
           className={clx(
-            "flex flex-row text-3xl-regular gap-x-2 items-baseline",
+            "flex flex-row !font-serif text-3xl text-tb-ink gap-x-2 items-baseline",
             {
               "opacity-50 pointer-events-none select-none":
                 !isOpen && cart.shipping_methods?.length === 0,
             }
           )}
         >
-          {t('delivery')}
+          {t("delivery")}
           {!isOpen && (cart.shipping_methods?.length ?? 0) > 0 && (
             <CheckCircleSolid />
           )}
@@ -175,10 +191,10 @@ const Shipping: React.FC<ShippingProps> = ({
             <Text>
               <button
                 onClick={handleEdit}
-                className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
+                className="text-tb-accent hover:text-tb-ink transition-colors"
                 data-testid="edit-delivery-button"
               >
-                {t('edit')}
+                {t("edit")}
               </button>
             </Text>
           )}
@@ -188,10 +204,10 @@ const Shipping: React.FC<ShippingProps> = ({
           <div className="grid">
             <div className="flex flex-col">
               <span className="font-medium txt-medium text-ui-fg-base">
-                {t('shippingMethod')}
+                {t("shippingMethod")}
               </span>
               <span className="mb-4 text-ui-fg-muted txt-medium">
-                {t('shippingMethodDescription')}
+                {t("shippingMethodDescription")}
               </span>
             </div>
             <div data-testid="delivery-options-container">
@@ -225,7 +241,7 @@ const Shipping: React.FC<ShippingProps> = ({
                           checked={showPickupOptions === PICKUP_OPTION_ON}
                         />
                         <span className="text-base-regular">
-                          {t('pickupOrder')}
+                          {t("pickupOrder")}
                         </span>
                       </div>
                       <span className="justify-self-end text-ui-fg-base">
@@ -299,14 +315,14 @@ const Shipping: React.FC<ShippingProps> = ({
 
           {showPickupOptions === PICKUP_OPTION_ON && (
             <div className="grid">
-            <div className="flex flex-col">
-              <span className="font-medium txt-medium text-ui-fg-base">
-                {t('store')}
-              </span>
-              <span className="mb-4 text-ui-fg-muted txt-medium">
-                {t('chooseStore')}
-              </span>
-            </div>
+              <div className="flex flex-col">
+                <span className="font-medium txt-medium text-ui-fg-base">
+                  {t("store")}
+                </span>
+                <span className="mb-4 text-ui-fg-muted txt-medium">
+                  {t("chooseStore")}
+                </span>
+              </div>
               <div data-testid="delivery-options-container">
                 <div className="pb-8 md:pt-0 pt-2">
                   <RadioGroup
@@ -344,7 +360,8 @@ const Shipping: React.FC<ShippingProps> = ({
                               </span>
                               <span className="text-base-regular text-ui-fg-muted">
                                 {formatAddress(
-                                  option.service_zone?.fulfillment_set?.location
+                                  (option as ShippingOptionWithServiceZone)
+                                    .service_zone?.fulfillment_set?.location
                                     ?.address
                                 )}
                               </span>
@@ -378,7 +395,7 @@ const Shipping: React.FC<ShippingProps> = ({
               disabled={!cart.shipping_methods?.[0]}
               data-testid="submit-delivery-option-button"
             >
-              {t('continueToPayment')}
+              {t("continueToPayment")}
             </Button>
           </div>
         </>
@@ -388,7 +405,7 @@ const Shipping: React.FC<ShippingProps> = ({
             {cart && (cart.shipping_methods?.length ?? 0) > 0 && (
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  {t('method')}
+                  {t("method")}
                 </Text>
                 <Text className="txt-medium text-ui-fg-subtle">
                   {cart.shipping_methods!.at(-1)!.name}{" "}

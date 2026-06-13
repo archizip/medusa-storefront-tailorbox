@@ -2,6 +2,7 @@
 
 import { useActionState } from "react"
 import Input from "@modules/common/components/input"
+import { useTranslations } from "@lib/util/i18n"
 import { LOGIN_VIEW } from "@modules/account/templates/login-template"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
@@ -13,6 +14,8 @@ type Props = {
 }
 
 const Register = ({ setCurrentView }: Props) => {
+  const t = useTranslations("account")
+  const tf = useTranslations("form")
   const [message, formAction] = useActionState(signup, null)
 
   return (
@@ -20,31 +23,28 @@ const Register = ({ setCurrentView }: Props) => {
       className="max-w-sm flex flex-col items-center"
       data-testid="register-page"
     >
-      <h1 className="text-large-semi uppercase mb-6">
-        Become a Medusa Store Member
-      </h1>
-      <p className="text-center text-base-regular text-ui-fg-base mb-4">
-        Create your Medusa Store Member profile, and get access to an enhanced
-        shopping experience.
+      <h1 className="serif text-3xl text-tb-ink mb-3">{t("createTitle")}</h1>
+      <p className="text-center text-sm text-tb-ink-3 mb-6">
+        {t("registerHint")}
       </p>
       <form className="w-full flex flex-col" action={formAction}>
         <div className="flex flex-col w-full gap-y-2">
           <Input
-            label="First name"
+            label={tf("firstName")}
             name="first_name"
             required
             autoComplete="given-name"
             data-testid="first-name-input"
           />
           <Input
-            label="Last name"
+            label={tf("lastName")}
             name="last_name"
             required
             autoComplete="family-name"
             data-testid="last-name-input"
           />
           <Input
-            label="Email"
+            label={tf("email")}
             name="email"
             required
             type="email"
@@ -52,14 +52,14 @@ const Register = ({ setCurrentView }: Props) => {
             data-testid="email-input"
           />
           <Input
-            label="Phone"
+            label={tf("phone")}
             name="phone"
             type="tel"
             autoComplete="tel"
             data-testid="phone-input"
           />
           <Input
-            label="Password"
+            label={t("password")}
             name="password"
             required
             type="password"
@@ -68,36 +68,35 @@ const Register = ({ setCurrentView }: Props) => {
           />
         </div>
         <ErrorMessage error={message} data-testid="register-error" />
-        <span className="text-center text-ui-fg-base text-small-regular mt-6">
-          By creating an account, you agree to Medusa Store&apos;s{" "}
+        <span className="text-center text-tb-ink-3 text-sm mt-6">
+          {t("agreePrefix")}{" "}
           <LocalizedClientLink
             href="/content/privacy-policy"
-            className="underline"
+            className="text-tb-accent underline underline-offset-2 hover:text-tb-ink transition-colors"
           >
-            Privacy Policy
+            {t("privacyPolicy")}
           </LocalizedClientLink>{" "}
-          and{" "}
+          {t("and")}{" "}
           <LocalizedClientLink
             href="/content/terms-of-use"
-            className="underline"
+            className="text-tb-accent underline underline-offset-2 hover:text-tb-ink transition-colors"
           >
-            Terms of Use
+            {t("termsOfUse")}
           </LocalizedClientLink>
           .
         </span>
         <SubmitButton className="w-full mt-6" data-testid="register-button">
-          Join
+          {t("join")}
         </SubmitButton>
       </form>
-      <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        Already a member?{" "}
+      <span className="text-center text-tb-ink-3 text-sm mt-6">
+        {t("alreadyMember")}{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}
-          className="underline"
+          className="text-tb-accent underline underline-offset-2 hover:text-tb-ink transition-colors"
         >
-          Sign in
+          {t("signIn")}
         </button>
-        .
       </span>
     </div>
   )

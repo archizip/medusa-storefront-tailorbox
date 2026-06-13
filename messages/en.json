@@ -34,6 +34,7 @@
     "findStore": "Find a Store"
   },
   "checkout": {
+    "inYourCart": "In your cart",
     "shipping": "Shipping",
     "delivery": "Delivery",
     "payment": "Payment",
@@ -92,7 +93,11 @@
     "remove": "Remove",
     "update": "Update",
     "summary": "Summary",
-    "goToCheckout": "Go to checkout"
+    "goToCheckout": "Go to checkout",
+    "title": "Cart",
+    "item": "Item",
+    "price": "Price",
+    "quantity": "Quantity"
   },
   "product": {
     "addToCart": "Add to Cart",
@@ -112,7 +117,13 @@
     "simpleExchanges": "Simple exchanges",
     "simpleExchangesDescription": "Is the fit not quite right? No worries - we'll exchange your product for a new one.",
     "easyReturns": "Easy returns",
-    "easyReturnsDescription": "Just return your product and we'll refund your money. No questions asked – we'll do our best to make sure your return is hassle-free."
+    "easyReturnsDescription": "Just return your product and we'll refund your money. No questions asked – we'll do our best to make sure your return is hassle-free.",
+    "pricePerMeter": "price per meter",
+    "inStock": "in stock",
+    "addOneMeter": "+ 1 m",
+    "select": "Select",
+    "from": "From",
+    "original": "Original"
   },
   "cartTotals": {
     "subtotalExclShippingTaxes": "Subtotal (excl. shipping and taxes)",
@@ -122,40 +133,89 @@
     "total": "Total"
   },
   "home": {
+    "meta": {
+      "title": "TailorBox — Fabrics for brands and ateliers",
+      "description": "Single jersey, fleece, interlock, ribbing. Order from 0.5 m. Free delivery from ₴1500."
+    },
     "hero": {
-      "title": "Fabrics for your creativity",
-      "subtitle": "Wide selection of natural and quality fabrics — cotton, linen, silk, wool and more. For sewing, decor and design.",
-      "shopNow": "Browse Catalogue",
-      "explore": "Fabric Types",
-      "badge": "2025 Collection · Natural Fabrics"
-    },
-    "categories": {
-      "title": "Fabric Types",
-      "viewAll": "All Fabric Types",
-      "subtitle": "Find exactly what you need"
-    },
-    "featured": {
-      "title": "New Arrivals",
-      "viewAll": "View All",
-      "subtitle": "Fresh fabrics in stock"
-    },
-    "collections": {
-      "title": "Our Collections",
-      "viewAll": "View All Collections"
+      "season": "· SPRING — SUMMER · 2025 ·",
+      "titleStart": "Knit fabric",
+      "titleAccent": "by the meter",
+      "titleEnd": "for small batches.",
+      "subtitle": "Single jersey, fleece, interlock, ribbing. Order from 0.5 m — just enough for one baby bodysuit or a test sample of a design.",
+      "browseCatalog": "Browse catalog",
+      "orderSamples": "Order samples",
+      "stat1Value": "120+",
+      "stat1Label": "fabrics in the catalog",
+      "stat2Value": "from 0.5 m",
+      "stat2Label": "minimum order",
+      "stat3Value": "3–5 days",
+      "stat3Label": "delivery across Ukraine",
+      "macroLabel": "MACRO · 1:1",
+      "latestBadge": "LATEST",
+      "swatchType": "Stretch jersey",
+      "swatchName": "“Petal”",
+      "swatchSpecs": "200 g/m² · 180 cm · 3 colors",
+      "perMeter": "per meter"
     },
     "trust": {
-      "quality": "Natural Materials",
-      "qualitySub": "100% certified raw materials",
-      "delivery": "Fast Delivery",
-      "deliverySub": "1 to 3 business days",
-      "returns": "Easy Returns",
-      "returnsSub": "14 days no questions asked",
-      "support": "Expert Advice",
-      "supportSub": "We'll help you choose fabric"
+      "b1Title": "Free sample",
+      "b1Text": "A 10×10 cm piece of any fabric — to feel it before ordering.",
+      "b2Title": "From 0.5 m",
+      "b2Text": "No minimum order. Buy just enough for a single bodysuit.",
+      "b3Title": "We know fabrics",
+      "b3Text": "We'll explain the difference between stretch jersey and interlock — no degree required.",
+      "b4Title": "Next-day dispatch",
+      "b4Text": "Same-day shipping if you order before 2:00 pm."
+    },
+    "rail": {
+      "label": "02 — New arrivals",
+      "title": "Fresh off the roll",
+      "viewAll": "All new arrivals →"
+    },
+    "guide": {
+      "label": "03 — Beginner's guide",
+      "titleLine1": "Not sure",
+      "titleLine2": "which to pick?",
+      "text": "We explain it in words both a seasoned seamstress and someone who just bought an overlocker will understand. What single jersey is, how 3-thread differs from 2-thread fleece, how many meters you need for a size 86 bodysuit.",
+      "openGuide": "Open the guide",
+      "orderSamples": "Order samples",
+      "qa1q": "Jersey or interlock?",
+      "qa1a": "Interlock is smooth on both sides and holds its shape. Jersey is thin and light.",
+      "qa2q": "How many meters for a size 86 bodysuit?",
+      "qa2a": "Roughly 0.6–0.8 m of 180 cm wide jersey.",
+      "qa3q": "What's brushed fleece?",
+      "qa3a": "The reverse side is fluffy — adds warmth. Used for winter clothing.",
+      "qa4q": "What is fabric weight?",
+      "qa4a": "g/m² — the higher, the denser the fabric. Up to 180 is light, above 250 is dense."
+    },
+    "collections": {
+      "label": "04 — Collections",
+      "title": "By purpose",
+      "fabricsCount": "{count} FABRICS",
+      "c1Title": "Kids' fabrics",
+      "c1Hint": "Bodysuits, rompers, outfits for ages 0–6.",
+      "c2Title": "Activewear",
+      "c2Hint": "Breathable, with good stretch.",
+      "c3Title": "Wardrobe basics",
+      "c3Hint": "Black, milky white, graphite, sand."
+    },
+    "manifesto": {
+      "label": "· WORKSHOP IN KYIV ·",
+      "title": "Fabric is only the beginning.",
+      "titleAccent": "The rest is in your hands.",
+      "text": "We cut rolls, ship samples and answer “which of these is best for a winter bodysuit?” — every day. Because fabric should make sense."
+    },
+    "categoriesGrid": {
+      "label": "01 — Categories",
+      "title": "By knit type",
+      "viewAll": "View all →",
+      "subcategories": "{count} subcategories →",
+      "browse": "Browse →"
     },
     "fabricTypes": {
-      "label": "Fabric types:",
-      "all": "All fabrics"
+      "label": "Type:",
+      "all": "All"
     }
   },
   "footer": {
@@ -178,6 +238,286 @@
     "terms": "Terms",
     "privacy": "Privacy",
     "cookies": "Cookies"
+  },
+  "store": {
+    "catalog": "Fabric catalog",
+    "title": "All fabrics",
+    "filters": "Filters",
+    "sortBy": "Sort by",
+    "sortLatest": "Latest arrivals",
+    "sortPriceAsc": "Price: low to high",
+    "sortPriceDesc": "Price: high to low",
+    "categories": "Categories",
+    "allCategories": "All fabrics",
+    "noProducts": "No products found",
+    "fabrics": "Fabrics",
+    "viewAll": "View all fabrics"
+  },
+  "nav": {
+    "announcement": "FREE NOVA POSHTA DELIVERY FROM ₴1500 · FABRIC SAMPLES — FREE",
+    "collections": "Collections",
+    "samples": "Samples",
+    "wholesale": "Wholesale",
+    "journal": "Journal"
+  },
+  "account": {
+    "welcomeBack": "Welcome back",
+    "signInHint": "Sign in to access an enhanced shopping experience.",
+    "signIn": "Sign in",
+    "notMember": "Not a member?",
+    "joinUs": "Join us",
+    "createTitle": "Create your account",
+    "registerHint": "Create your TailorBox profile and enjoy a smoother shopping experience.",
+    "agreePrefix": "By creating an account, you agree to TailorBox's",
+    "privacyPolicy": "Privacy Policy",
+    "and": "and",
+    "termsOfUse": "Terms of Use",
+    "join": "Join",
+    "alreadyMember": "Already a member?",
+    "gotQuestions": "Got questions?",
+    "gotQuestionsText": "You can find frequently asked questions and answers on our customer service page.",
+    "customerService": "Customer Service",
+    "title": "Account",
+    "helloName": "Hello {name}",
+    "overview": "Overview",
+    "profile": "Profile",
+    "addresses": "Addresses",
+    "orders": "Orders",
+    "logout": "Log out",
+    "signedInAs": "Signed in as:",
+    "completed": "Completed",
+    "saved": "Saved",
+    "recentOrders": "Recent orders",
+    "noRecentOrders": "No recent orders",
+    "datePlaced": "Date placed",
+    "orderNumber": "Order number",
+    "totalAmount": "Total amount",
+    "goToOrder": "Go to order #{id}",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "save": "Save changes",
+    "updatedSuccessfully": "{label} updated successfully",
+    "genericError": "An error occurred, please try again",
+    "name": "Name",
+    "password": "Password",
+    "oldPassword": "Old password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "passwordHidden": "The password is not shown for security reasons"
+  },
+  "pages": {
+    "about": {
+      "kicker": "About us",
+      "title": "Our story",
+      "intro": "TailorBox is a small knit-fabric workshop in Kyiv. We cut fabric by the meter so you buy exactly as much as you need.",
+      "blocks": [
+        {
+          "heading": "How it started",
+          "text": "We sew ourselves and know how hard it is to find good fabric in small lengths without wholesale minimums. So we built a shop where you can order from 0.5 m."
+        },
+        {
+          "heading": "What drives us",
+          "text": "Honest descriptions, real photos, samples to touch and help with choosing — so fabric makes sense even to a beginner."
+        }
+      ]
+    },
+    "howWeWork": {
+      "kicker": "Process",
+      "title": "How we work",
+      "intro": "From the roll to your parcel — a few simple steps.",
+      "blocks": [
+        {
+          "heading": "Cut to your order",
+          "text": "Order the length you need and we cut it from the roll. Minimum — 0.5 m."
+        },
+        {
+          "heading": "Samples before you buy",
+          "text": "Not sure? Order free samples to feel the fabric in your hands."
+        },
+        {
+          "heading": "Fast shipping",
+          "text": "We pack and ship via Nova Poshta across Ukraine and to the EU within 1–2 business days."
+        }
+      ]
+    },
+    "contacts": {
+      "kicker": "Get in touch",
+      "title": "Contacts",
+      "intro": "Write or call — we reply every day.",
+      "blocks": [
+        {
+          "heading": "Phone and email",
+          "items": [
+            "+38 (067) 555-12-34",
+            "hello@tailorbox.ua"
+          ]
+        },
+        {
+          "heading": "Hours",
+          "text": "Mon–Fri, 10:00–18:00 Kyiv time."
+        },
+        {
+          "heading": "Workshop",
+          "text": "Kyiv, Ukraine. We ship across Ukraine and to the EU."
+        }
+      ]
+    },
+    "shipping": {
+      "kicker": "Shipping & payment",
+      "title": "Shipping & payment",
+      "intro": "We ship via Nova Poshta; pay the way that suits you.",
+      "blocks": [
+        {
+          "heading": "Delivery",
+          "text": "Nova Poshta across Ukraine (branch or courier). Free on orders from ₴1500. Dispatched within 1–2 business days."
+        },
+        {
+          "heading": "International",
+          "text": "We ship to the EU. Cost and time depend on the country — calculated at checkout."
+        },
+        {
+          "heading": "Payment",
+          "text": "Card online or cash on delivery."
+        }
+      ]
+    },
+    "returns": {
+      "kicker": "Returns",
+      "title": "Returns & exchanges",
+      "intro": "We want the fabric to be right for you.",
+      "blocks": [
+        {
+          "heading": "Conditions",
+          "text": "You can return or exchange an item within 14 days if the fabric is unused and in resalable condition."
+        },
+        {
+          "heading": "How to return",
+          "text": "Email us at hello@tailorbox.ua with your order number and we'll guide you."
+        },
+        {
+          "heading": "Exceptions",
+          "text": "Cuts made to a custom length can't be returned, except in case of defects."
+        }
+      ]
+    },
+    "faq": {
+      "kicker": "For beginners",
+      "title": "Frequently asked",
+      "intro": "The essentials if you're just starting out.",
+      "blocks": [
+        {
+          "heading": "How many meters for a size 86 bodysuit?",
+          "text": "Roughly 0.6–0.8 m of 180 cm wide single jersey."
+        },
+        {
+          "heading": "Jersey or interlock?",
+          "text": "Interlock is smooth on both sides and holds its shape. Jersey is thinner and lighter."
+        },
+        {
+          "heading": "What is weight (g/m²)?",
+          "text": "The higher, the denser the fabric. Up to 180 is light, above 250 is dense."
+        },
+        {
+          "heading": "Can I order less than a meter?",
+          "text": "Yes, the minimum is 0.5 m."
+        }
+      ]
+    },
+    "guide": {
+      "kicker": "Guide",
+      "title": "How to choose fabric",
+      "intro": "We explain it in words a seasoned seamstress and a beginner will both understand.",
+      "blocks": [
+        {
+          "heading": "Knit types",
+          "text": "Single jersey — light and breathable, for tees and bodysuits. Fleece — denser, brushed or not, for hoodies. Interlock — dense, holds shape. Rib — stretchy, for cuffs and necklines."
+        },
+        {
+          "heading": "Weight",
+          "text": "g/m² shows density. Up to 180 is light summer, 200–250 is all-round, above 250 is warm."
+        },
+        {
+          "heading": "How much to buy",
+          "text": "A size 86 bodysuit — 0.6–0.8 m, an adult tee — 1–1.5 m. Not sure — order a sample."
+        }
+      ]
+    },
+    "wholesale": {
+      "kicker": "Wholesale",
+      "title": "Wholesale orders",
+      "intro": "Sewing to sell? We work with workshops and brands.",
+      "blocks": [
+        {
+          "heading": "Terms",
+          "text": "Special pricing from a certain volume, roll reservations and regular supply of your favorite articles."
+        },
+        {
+          "heading": "How to order",
+          "text": "Email hello@tailorbox.ua or call — we'll build a price list for your volumes."
+        }
+      ]
+    },
+    "samples": {
+      "kicker": "Samples",
+      "title": "Fabric samples",
+      "intro": "Feel the fabric first — then order by the meter.",
+      "blocks": [
+        {
+          "heading": "What it is",
+          "text": "A 10×10 cm square of any fabric in the catalog. Compare colors, weight and texture in person."
+        },
+        {
+          "heading": "Free",
+          "text": "Samples are free. You only pay for shipping, which we refund on your next order."
+        },
+        {
+          "heading": "How to order",
+          "text": "Add the samples you want to the cart or write to us — we'll put a set together."
+        }
+      ]
+    },
+    "journal": {
+      "kicker": "Journal",
+      "title": "The TailorBox Journal",
+      "intro": "Guides, fabric stories and sewing tips.",
+      "blocks": [
+        {
+          "heading": "Coming soon",
+          "text": "We're preparing articles on knit types, garment care and seasonal picks. Check back a little later."
+        },
+        {
+          "heading": "Don't miss out",
+          "text": "Subscribe to the newsletter in the footer — we'll let you know about new pieces."
+        }
+      ]
+    },
+    "collections": {
+      "kicker": "Catalog",
+      "title": "Collections",
+      "intro": "Themed fabric selections — by season, purpose and mood.",
+      "empty": "Collections are being put together. Meanwhile, browse the full fabric catalog.",
+      "toStore": "To the catalog"
+    }
+  },
+  "order": {
+    "thankYou": "Thank you!",
+    "placedSuccessfully": "Your order was placed successfully.",
+    "confirmationSentTo": "We have sent the order confirmation details to",
+    "orderDate": "Order date:",
+    "orderNumber": "Order number:",
+    "orderStatus": "Order status:",
+    "paymentStatus": "Payment status:",
+    "summary": "Summary",
+    "delivery": "Delivery",
+    "shippingAddress": "Shipping address",
+    "contact": "Contact",
+    "method": "Method",
+    "payment": "Payment",
+    "paymentMethod": "Payment method",
+    "paymentDetails": "Payment details",
+    "paidAt": "paid on",
+    "needHelp": "Need help?",
+    "contactLink": "Contact",
+    "returnsExchanges": "Returns & exchanges"
   }
 }
-

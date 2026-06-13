@@ -1,6 +1,7 @@
 "use client"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { useTranslations } from "@lib/util/i18n"
 
 const FABRIC_PATTERN = `repeating-linear-gradient(
   45deg,
@@ -17,6 +18,14 @@ const FABRIC_PATTERN = `repeating-linear-gradient(
 )`
 
 const Hero = () => {
+  const t = useTranslations("home.hero")
+
+  const stats = [
+    [t("stat1Value"), t("stat1Label")],
+    [t("stat2Value"), t("stat2Label")],
+    [t("stat3Value"), t("stat3Label")],
+  ]
+
   return (
     <section
       style={{
@@ -44,7 +53,7 @@ const Hero = () => {
           }}
         >
           <div className="uppercase-label" style={{ marginBottom: 22 }}>
-            · ВЕСНА — ЛІТО · 2025 ·
+            {t("season")}
           </div>
 
           <h1
@@ -57,13 +66,13 @@ const Hero = () => {
               color: "var(--ink)",
             }}
           >
-            Трикотаж
+            {t("titleStart")}
             <br />
-            <em style={{ fontStyle: "italic", color: "var(--accent)" }}>метражем</em>
+            <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+              {t("titleAccent")}
+            </em>
             <br />
-            для маленьких
-            <br />
-            партій.
+            {t("titleEnd")}
           </h1>
 
           <p
@@ -75,28 +84,30 @@ const Hero = () => {
               margin: "32px 0",
             }}
           >
-            Кулірка, футер, інтерлок, рібана. Замовляйте від 0.5 м — стільки,
-            скільки треба для одного дитячого боді або тестового зразка моделі.
+            {t("subtitle")}
           </p>
 
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
             <LocalizedClientLink href="/store">
-              <button className="btn btn-primary btn-lg">Переглянути каталог</button>
+              <button className="btn btn-primary btn-lg">
+                {t("browseCatalog")}
+              </button>
             </LocalizedClientLink>
-            <LocalizedClientLink href="/store">
-              <button className="btn btn-outline btn-lg">Замовити зразки</button>
+            <LocalizedClientLink href="/samples">
+              <button className="btn btn-outline btn-lg">
+                {t("orderSamples")}
+              </button>
             </LocalizedClientLink>
           </div>
 
           {/* Stats row */}
           <div style={{ marginTop: 50, display: "flex", gap: 50 }}>
-            {[
-              ["120+", "тканин у каталозі"],
-              ["від 0.5 м", "мінімальне замовлення"],
-              ["3–5 днів", "доставка по Україні"],
-            ].map(([num, label]) => (
+            {stats.map(([num, label]) => (
               <div key={label}>
-                <div className="serif" style={{ fontSize: 30, lineHeight: 1, color: "var(--ink)" }}>
+                <div
+                  className="serif"
+                  style={{ fontSize: 30, lineHeight: 1, color: "var(--ink)" }}
+                >
                   {num}
                 </div>
                 <div
@@ -141,7 +152,7 @@ const Hero = () => {
                 color: "var(--ink-2)",
               }}
             >
-              МАКРОЗЙОМКА · 1:1
+              {t("macroLabel")}
             </div>
 
             {/* Badge top-right */}
@@ -159,7 +170,7 @@ const Hero = () => {
                 borderRadius: 2,
               }}
             >
-              ОСТАННЄ
+              {t("latestBadge")}
             </div>
 
             {/* Overlay card */}
@@ -179,8 +190,10 @@ const Hero = () => {
               }}
             >
               <div>
-                <div className="uppercase-label">Кулірка стрейч</div>
-                <div className="serif" style={{ fontSize: 22, marginTop: 2 }}>«Пелюстка»</div>
+                <div className="uppercase-label">{t("swatchType")}</div>
+                <div className="serif" style={{ fontSize: 22, marginTop: 2 }}>
+                  {t("swatchName")}
+                </div>
                 <div
                   style={{
                     fontSize: 12,
@@ -189,13 +202,21 @@ const Hero = () => {
                     fontFamily: "var(--mono)",
                   }}
                 >
-                  200 г/м² · 180 см · в 3 кольорах
+                  {t("swatchSpecs")}
                 </div>
               </div>
               <div style={{ textAlign: "right" }}>
-                <div className="serif" style={{ fontSize: 28 }}>420 ₴</div>
-                <div style={{ fontSize: 11, color: "var(--ink-3)", fontFamily: "var(--mono)" }}>
-                  за метр
+                <div className="serif" style={{ fontSize: 28 }}>
+                  420 ₴
+                </div>
+                <div
+                  style={{
+                    fontSize: 11,
+                    color: "var(--ink-3)",
+                    fontFamily: "var(--mono)",
+                  }}
+                >
+                  {t("perMeter")}
                 </div>
               </div>
             </div>

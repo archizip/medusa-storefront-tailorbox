@@ -1,12 +1,14 @@
 import { Suspense } from "react"
+import { getTranslations } from "next-intl/server"
 
+import { listCategories } from "@lib/data/categories"
 import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
 import RefinementList from "@modules/store/components/refinement-list"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 
 import PaginatedProducts from "./paginated-products"
 
-const StoreTemplate = ({
+const StoreTemplate = async ({
   sortBy,
   page,
   countryCode,
@@ -17,6 +19,13 @@ const StoreTemplate = ({
 }) => {
   const pageNumber = page ? parseInt(page) : 1
   const sort = sortBy || "created_at"
+
+  const t = await getTranslations("store")
+
+  const categories = await listCategories({ limit: 100 }).catch(() => [])
+  const parentCategories = (categories ?? [])
+    .filter((c) => c?.handle && c?.name && !c?.parent_category)
+    .sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""))
 
   return (
     <div
@@ -29,7 +38,9 @@ const StoreTemplate = ({
     >
       {/* Page header */}
       <div style={{ marginBottom: 40 }}>
-        <div className="uppercase-label" style={{ marginBottom: 12 }}>Каталог тканин</div>
+        <div className="uppercase-label" style={{ marginBottom: 12 }}>
+          {t("catalog")}
+        </div>
         <h1
           className="serif"
           style={{
@@ -41,12 +52,12 @@ const StoreTemplate = ({
           }}
           data-testid="store-page-title"
         >
-          Всі тканини
+          {t("title")}
         </h1>
       </div>
 
       <div style={{ display: "flex", gap: 40, alignItems: "flex-start" }}>
-        <RefinementList sortBy={sort} />
+        <RefinementList sortBy={sort} categories={parentCategories} />
         <div style={{ flex: 1, minWidth: 0 }}>
           <Suspense fallback={<SkeletonProductGrid />}>
             <PaginatedProducts

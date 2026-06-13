@@ -34,6 +34,7 @@
     "findStore": "Trouver un magasin"
   },
   "checkout": {
+    "inYourCart": "Dans votre panier",
     "shipping": "Livraison",
     "delivery": "Livraison",
     "payment": "Paiement",
@@ -92,7 +93,11 @@
     "remove": "Retirer",
     "update": "Mettre à jour",
     "summary": "Résumé",
-    "goToCheckout": "Passer à la caisse"
+    "goToCheckout": "Passer à la caisse",
+    "title": "Panier",
+    "item": "Article",
+    "price": "Prix",
+    "quantity": "Quantité"
   },
   "product": {
     "addToCart": "Ajouter au panier",
@@ -113,7 +118,13 @@
     "simpleExchanges": "Échanges simples",
     "simpleExchangesDescription": "La taille ne convient pas ? Pas de souci - nous échangerons votre produit contre un nouveau.",
     "easyReturns": "Retours faciles",
-    "easyReturnsDescription": "Retournez simplement votre produit et nous vous rembourserons. Sans poser de questions – nous ferons de notre mieux pour que votre retour se passe sans problème."
+    "easyReturnsDescription": "Retournez simplement votre produit et nous vous rembourserons. Sans poser de questions – nous ferons de notre mieux pour que votre retour se passe sans problème.",
+    "pricePerMeter": "prix au mètre",
+    "inStock": "en stock",
+    "addOneMeter": "+ 1 m",
+    "select": "Choisir",
+    "from": "À partir de",
+    "original": "Prix initial"
   },
   "cartTotals": {
     "subtotalExclShippingTaxes": "Sous-total (hors livraison et taxes)",
@@ -123,40 +134,89 @@
     "total": "Total"
   },
   "home": {
+    "meta": {
+      "title": "TailorBox — Tissus pour marques et ateliers",
+      "description": "Jersey, molleton, interlock, bord-côte. Commandez dès 0,5 m. Livraison gratuite dès 1500 ₴."
+    },
     "hero": {
-      "title": "Tissus pour votre créativité",
-      "subtitle": "Large sélection de tissus naturels et de qualité — coton, lin, soie, laine et bien plus. Pour la couture, la décoration et le design.",
-      "shopNow": "Voir le catalogue",
-      "explore": "Types de tissus",
-      "badge": "Collection 2025 · Tissus naturels"
-    },
-    "categories": {
-      "title": "Types de tissus",
-      "viewAll": "Tous les types de tissus",
-      "subtitle": "Trouvez exactement ce dont vous avez besoin"
-    },
-    "featured": {
-      "title": "Nouveautés",
-      "viewAll": "Voir tout",
-      "subtitle": "Nouveaux tissus en stock"
-    },
-    "collections": {
-      "title": "Nos collections",
-      "viewAll": "Voir toutes les collections"
+      "season": "· PRINTEMPS — ÉTÉ · 2025 ·",
+      "titleStart": "Du tricot",
+      "titleAccent": "au mètre",
+      "titleEnd": "pour les petites séries.",
+      "subtitle": "Jersey, molleton, interlock, bord-côte. Commandez dès 0,5 m — juste ce qu'il faut pour un body d'enfant ou un échantillon de modèle.",
+      "browseCatalog": "Voir le catalogue",
+      "orderSamples": "Commander des échantillons",
+      "stat1Value": "120+",
+      "stat1Label": "tissus au catalogue",
+      "stat2Value": "dès 0,5 m",
+      "stat2Label": "commande minimale",
+      "stat3Value": "3–5 jours",
+      "stat3Label": "livraison en Ukraine",
+      "macroLabel": "MACRO · 1:1",
+      "latestBadge": "NOUVEAU",
+      "swatchType": "Jersey stretch",
+      "swatchName": "« Pétale »",
+      "swatchSpecs": "200 g/m² · 180 cm · 3 coloris",
+      "perMeter": "le mètre"
     },
     "trust": {
-      "quality": "Matériaux naturels",
-      "qualitySub": "Matières premières 100% certifiées",
-      "delivery": "Livraison rapide",
-      "deliverySub": "1 à 3 jours ouvrables",
-      "returns": "Retours faciles",
-      "returnsSub": "14 jours sans questions",
-      "support": "Conseil expert",
-      "supportSub": "Nous vous aidons à choisir"
+      "b1Title": "Échantillon gratuit",
+      "b1Text": "Un carré de 10×10 cm de n'importe quel tissu — pour le toucher avant de commander.",
+      "b2Title": "Dès 0,5 m",
+      "b2Text": "Pas de minimum de commande. Achetez juste ce qu'il faut pour un body.",
+      "b3Title": "On connaît les tissus",
+      "b3Text": "On vous explique la différence entre jersey stretch et interlock — sans jargon.",
+      "b4Title": "Dès le lendemain",
+      "b4Text": "Expédition le jour même pour toute commande passée avant 14h00."
+    },
+    "rail": {
+      "label": "02 — Nouveautés",
+      "title": "Tout juste déroulé",
+      "viewAll": "Toutes les nouveautés →"
+    },
+    "guide": {
+      "label": "03 — Guide du débutant",
+      "titleLine1": "Vous hésitez,",
+      "titleLine2": "lequel choisir ?",
+      "text": "On vous explique tout, que vous soyez couturière confirmée ou que vous veniez d'acheter votre surjeteuse. C'est quoi le jersey, la différence entre molleton 2 fils et 3 fils, combien de mètres pour un body taille 86.",
+      "openGuide": "Ouvrir le guide",
+      "orderSamples": "Commander des échantillons",
+      "qa1q": "Jersey ou interlock ?",
+      "qa1a": "L'interlock est lisse des deux côtés et garde sa forme. Le jersey est fin et léger.",
+      "qa2q": "Combien de mètres pour un body 86 ?",
+      "qa2a": "Environ 0,6–0,8 m de jersey en 180 cm de large.",
+      "qa3q": "C'est quoi, le gratté ?",
+      "qa3a": "L'envers est duveteux — plus chaud. Idéal pour les vêtements d'hiver.",
+      "qa4q": "C'est quoi, le grammage ?",
+      "qa4a": "g/m² — plus c'est élevé, plus le tissu est dense. Jusqu'à 180 : léger ; au-delà de 250 : dense."
+    },
+    "collections": {
+      "label": "04 — Collections",
+      "title": "Par usage",
+      "fabricsCount": "{count} TISSUS",
+      "c1Title": "Tissus enfants",
+      "c1Hint": "Bodies, grenouillères, ensembles 0–6 ans.",
+      "c2Title": "Vêtements de sport",
+      "c2Hint": "Respirants, bien extensibles.",
+      "c3Title": "Garde-robe basique",
+      "c3Hint": "Noir, écru, graphite, sable."
+    },
+    "manifesto": {
+      "label": "· ATELIER À KYIV ·",
+      "title": "Le tissu n'est que le début.",
+      "titleAccent": "Ensuite, c'est entre vos mains.",
+      "text": "Nous coupons les rouleaux, envoyons des échantillons et répondons chaque jour à « lequel est le mieux pour un body d'hiver ? ». Parce qu'un tissu doit être compréhensible."
+    },
+    "categoriesGrid": {
+      "label": "01 — Catégories",
+      "title": "Par type de tricot",
+      "viewAll": "Tout voir →",
+      "subcategories": "{count} sous-catégories →",
+      "browse": "Découvrir →"
     },
     "fabricTypes": {
-      "label": "Types de tissus :",
-      "all": "Tous les tissus"
+      "label": "Type :",
+      "all": "Tous"
     }
   },
   "footer": {
@@ -179,6 +239,286 @@
     "terms": "Conditions",
     "privacy": "Confidentialité",
     "cookies": "Cookies"
+  },
+  "store": {
+    "catalog": "Catalogue de tissus",
+    "title": "Tous les tissus",
+    "filters": "Filtres",
+    "sortBy": "Trier par",
+    "sortLatest": "Nouveautés",
+    "sortPriceAsc": "Prix : croissant",
+    "sortPriceDesc": "Prix : décroissant",
+    "categories": "Catégories",
+    "allCategories": "Tous les tissus",
+    "noProducts": "Aucun produit trouvé",
+    "fabrics": "Tissus",
+    "viewAll": "Tous les tissus"
+  },
+  "nav": {
+    "announcement": "LIVRAISON GRATUITE PAR NOVA POSHTA DÈS 1500 ₴ · ÉCHANTILLONS DE TISSU GRATUITS",
+    "collections": "Collections",
+    "samples": "Échantillons",
+    "wholesale": "En gros",
+    "journal": "Journal"
+  },
+  "account": {
+    "welcomeBack": "Bon retour",
+    "signInHint": "Connectez-vous pour profiter d'une expérience d'achat enrichie.",
+    "signIn": "Se connecter",
+    "notMember": "Pas encore membre ?",
+    "joinUs": "Rejoignez-nous",
+    "createTitle": "Créer votre compte",
+    "registerHint": "Créez votre profil TailorBox et profitez d'une expérience d'achat plus fluide.",
+    "agreePrefix": "En créant un compte, vous acceptez les",
+    "privacyPolicy": "Politique de confidentialité",
+    "and": "et",
+    "termsOfUse": "Conditions d'utilisation",
+    "join": "Rejoindre",
+    "alreadyMember": "Déjà membre ?",
+    "gotQuestions": "Des questions ?",
+    "gotQuestionsText": "Vous trouverez les questions fréquentes et leurs réponses sur notre page de service client.",
+    "customerService": "Service client",
+    "title": "Compte",
+    "helloName": "Bonjour {name}",
+    "overview": "Aperçu",
+    "profile": "Profil",
+    "addresses": "Adresses",
+    "orders": "Commandes",
+    "logout": "Se déconnecter",
+    "signedInAs": "Connecté en tant que :",
+    "completed": "Complété",
+    "saved": "Enregistrées",
+    "recentOrders": "Commandes récentes",
+    "noRecentOrders": "Aucune commande récente",
+    "datePlaced": "Date de commande",
+    "orderNumber": "Numéro de commande",
+    "totalAmount": "Montant total",
+    "goToOrder": "Voir la commande n°{id}",
+    "edit": "Modifier",
+    "cancel": "Annuler",
+    "save": "Enregistrer les modifications",
+    "updatedSuccessfully": "{label} mis à jour avec succès",
+    "genericError": "Une erreur s'est produite, veuillez réessayer",
+    "name": "Nom",
+    "password": "Mot de passe",
+    "oldPassword": "Ancien mot de passe",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "passwordHidden": "Le mot de passe n'est pas affiché pour des raisons de sécurité"
+  },
+  "pages": {
+    "about": {
+      "kicker": "À propos",
+      "title": "Notre histoire",
+      "intro": "TailorBox est un petit atelier de tissus en maille à Kyiv. Nous coupons le tissu au mètre pour que vous achetiez juste ce qu'il faut.",
+      "blocks": [
+        {
+          "heading": "Comment tout a commencé",
+          "text": "Nous cousons nous-mêmes et savons combien il est difficile de trouver un bon tissu en petites longueurs sans minimums de gros. D'où une boutique où l'on commande dès 0,5 m."
+        },
+        {
+          "heading": "Ce qui nous anime",
+          "text": "Des descriptions honnêtes, de vraies photos, des échantillons à toucher et de l'aide au choix — pour que le tissu soit clair même pour un débutant."
+        }
+      ]
+    },
+    "howWeWork": {
+      "kicker": "Processus",
+      "title": "Comment nous travaillons",
+      "intro": "Du rouleau à votre colis — quelques étapes simples.",
+      "blocks": [
+        {
+          "heading": "Coupé pour vous",
+          "text": "Commandez la longueur voulue, nous la coupons au rouleau. Minimum — 0,5 m."
+        },
+        {
+          "heading": "Échantillons avant l'achat",
+          "text": "Pas sûr ? Commandez des échantillons gratuits pour sentir le tissu."
+        },
+        {
+          "heading": "Expédition rapide",
+          "text": "Nous emballons et expédions via Nova Poshta en Ukraine et vers l'UE sous 1 à 2 jours ouvrés."
+        }
+      ]
+    },
+    "contacts": {
+      "kicker": "Contact",
+      "title": "Contacts",
+      "intro": "Écrivez ou appelez — nous répondons chaque jour.",
+      "blocks": [
+        {
+          "heading": "Téléphone et e-mail",
+          "items": [
+            "+38 (067) 555-12-34",
+            "hello@tailorbox.ua"
+          ]
+        },
+        {
+          "heading": "Horaires",
+          "text": "Lun–Ven, 10h00–18h00 (heure de Kyiv)."
+        },
+        {
+          "heading": "Atelier",
+          "text": "Kyiv, Ukraine. Nous expédions en Ukraine et vers l'UE."
+        }
+      ]
+    },
+    "shipping": {
+      "kicker": "Livraison et paiement",
+      "title": "Livraison et paiement",
+      "intro": "Nous expédions via Nova Poshta ; payez comme il vous convient.",
+      "blocks": [
+        {
+          "heading": "Livraison",
+          "text": "Nova Poshta en Ukraine (point relais ou coursier). Gratuite dès 1500 ₴. Expédition sous 1 à 2 jours ouvrés."
+        },
+        {
+          "heading": "International",
+          "text": "Nous expédions vers l'UE. Coût et délais selon le pays — calculés au paiement."
+        },
+        {
+          "heading": "Paiement",
+          "text": "Carte en ligne ou paiement à la livraison."
+        }
+      ]
+    },
+    "returns": {
+      "kicker": "Retours",
+      "title": "Retours et échanges",
+      "intro": "Nous voulons que le tissu vous convienne.",
+      "blocks": [
+        {
+          "heading": "Conditions",
+          "text": "Vous pouvez retourner ou échanger un article sous 14 jours s'il est inutilisé et en bon état de revente."
+        },
+        {
+          "heading": "Comment retourner",
+          "text": "Écrivez-nous à hello@tailorbox.ua avec votre numéro de commande, nous vous guiderons."
+        },
+        {
+          "heading": "Exceptions",
+          "text": "Les coupes réalisées à une longueur sur mesure ne sont pas reprises, sauf défaut."
+        }
+      ]
+    },
+    "faq": {
+      "kicker": "Pour débutants",
+      "title": "Questions fréquentes",
+      "intro": "L'essentiel si vous débutez.",
+      "blocks": [
+        {
+          "heading": "Combien de mètres pour un body taille 86 ?",
+          "text": "Environ 0,6–0,8 m de jersey simple en 180 cm de large."
+        },
+        {
+          "heading": "Jersey ou interlock ?",
+          "text": "L'interlock est lisse des deux côtés et garde sa forme. Le jersey est plus fin et léger."
+        },
+        {
+          "heading": "C'est quoi le grammage (g/m²) ?",
+          "text": "Plus il est élevé, plus le tissu est dense. Jusqu'à 180 : léger ; au-delà de 250 : dense."
+        },
+        {
+          "heading": "Puis-je commander moins d'un mètre ?",
+          "text": "Oui, le minimum est de 0,5 m."
+        }
+      ]
+    },
+    "guide": {
+      "kicker": "Guide",
+      "title": "Comment choisir le tissu",
+      "intro": "On l'explique avec des mots compréhensibles par une couturière confirmée comme par une débutante.",
+      "blocks": [
+        {
+          "heading": "Types de maille",
+          "text": "Jersey simple — léger et respirant, pour t-shirts et bodys. Molleton — plus dense, gratté ou non, pour les sweats. Interlock — dense, garde la forme. Bord-côte — élastique, pour poignets et encolures."
+        },
+        {
+          "heading": "Grammage",
+          "text": "Le g/m² indique la densité. Jusqu'à 180 : été léger ; 200–250 : polyvalent ; au-delà de 250 : chaud."
+        },
+        {
+          "heading": "Quelle quantité",
+          "text": "Un body taille 86 — 0,6–0,8 m ; un t-shirt adulte — 1–1,5 m. Un doute ? Commandez un échantillon."
+        }
+      ]
+    },
+    "wholesale": {
+      "kicker": "En gros",
+      "title": "Commandes en gros",
+      "intro": "Vous cousez pour vendre ? Nous travaillons avec ateliers et marques.",
+      "blocks": [
+        {
+          "heading": "Conditions",
+          "text": "Tarifs spéciaux à partir d'un certain volume, réservation de rouleaux et réassort régulier de vos références préférées."
+        },
+        {
+          "heading": "Comment commander",
+          "text": "Écrivez à hello@tailorbox.ua ou appelez — nous établirons un tarif selon vos volumes."
+        }
+      ]
+    },
+    "samples": {
+      "kicker": "Échantillons",
+      "title": "Échantillons de tissu",
+      "intro": "Touchez d'abord le tissu — commandez ensuite au mètre.",
+      "blocks": [
+        {
+          "heading": "Qu'est-ce que c'est",
+          "text": "Un carré de 10×10 cm de n'importe quel tissu du catalogue. Comparez couleurs, grammage et texture en vrai."
+        },
+        {
+          "heading": "Gratuit",
+          "text": "Les échantillons sont gratuits. Vous ne payez que la livraison, remboursée à votre prochaine commande."
+        },
+        {
+          "heading": "Comment commander",
+          "text": "Ajoutez les échantillons voulus au panier ou écrivez-nous — nous préparons un set."
+        }
+      ]
+    },
+    "journal": {
+      "kicker": "Journal",
+      "title": "Le Journal TailorBox",
+      "intro": "Guides, histoires de tissus et conseils de couture.",
+      "blocks": [
+        {
+          "heading": "Bientôt ici",
+          "text": "Nous préparons des articles sur les types de maille, l'entretien et des sélections de saison. Revenez un peu plus tard."
+        },
+        {
+          "heading": "À ne pas manquer",
+          "text": "Abonnez-vous à la newsletter dans le pied de page — nous vous préviendrons des nouveautés."
+        }
+      ]
+    },
+    "collections": {
+      "kicker": "Catalogue",
+      "title": "Collections",
+      "intro": "Des sélections de tissus par thème — saison, usage et humeur.",
+      "empty": "Les collections sont en préparation. En attendant, parcourez tout le catalogue de tissus.",
+      "toStore": "Vers le catalogue"
+    }
+  },
+  "order": {
+    "thankYou": "Merci !",
+    "placedSuccessfully": "Votre commande a bien été passée.",
+    "confirmationSentTo": "Nous avons envoyé la confirmation de commande à",
+    "orderDate": "Date de commande :",
+    "orderNumber": "Numéro de commande :",
+    "orderStatus": "Statut de la commande :",
+    "paymentStatus": "Statut du paiement :",
+    "summary": "Résumé",
+    "delivery": "Livraison",
+    "shippingAddress": "Adresse de livraison",
+    "contact": "Contact",
+    "method": "Méthode",
+    "payment": "Paiement",
+    "paymentMethod": "Mode de paiement",
+    "paymentDetails": "Détails du paiement",
+    "paidAt": "payé le",
+    "needHelp": "Besoin d'aide ?",
+    "contactLink": "Contact",
+    "returnsExchanges": "Retours et échanges"
   }
 }
-

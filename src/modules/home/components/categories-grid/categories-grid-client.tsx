@@ -2,21 +2,43 @@
 
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { useTranslations } from "@lib/util/i18n"
 
 type CategoriesGridClientProps = {
   categories: HttpTypes.StoreProductCategory[]
 }
 
 const SWATCH_PATTERNS = [
-  { bg: "#e8c8b8", pattern: `repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(184,90,59,0.12) 6px, rgba(184,90,59,0.12) 7px)` },
-  { bg: "#c8d4b8", pattern: `repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(107,122,82,0.15) 8px, rgba(107,122,82,0.15) 9px)` },
-  { bg: "#c8d0d8", pattern: `repeating-linear-gradient(-45deg, transparent, transparent 6px, rgba(74,90,120,0.12) 6px, rgba(74,90,120,0.12) 7px)` },
-  { bg: "#d8c8a8", pattern: `repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(120,100,60,0.12) 10px, rgba(120,100,60,0.12) 11px)` },
-  { bg: "#d4b8b8", pattern: `repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(160,60,60,0.1) 8px, rgba(160,60,60,0.1) 9px)` },
-  { bg: "#b8d0c8", pattern: `repeating-linear-gradient(135deg, transparent, transparent 6px, rgba(60,130,110,0.12) 6px, rgba(60,130,110,0.12) 7px)` },
+  {
+    bg: "#e8c8b8",
+    pattern: `repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(184,90,59,0.12) 6px, rgba(184,90,59,0.12) 7px)`,
+  },
+  {
+    bg: "#c8d4b8",
+    pattern: `repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(107,122,82,0.15) 8px, rgba(107,122,82,0.15) 9px)`,
+  },
+  {
+    bg: "#c8d0d8",
+    pattern: `repeating-linear-gradient(-45deg, transparent, transparent 6px, rgba(74,90,120,0.12) 6px, rgba(74,90,120,0.12) 7px)`,
+  },
+  {
+    bg: "#d8c8a8",
+    pattern: `repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(120,100,60,0.12) 10px, rgba(120,100,60,0.12) 11px)`,
+  },
+  {
+    bg: "#d4b8b8",
+    pattern: `repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(160,60,60,0.1) 8px, rgba(160,60,60,0.1) 9px)`,
+  },
+  {
+    bg: "#b8d0c8",
+    pattern: `repeating-linear-gradient(135deg, transparent, transparent 6px, rgba(60,130,110,0.12) 6px, rgba(60,130,110,0.12) 7px)`,
+  },
 ]
 
-export default function CategoriesGridClient({ categories }: CategoriesGridClientProps) {
+export default function CategoriesGridClient({
+  categories,
+}: CategoriesGridClientProps) {
+  const t = useTranslations("home.categoriesGrid")
   const displayCategories = categories.slice(0, 6)
 
   return (
@@ -37,7 +59,9 @@ export default function CategoriesGridClient({ categories }: CategoriesGridClien
         }}
       >
         <div>
-          <div className="uppercase-label" style={{ marginBottom: 10 }}>01 — Категорії</div>
+          <div className="uppercase-label" style={{ marginBottom: 10 }}>
+            {t("label")}
+          </div>
           <h2
             className="serif"
             style={{
@@ -48,7 +72,7 @@ export default function CategoriesGridClient({ categories }: CategoriesGridClien
               color: "var(--ink)",
             }}
           >
-            За типом трикотажу
+            {t("title")}
           </h2>
         </div>
         <LocalizedClientLink
@@ -61,7 +85,7 @@ export default function CategoriesGridClient({ categories }: CategoriesGridClien
             whiteSpace: "nowrap",
           }}
         >
-          Дивитися всі →
+          {t("viewAll")}
         </LocalizedClientLink>
       </div>
 
@@ -82,7 +106,12 @@ export default function CategoriesGridClient({ categories }: CategoriesGridClien
             <LocalizedClientLink
               key={category.id}
               href={`/categories/${category.handle}`}
-              style={{ display: "flex", flexDirection: "column", textDecoration: "none", color: "var(--ink)" }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                textDecoration: "none",
+                color: "var(--ink)",
+              }}
             >
               {/* Swatch */}
               <div
@@ -104,17 +133,35 @@ export default function CategoriesGridClient({ categories }: CategoriesGridClien
                     {category.parent_category.name}
                   </div>
                 )}
-                <div className="serif" style={{ fontSize: 22, marginBottom: 6 }}>{category.name}</div>
+                <div
+                  className="serif"
+                  style={{ fontSize: 22, marginBottom: 6 }}
+                >
+                  {category.name}
+                </div>
                 {category.description && (
-                  <div style={{ fontSize: 13, color: "var(--ink-3)", lineHeight: 1.4, marginBottom: 8 }}>
+                  <div
+                    style={{
+                      fontSize: 13,
+                      color: "var(--ink-3)",
+                      lineHeight: 1.4,
+                      marginBottom: 8,
+                    }}
+                  >
                     {category.description}
                   </div>
                 )}
                 <div
                   className="mono"
-                  style={{ fontSize: 11, color: "var(--ink-4)", letterSpacing: "0.06em" }}
+                  style={{
+                    fontSize: 11,
+                    color: "var(--ink-4)",
+                    letterSpacing: "0.06em",
+                  }}
                 >
-                  {childCount > 0 ? `${childCount} підкатегорій →` : "Переглянути →"}
+                  {childCount > 0
+                    ? t("subcategories", { count: childCount })
+                    : t("browse")}
                 </div>
               </div>
             </LocalizedClientLink>

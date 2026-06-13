@@ -7,7 +7,7 @@ import PaymentButton from "../payment-button"
 import { useSearchParams } from "next/navigation"
 
 const Review = ({ cart }: { cart: any }) => {
-  const t = useTranslations('checkout')
+  const t = useTranslations("checkout")
   const searchParams = useSearchParams()
 
   const isOpen = searchParams.get("step") === "review"
@@ -21,18 +21,18 @@ const Review = ({ cart }: { cart: any }) => {
     (cart.payment_collection || paidByGiftcard)
 
   return (
-    <div className="bg-white">
+    <div className="bg-tb-bg-card border border-tb-line-soft rounded px-6 py-6">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
           className={clx(
-            "flex flex-row text-3xl-regular gap-x-2 items-baseline",
+            "flex flex-row !font-serif text-3xl text-tb-ink gap-x-2 items-baseline",
             {
               "opacity-50 pointer-events-none select-none": !isOpen,
             }
           )}
         >
-          {t('review')}
+          {t("review")}
         </Heading>
       </div>
       {isOpen && previousStepsCompleted && (
@@ -40,7 +40,7 @@ const Review = ({ cart }: { cart: any }) => {
           <div className="flex items-start gap-x-1 w-full mb-6">
             <div className="w-full">
               <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                {t('termsText')}
+                {t("termsText")}
               </Text>
             </div>
           </div>

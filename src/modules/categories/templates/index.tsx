@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
-import { getTranslations } from "next-intl/server"
 
+import { listCategories } from "@lib/data/categories"
 import InteractiveLink from "@modules/common/components/interactive-link"
 import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
 import RefinementList from "@modules/store/components/refinement-list"
@@ -37,12 +37,22 @@ export default async function CategoryTemplate({
 
   getParents(category)
 
+  const allCategories = await listCategories({ limit: 100 }).catch(() => [])
+  const parentCategories = (allCategories ?? [])
+    .filter((c) => c?.handle && c?.name && !c?.parent_category)
+    .sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""))
+
   return (
     <div
       className="flex flex-col small:flex-row small:items-start py-6 content-container"
       data-testid="category-container"
     >
-      <RefinementList sortBy={sort} data-testid="sort-by-container" />
+      <RefinementList
+        sortBy={sort}
+        categories={parentCategories}
+        currentCategory={category.handle}
+        data-testid="sort-by-container"
+      />
       <div className="w-full">
         <div className="flex flex-row mb-8 text-2xl-semi gap-4">
           {parents &&
@@ -53,7 +63,7 @@ export default async function CategoryTemplate({
                   href={`/categories/${parent.handle}`}
                   data-testid="sort-by-link"
                 >
-                  {parent.handle ?  parent.name : parent.name}
+                  {parent.handle ? parent.name : parent.name}
                 </LocalizedClientLink>
                 /
               </span>
@@ -65,9 +75,7 @@ export default async function CategoryTemplate({
         {category.description && (
           <div className="mb-8 text-base-regular">
             <p>
-              {category.handle 
-                ? category.description 
-                : category.description}
+              {category.handle ? category.description : category.description}
             </p>
           </div>
         )}

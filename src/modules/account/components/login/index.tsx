@@ -1,4 +1,5 @@
 import { login } from "@lib/data/customer"
+import { useTranslations } from "@lib/util/i18n"
 import { LOGIN_VIEW } from "@modules/account/templates/login-template"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
@@ -10,6 +11,8 @@ type Props = {
 }
 
 const Login = ({ setCurrentView }: Props) => {
+  const t = useTranslations("account")
+  const tf = useTranslations("form")
   const [message, formAction] = useActionState(login, null)
 
   return (
@@ -17,14 +20,14 @@ const Login = ({ setCurrentView }: Props) => {
       className="max-w-sm w-full flex flex-col items-center"
       data-testid="login-page"
     >
-      <h1 className="text-large-semi uppercase mb-6">Welcome back</h1>
-      <p className="text-center text-base-regular text-ui-fg-base mb-8">
-        Sign in to access an enhanced shopping experience.
+      <h1 className="serif text-3xl text-tb-ink mb-3">{t("welcomeBack")}</h1>
+      <p className="text-center text-sm text-tb-ink-3 mb-8">
+        {t("signInHint")}
       </p>
       <form className="w-full" action={formAction}>
         <div className="flex flex-col w-full gap-y-2">
           <Input
-            label="Email"
+            label={tf("email")}
             name="email"
             type="email"
             title="Enter a valid email address."
@@ -33,7 +36,7 @@ const Login = ({ setCurrentView }: Props) => {
             data-testid="email-input"
           />
           <Input
-            label="Password"
+            label={t("password")}
             name="password"
             type="password"
             autoComplete="current-password"
@@ -43,19 +46,18 @@ const Login = ({ setCurrentView }: Props) => {
         </div>
         <ErrorMessage error={message} data-testid="login-error-message" />
         <SubmitButton data-testid="sign-in-button" className="w-full mt-6">
-          Sign in
+          {t("signIn")}
         </SubmitButton>
       </form>
-      <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        Not a member?{" "}
+      <span className="text-center text-tb-ink-3 text-sm mt-6">
+        {t("notMember")}{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
-          className="underline"
+          className="text-tb-accent underline underline-offset-2 hover:text-tb-ink transition-colors"
           data-testid="register-button"
         >
-          Join us
+          {t("joinUs")}
         </button>
-        .
       </span>
     </div>
   )

@@ -21,8 +21,8 @@ const ShippingAddress = ({
   checked: boolean
   onChange: () => void
 }) => {
-  const t = useTranslations('form')
-  const tCheckout = useTranslations('checkout')
+  const t = useTranslations("form")
+  const tCheckout = useTranslations("checkout")
   const [formData, setFormData] = useState<Record<string, any>>({
     "shipping_address.first_name": cart?.shipping_address?.first_name || "",
     "shipping_address.last_name": cart?.shipping_address?.last_name || "",
@@ -102,7 +102,7 @@ const ShippingAddress = ({
       {customer && (addressesInRegion?.length || 0) > 0 && (
         <Container className="mb-6 flex flex-col gap-y-4 p-5">
           <p className="text-small-regular">
-            {tCheckout('useSavedAddress', { name: customer.first_name })}
+            {tCheckout("useSavedAddress", { name: customer.first_name ?? "" })}
           </p>
           <AddressSelect
             addresses={customer.addresses}
@@ -117,7 +117,7 @@ const ShippingAddress = ({
       )}
       <div className="grid grid-cols-2 gap-4">
         <Input
-          label={t('firstName')}
+          label={t("firstName")}
           name="shipping_address.first_name"
           autoComplete="given-name"
           value={formData["shipping_address.first_name"]}
@@ -126,7 +126,7 @@ const ShippingAddress = ({
           data-testid="shipping-first-name-input"
         />
         <Input
-          label={t('lastName')}
+          label={t("lastName")}
           name="shipping_address.last_name"
           autoComplete="family-name"
           value={formData["shipping_address.last_name"]}
@@ -135,7 +135,7 @@ const ShippingAddress = ({
           data-testid="shipping-last-name-input"
         />
         <Input
-          label={t('address')}
+          label={t("address")}
           name="shipping_address.address_1"
           autoComplete="address-line1"
           value={formData["shipping_address.address_1"]}
@@ -144,7 +144,7 @@ const ShippingAddress = ({
           data-testid="shipping-address-input"
         />
         <Input
-          label={t('company')}
+          label={t("company")}
           name="shipping_address.company"
           value={formData["shipping_address.company"]}
           onChange={handleChange}
@@ -152,7 +152,7 @@ const ShippingAddress = ({
           data-testid="shipping-company-input"
         />
         <Input
-          label={t('postalCode')}
+          label={t("postalCode")}
           name="shipping_address.postal_code"
           autoComplete="postal-code"
           value={formData["shipping_address.postal_code"]}
@@ -161,7 +161,7 @@ const ShippingAddress = ({
           data-testid="shipping-postal-code-input"
         />
         <Input
-          label={t('city')}
+          label={t("city")}
           name="shipping_address.city"
           autoComplete="address-level2"
           value={formData["shipping_address.city"]}
@@ -179,7 +179,7 @@ const ShippingAddress = ({
           data-testid="shipping-country-select"
         />
         <Input
-          label={t('stateProvince')}
+          label={t("stateProvince")}
           name="shipping_address.province"
           autoComplete="address-level1"
           value={formData["shipping_address.province"]}
@@ -189,7 +189,7 @@ const ShippingAddress = ({
       </div>
       <div className="my-8">
         <Checkbox
-          label={tCheckout('billingAddressSameAsShipping')}
+          label={tCheckout("billingAddressSameAsShipping")}
           name="same_as_billing"
           checked={checked}
           onChange={onChange}
@@ -198,7 +198,7 @@ const ShippingAddress = ({
       </div>
       <div className="grid grid-cols-2 gap-4 mb-4">
         <Input
-          label={t('email')}
+          label={t("email")}
           name="email"
           type="email"
           title="Enter a valid email address."
@@ -209,7 +209,7 @@ const ShippingAddress = ({
           data-testid="shipping-email-input"
         />
         <Input
-          label={t('phone')}
+          label={t("phone")}
           name="shipping_address.phone"
           autoComplete="tel"
           value={formData["shipping_address.phone"]}

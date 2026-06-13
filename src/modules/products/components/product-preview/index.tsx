@@ -1,10 +1,14 @@
 import { getProductPrice } from "@lib/util/get-product-price"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { useTranslations } from "@lib/util/i18n"
 import Thumbnail from "../thumbnail"
 import PreviewPrice from "./price"
+import QuickAddButton from "./quick-add-button"
 
-export default async function ProductPreview({
+// Без "use client" и без async: компонент должен работать и как серверный
+// (PaginatedProducts), и внутри клиентской границы (ProductRailClient).
+export default function ProductPreview({
   product,
   isFeatured,
   region,
@@ -13,12 +17,16 @@ export default async function ProductPreview({
   isFeatured?: boolean
   region: HttpTypes.StoreRegion
 }) {
+  const t = useTranslations("product")
   const { cheapestPrice } = getProductPrice({ product })
 
   const category = product.categories?.[0]?.name ?? ""
 
   return (
-    <LocalizedClientLink href={`/products/${product.handle}`} style={{ textDecoration: "none", color: "var(--ink)", display: "block" }}>
+    <LocalizedClientLink
+      href={`/products/${product.handle}`}
+      style={{ textDecoration: "none", color: "var(--ink)", display: "block" }}
+    >
       <div
         className="fabric-card"
         data-testid="product-wrapper"
@@ -53,22 +61,57 @@ export default async function ProductPreview({
         </div>
 
         {/* Card body */}
-        <div style={{ padding: "18px 18px 22px", flex: 1, display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            padding: "18px 18px 22px",
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           {category && (
-            <div className="uppercase-label" style={{ marginBottom: 6 }}>{category}</div>
+            <div className="uppercase-label" style={{ marginBottom: 6 }}>
+              {category}
+            </div>
           )}
 
-          <div className="serif" style={{ fontSize: 19, lineHeight: 1.2, marginBottom: 14, color: "var(--ink)" }}>
+          <div
+            className="serif"
+            style={{
+              fontSize: 19,
+              lineHeight: 1.2,
+              marginBottom: 14,
+              color: "var(--ink)",
+            }}
+          >
             {product.title}
           </div>
 
-          <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+          <div
+            style={{
+              marginTop: "auto",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+            }}
+          >
             <div>
-              <div style={{ fontSize: 11, color: "var(--ink-3)", fontFamily: "var(--mono)", letterSpacing: "0.04em", marginBottom: 2 }}>
-                ціна за метр
+              <div
+                style={{
+                  fontSize: 11,
+                  color: "var(--ink-3)",
+                  fontFamily: "var(--mono)",
+                  letterSpacing: "0.04em",
+                  marginBottom: 2,
+                }}
+              >
+                {t("pricePerMeter")}
               </div>
               {cheapestPrice && (
-                <div className="serif" style={{ fontSize: 22, lineHeight: 1, color: "var(--ink)" }}>
+                <div
+                  className="serif"
+                  style={{ fontSize: 22, lineHeight: 1, color: "var(--ink)" }}
+                >
                   <PreviewPrice price={cheapestPrice} />
                 </div>
               )}
@@ -88,24 +131,15 @@ export default async function ProductPreview({
           >
             <div
               className="mono"
-              style={{ fontSize: 11, color: "var(--in-stock)", letterSpacing: "0.04em" }}
-            >
-              ● у наявності
-            </div>
-            <button
-              onClick={(e) => e.preventDefault()}
-              className="btn-ghost"
               style={{
-                padding: "4px 8px",
-                fontSize: 12,
-                fontFamily: "var(--mono)",
-                letterSpacing: "0.05em",
-                color: "var(--ink-2)",
-                borderRadius: 2,
+                fontSize: 11,
+                color: "var(--in-stock)",
+                letterSpacing: "0.04em",
               }}
             >
-              + 1 м
-            </button>
+              ● {t("inStock")}
+            </div>
+            <QuickAddButton label={t("addOneMeter")} />
           </div>
         </div>
       </div>

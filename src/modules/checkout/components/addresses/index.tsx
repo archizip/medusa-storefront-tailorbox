@@ -22,7 +22,7 @@ const Addresses = ({
   cart: HttpTypes.StoreCart | null
   customer: HttpTypes.StoreCustomer | null
 }) => {
-  const t = useTranslations('checkout')
+  const t = useTranslations("checkout")
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -42,23 +42,23 @@ const Addresses = ({
   const [message, formAction] = useActionState(setAddresses, null)
 
   return (
-    <div className="bg-white">
+    <div className="bg-tb-bg-card border border-tb-line-soft rounded px-6 py-6">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
-          className="flex flex-row text-3xl-regular gap-x-2 items-baseline"
+          className="flex flex-row !font-serif text-3xl text-tb-ink gap-x-2 items-baseline"
         >
-          {t('shippingAddress')}
+          {t("shippingAddress")}
           {!isOpen && <CheckCircleSolid />}
         </Heading>
         {!isOpen && cart?.shipping_address && (
           <Text>
             <button
               onClick={handleEdit}
-              className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
+              className="text-tb-accent hover:text-tb-ink transition-colors"
               data-testid="edit-address-button"
             >
-              {t('edit')}
+              {t("edit")}
             </button>
           </Text>
         )}
@@ -77,16 +77,16 @@ const Addresses = ({
               <div>
                 <Heading
                   level="h2"
-                  className="text-3xl-regular gap-x-4 pb-6 pt-8"
+                  className="!font-serif text-3xl text-tb-ink gap-x-4 pb-6 pt-8"
                 >
-                  {t('billingAddress')}
+                  {t("billingAddress")}
                 </Heading>
 
                 <BillingAddress cart={cart} />
               </div>
             )}
             <SubmitButton className="mt-6" data-testid="submit-address-button">
-              {t('continueToDelivery')}
+              {t("continueToDelivery")}
             </SubmitButton>
             <ErrorMessage error={message} data-testid="address-error-message" />
           </div>
@@ -102,7 +102,7 @@ const Addresses = ({
                     data-testid="shipping-address-summary"
                   >
                     <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                      {t('shippingAddress')}
+                      {t("shippingAddress")}
                     </Text>
                     <Text className="txt-medium text-ui-fg-subtle">
                       {cart.shipping_address.first_name}{" "}
@@ -126,7 +126,7 @@ const Addresses = ({
                     data-testid="shipping-contact-summary"
                   >
                     <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                      {t('contact')}
+                      {t("contact")}
                     </Text>
                     <Text className="txt-medium text-ui-fg-subtle">
                       {cart.shipping_address.phone}
@@ -141,12 +141,12 @@ const Addresses = ({
                     data-testid="billing-address-summary"
                   >
                     <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                      {t('billingAddress')}
+                      {t("billingAddress")}
                     </Text>
 
                     {sameAsBilling ? (
                       <Text className="txt-medium text-ui-fg-subtle">
-                        {t('billingAddressSame')}
+                        {t("billingAddressSame")}
                       </Text>
                     ) : (
                       <>

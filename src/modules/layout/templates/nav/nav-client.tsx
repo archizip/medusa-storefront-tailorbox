@@ -1,11 +1,10 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { Suspense } from "react"
 import { HttpTypes } from "@medusajs/types"
 import { Locale } from "@lib/data/locales"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import CartButton from "@modules/layout/components/cart-button"
+import { useTranslations } from "@lib/util/i18n"
 
 type NavClientProps = {
   regions: HttpTypes.StoreRegion[] | null
@@ -13,36 +12,34 @@ type NavClientProps = {
   currentLocale: string | null
   categories: HttpTypes.StoreProductCategory[]
   collections: HttpTypes.StoreCollection[]
+  cartSlot: React.ReactNode
   translations: {
     findStore: string
     help: string
     signIn: string
+    fabrics: string
+    viewAll: string
   }
 }
 
-const MEGA_MENU_GROUPS = [
-  {
-    title: "Кулірка",
-    hint: "тонкий гладкий трикотаж",
-    handles: ["single-jersey", "stretch-jersey"],
-    names: ["Кулірка", "Кулірка стрейч"],
-  },
-  {
-    title: "Футер",
-    hint: "теплий, для зими і міжсезоння",
-    handles: ["two-thread-fleece", "brushed-two-thread", "french-terry", "brushed-fleece"],
-    names: ["Двонитка", "Двонитка з начосом", "Трьохнитка петля", "Трьохнитка з начосом"],
-  },
-  {
-    title: "Інші",
-    hint: "інтерлок, рібана, піке",
-    handles: ["interlock", "rib", "pique"],
-    names: ["Інтерлок", "Рібана", "Піке"],
-  },
-]
+function MegaMenu({
+  categories,
+  allLabel,
+  onClose,
+}: {
+  categories: HttpTypes.StoreProductCategory[]
+  allLabel: string
+  onClose: () => void
+}) {
+  // Build the menu from real backend categories: top-level ones become
+  // column headers, their children (if any) are listed beneath.
+  const topLevel = categories.filter(
+    (c) => c?.handle && c?.name && !c?.parent_category
+  )
 
-function MegaMenu({ categories, onClose }: { categories: HttpTypes.StoreProductCategory[]; onClose: () => void }) {
-  const categoryMap = new Map(categories.map((c) => [c.handle, c]))
+  if (topLevel.length === 0) {
+    return null
+  }
 
   return (
     <div
@@ -55,35 +52,92 @@ function MegaMenu({ categories, onClose }: { categories: HttpTypes.StoreProductC
         border: "1px solid var(--line)",
         padding: "28px 32px",
         display: "flex",
-        gap: 60,
+        flexWrap: "wrap",
+        gap: "28px 60px",
         boxShadow: "0 12px 40px rgba(31,26,20,0.08)",
         borderRadius: 4,
-        width: 720,
+        maxWidth: 720,
         zIndex: 100,
       }}
     >
-      {MEGA_MENU_GROUPS.map((group) => (
-        <div key={group.title}>
-          <div className="serif" style={{ fontSize: 22, marginBottom: 4 }}>{group.title}</div>
-          <div style={{ fontSize: 12, color: "var(--ink-3)", marginBottom: 12 }}>{group.hint}</div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {group.handles.map((handle, i) => {
-              const cat = categoryMap.get(handle)
-              return (
-                <LocalizedClientLink
-                  key={handle}
-                  href={cat ? `/categories/${cat.handle}` : `/store`}
-                  onClick={onClose}
-                  style={{ fontSize: 14, color: "var(--ink-2)", display: "flex", alignItems: "center", gap: 6 }}
-                >
-                  {group.names[i]}
-                  <span style={{ color: "var(--ink-4)", fontFamily: "var(--mono)", fontSize: 11 }}>→</span>
-                </LocalizedClientLink>
-              )
-            })}
+      {topLevel.map((category) => {
+        const children = (category.category_children ?? []).filter(
+          (c) => c?.handle && c?.name
+        )
+        return (
+          <div key={category.id} style={{ minWidth: 160 }}>
+            <LocalizedClientLink
+              href={`/categories/${category.handle}`}
+              onClick={onClose}
+              className="serif"
+              style={{
+                display: "block",
+                fontSize: 22,
+                marginBottom: children.length ? 12 : 0,
+                color: "var(--ink)",
+                textDecoration: "none",
+              }}
+            >
+              {category.name}
+            </LocalizedClientLink>
+            {children.length > 0 && (
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {children.map((child) => (
+                  <LocalizedClientLink
+                    key={child.id}
+                    href={`/categories/${child.handle}`}
+                    onClick={onClose}
+                    style={{
+                      fontSize: 14,
+                      color: "var(--ink-2)",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
+                    }}
+                  >
+                    {child.name}
+                    <span
+                      style={{
+                        color: "var(--ink-4)",
+                        fontFamily: "var(--mono)",
+                        fontSize: 11,
+                      }}
+                    >
+                      →
+                    </span>
+                  </LocalizedClientLink>
+                ))}
+              </div>
+            )}
           </div>
-        </div>
-      ))}
+        )
+      })}
+
+      {/* Link to the full catalog */}
+      <div
+        style={{
+          width: "100%",
+          borderTop: "1px solid var(--line-soft)",
+          paddingTop: 16,
+        }}
+      >
+        <LocalizedClientLink
+          href="/store"
+          onClick={onClose}
+          className="mono"
+          style={{
+            fontSize: 12,
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            color: "var(--ink-2)",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          {allLabel} →
+        </LocalizedClientLink>
+      </div>
     </div>
   )
 }
@@ -94,8 +148,11 @@ export default function NavClient({
   currentLocale,
   categories,
   collections,
+  cartSlot,
   translations,
 }: NavClientProps) {
+  const tNav = useTranslations("nav")
+  const tCommon = useTranslations("common")
   const [megaOpen, setMegaOpen] = useState(false)
   const megaTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -129,7 +186,7 @@ export default function NavClient({
           textAlign: "center",
         }}
       >
-        БЕЗКОШТОВНА ДОСТАВКА НОВОЮ ПОШТОЮ ВІД 1500 ₴ · ЗРАЗКИ ТКАНИНИ — БЕЗКОШТОВНО
+        {tNav("announcement")}
       </div>
 
       {/* Main nav row */}
@@ -148,15 +205,41 @@ export default function NavClient({
         {/* Logo */}
         <LocalizedClientLink
           href="/"
-          style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", color: "var(--ink)", flexShrink: 0 }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            textDecoration: "none",
+            color: "var(--ink)",
+            flexShrink: 0,
+          }}
           data-testid="nav-store-link"
         >
           <svg width={28} height={28} viewBox="0 0 32 32">
-            <rect x="2" y="2" width="28" height="28" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
-            <path d="M2 12 L30 12 M2 20 L30 20 M12 2 L12 30 M20 2 L20 30" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+            <rect
+              x="2"
+              y="2"
+              width="28"
+              height="28"
+              rx="2"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+            />
+            <path
+              d="M2 12 L30 12 M2 20 L30 20 M12 2 L12 30 M20 2 L20 30"
+              stroke="currentColor"
+              strokeWidth="1"
+              opacity="0.4"
+            />
             <circle cx="16" cy="16" r="3" fill="currentColor" />
           </svg>
-          <span className="serif" style={{ fontSize: 22, letterSpacing: "-0.01em" }}>TailorBox</span>
+          <span
+            className="serif"
+            style={{ fontSize: 22, letterSpacing: "-0.01em" }}
+          >
+            TailorBox
+          </span>
         </LocalizedClientLink>
 
         {/* Desktop nav */}
@@ -187,69 +270,108 @@ export default function NavClient({
                 fontWeight: 400,
               }}
             >
-              Тканини
+              {translations.fabrics}
               <svg width={10} height={10} viewBox="0 0 10 10">
-                <path d="M2 4 L5 7 L8 4" stroke="currentColor" strokeWidth="1.4" fill="none" />
+                <path
+                  d="M2 4 L5 7 L8 4"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  fill="none"
+                />
               </svg>
             </LocalizedClientLink>
             {megaOpen && (
               <MegaMenu
                 categories={categories}
+                allLabel={translations.viewAll}
                 onClose={() => setMegaOpen(false)}
               />
             )}
           </div>
 
           <LocalizedClientLink
-            href="/store"
+            href="/collections"
             style={{ padding: "10px 14px", color: "var(--ink)" }}
           >
-            Колекції
+            {tNav("collections")}
           </LocalizedClientLink>
           <LocalizedClientLink
-            href="/store"
+            href="/samples"
             style={{ padding: "10px 14px", color: "var(--ink)" }}
           >
-            Зразки
+            {tNav("samples")}
           </LocalizedClientLink>
-          <span style={{ padding: "10px 14px", color: "var(--ink-3)", cursor: "default" }}>Гуртом</span>
-          <span style={{ padding: "10px 14px", color: "var(--ink-3)", cursor: "default" }}>Журнал</span>
+          <LocalizedClientLink
+            href="/wholesale"
+            style={{ padding: "10px 14px", color: "var(--ink)" }}
+          >
+            {tNav("wholesale")}
+          </LocalizedClientLink>
+          <LocalizedClientLink
+            href="/journal"
+            style={{ padding: "10px 14px", color: "var(--ink)" }}
+          >
+            {tNav("journal")}
+          </LocalizedClientLink>
         </nav>
 
         {/* Right icons */}
-        <div style={{ display: "flex", alignItems: "center", gap: 4, flexShrink: 0 }}>
-          <button className="btn-ghost" title="Пошук" style={{ borderRadius: 999, padding: "8px 10px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 4,
+            flexShrink: 0,
+          }}
+        >
+          <button
+            className="btn-ghost"
+            title={tCommon("search")}
+            style={{ borderRadius: 999, padding: "8px 10px" }}
+          >
             <svg width={18} height={18} viewBox="0 0 18 18" fill="none">
-              <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M12 12 L16 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              <circle
+                cx="8"
+                cy="8"
+                r="5.5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M12 12 L16 16"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
             </svg>
           </button>
 
           <LocalizedClientLink href="/account">
-            <button className="btn-ghost" title="Акаунт" style={{ borderRadius: 999, padding: "8px 10px" }} data-testid="nav-account-link">
+            <button
+              className="btn-ghost"
+              title={tCommon("account")}
+              style={{ borderRadius: 999, padding: "8px 10px" }}
+              data-testid="nav-account-link"
+            >
               <svg width={18} height={18} viewBox="0 0 18 18" fill="none">
-                <circle cx="9" cy="6" r="3" stroke="currentColor" strokeWidth="1.5" />
-                <path d="M3 16 C 3 12, 6 11, 9 11 S 15 12, 15 16" stroke="currentColor" strokeWidth="1.5" fill="none" />
+                <circle
+                  cx="9"
+                  cy="6"
+                  r="3"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+                <path
+                  d="M3 16 C 3 12, 6 11, 9 11 S 15 12, 15 16"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
               </svg>
             </button>
           </LocalizedClientLink>
 
-          <Suspense
-            fallback={
-              <LocalizedClientLink href="/cart">
-                <button className="btn btn-soft btn-sm" style={{ borderRadius: 999 }} data-testid="nav-cart-link">
-                  <svg width={16} height={16} viewBox="0 0 16 16" fill="none">
-                    <path d="M2 4 H4 L5.5 12 H13 L14 6 H5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinejoin="round" />
-                    <circle cx="6" cy="14" r="0.8" fill="currentColor" />
-                    <circle cx="12" cy="14" r="0.8" fill="currentColor" />
-                  </svg>
-                  Кошик
-                </button>
-              </LocalizedClientLink>
-            }
-          >
-            <CartButton />
-          </Suspense>
+          {cartSlot}
         </div>
       </div>
     </header>

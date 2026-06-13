@@ -22,11 +22,11 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
   const cart = await retrieveCart()
   const rawLocale = await getLocale()
   const locale = normalizeLocale(rawLocale)
-  
+
   // Загружаем сообщения для текущего locale на сервере
-  const messages = await import(`../../../../messages/${locale}.json`).catch(() => 
-    import(`../../../../messages/en.json`)
-  ).then(mod => mod.default)
+  const messages = await import(`../../../../messages/${locale}.json`)
+    .catch(() => import(`../../../../messages/uk.json`))
+    .then((mod) => mod.default)
 
   let shippingOptions: StoreCartShippingOption[] = []
 

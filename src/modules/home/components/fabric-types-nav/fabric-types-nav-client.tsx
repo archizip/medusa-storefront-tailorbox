@@ -2,12 +2,15 @@
 
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { useTranslations } from "@lib/util/i18n"
 
 type Props = {
   categories: HttpTypes.StoreProductCategory[]
 }
 
 export default function FabricTypesNavClient({ categories }: Props) {
+  const t = useTranslations("home.fabricTypes")
+
   return (
     <div
       style={{
@@ -41,7 +44,7 @@ export default function FabricTypesNavClient({ categories }: Props) {
             flexShrink: 0,
           }}
         >
-          Тип:
+          {t("label")}
         </div>
 
         {/* All fabrics */}
@@ -63,7 +66,7 @@ export default function FabricTypesNavClient({ categories }: Props) {
             transition: "background-color 0.15s",
           }}
         >
-          Всі
+          {t("all")}
         </LocalizedClientLink>
 
         {categories.map((category) => (

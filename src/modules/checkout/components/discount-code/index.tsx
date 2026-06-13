@@ -18,7 +18,7 @@ type DiscountCodeProps = {
 }
 
 const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
-  const t = useTranslations('checkout')
+  const t = useTranslations("checkout")
   const [isOpen, setIsOpen] = React.useState(false)
   const [errorMessage, setErrorMessage] = React.useState("")
 
@@ -58,17 +58,17 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
   }
 
   return (
-    <div className="w-full bg-white flex flex-col">
+    <div className="w-full flex flex-col">
       <div className="txt-medium">
         <form action={(a) => addPromotionCode(a)} className="w-full mb-5">
           <Label className="flex gap-x-1 my-2 items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="txt-medium text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
+              className="txt-medium text-tb-accent hover:text-tb-ink transition-colors"
               data-testid="add-discount-button"
             >
-              {t('addPromotionCode')}
+              {t("addPromotionCode")}
             </button>
 
             {/* <Tooltip content="You can add multiple promotion codes">
@@ -91,7 +91,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                   variant="secondary"
                   data-testid="discount-apply-button"
                 >
-                  {t('apply')}
+                  {t("apply")}
                 </SubmitButton>
               </div>
 
@@ -107,7 +107,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
           <div className="w-full flex items-center">
             <div className="flex flex-col w-full">
               <Heading className="txt-medium mb-2">
-                {t('promotionsApplied')}
+                {t("promotionsApplied")}
               </Heading>
 
               {promotions.map((promotion) => {
@@ -163,7 +163,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                       >
                         <Trash size={14} />
                         <span className="sr-only">
-                          {t('removeDiscountCode')}
+                          {t("removeDiscountCode")}
                         </span>
                       </button>
                     )}

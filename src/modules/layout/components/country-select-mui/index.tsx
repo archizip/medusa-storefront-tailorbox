@@ -31,17 +31,17 @@ const CountrySelectMui = ({ regions }: CountrySelectMuiProps) => {
   const currentPath = usePathname().split(`/${countryCode}`)[1]
   const t = useTranslations("common")
 
-  const options = useMemo(() => {
-    return regions
-      ?.map((r) => {
-        return r.countries?.map((c) => ({
-          country: c.iso_2,
+  const options = useMemo<CountryOption[]>(() => {
+    return (regions ?? [])
+      .flatMap((r) =>
+        (r.countries ?? []).map((c) => ({
+          country: c.iso_2 ?? "",
           region: r.id,
-          label: c.display_name,
+          label: c.display_name ?? "",
         }))
-      })
-      .flat()
-      .sort((a, b) => (a?.label ?? "").localeCompare(b?.label ?? ""))
+      )
+      .filter((o) => o.country)
+      .sort((a, b) => a.label.localeCompare(b.label))
   }, [regions])
 
   useEffect(() => {
@@ -65,9 +65,9 @@ const CountrySelectMui = ({ regions }: CountrySelectMuiProps) => {
   const currentOption = options?.find((o) => o.country === current)
 
   return (
-    <FormControl 
-      size="small" 
-      sx={{ 
+    <FormControl
+      size="small"
+      sx={{
         minWidth: { xs: 120, sm: 140, md: 160 },
         width: { xs: "100%", sm: "auto" },
       }}
@@ -138,4 +138,3 @@ const CountrySelectMui = ({ regions }: CountrySelectMuiProps) => {
 }
 
 export default CountrySelectMui
-

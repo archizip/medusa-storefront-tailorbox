@@ -3,6 +3,7 @@
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import ProductPreview from "@modules/products/components/product-preview"
+import { useTranslations } from "@lib/util/i18n"
 
 type ProductRailClientProps = {
   collection: HttpTypes.StoreCollection
@@ -10,7 +11,13 @@ type ProductRailClientProps = {
   products: HttpTypes.StoreProduct[]
 }
 
-export default function ProductRailClient({ collection, region, products }: ProductRailClientProps) {
+export default function ProductRailClient({
+  collection,
+  region,
+  products,
+}: ProductRailClientProps) {
+  const t = useTranslations("home.rail")
+
   return (
     <section
       style={{
@@ -29,7 +36,9 @@ export default function ProductRailClient({ collection, region, products }: Prod
         }}
       >
         <div>
-          <div className="uppercase-label" style={{ marginBottom: 10 }}>02 — Новинки</div>
+          <div className="uppercase-label" style={{ marginBottom: 10 }}>
+            {t("label")}
+          </div>
           <h2
             className="serif"
             style={{
@@ -40,7 +49,7 @@ export default function ProductRailClient({ collection, region, products }: Prod
               color: "var(--ink)",
             }}
           >
-            Щойно з рулону
+            {t("title")}
           </h2>
         </div>
         <LocalizedClientLink
@@ -53,7 +62,7 @@ export default function ProductRailClient({ collection, region, products }: Prod
             whiteSpace: "nowrap",
           }}
         >
-          Усі новинки →
+          {t("viewAll")}
         </LocalizedClientLink>
       </div>
 
@@ -67,7 +76,12 @@ export default function ProductRailClient({ collection, region, products }: Prod
         className="products-grid"
       >
         {products.map((product) => (
-          <ProductPreview key={product.id} product={product} region={region} isFeatured />
+          <ProductPreview
+            key={product.id}
+            product={product}
+            region={region}
+            isFeatured
+          />
         ))}
       </div>
 

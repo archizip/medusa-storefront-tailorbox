@@ -36,7 +36,8 @@ export default function ProductActions({
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const t = useTranslations('common')
+  const t = useTranslations("common")
+  const tp = useTranslations("product")
 
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
@@ -164,6 +165,13 @@ export default function ProductActions({
 
         <ProductPrice product={product} variant={selectedVariant} />
 
+        {inStock && (
+          <div className="mono text-tb-sage text-xs tracking-wide flex items-center gap-x-1 mt-1">
+            <span aria-hidden>●</span>
+            {tp("inStock")}
+          </div>
+        )}
+
         <Button
           onClick={handleAddToCart}
           disabled={
@@ -179,10 +187,10 @@ export default function ProductActions({
           data-testid="add-product-button"
         >
           {!selectedVariant && !options
-            ? t('selectVariant')
+            ? t("selectVariant")
             : !inStock || !isValidVariant
-            ? t('outOfStock')
-            : t('addToCart')}
+            ? t("outOfStock")
+            : t("addToCart")}
         </Button>
         <MobileActions
           product={product}

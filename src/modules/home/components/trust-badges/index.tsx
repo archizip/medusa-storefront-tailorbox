@@ -1,29 +1,17 @@
 "use client"
 
-const BADGES = [
-  {
-    mark: "01",
-    title: "Безкоштовний зразок",
-    txt: "Шматочок 10×10 см будь-якої тканини — щоб помацати перед замовленням.",
-  },
-  {
-    mark: "02",
-    title: "Від 0.5 м",
-    txt: "Без мінімального замовлення. Купуйте стільки, скільки треба для одного боді.",
-  },
-  {
-    mark: "03",
-    title: "Знаємо тканини",
-    txt: "Розкажемо різницю між кулірою стрейч і інтерлоком — без спеціальної освіти.",
-  },
-  {
-    mark: "04",
-    title: "На наступний день",
-    txt: "Відправляємо у день замовлення, якщо встигнете до 14:00.",
-  },
-]
+import { useTranslations } from "@lib/util/i18n"
 
 export default function TrustBadges() {
+  const t = useTranslations("home.trust")
+
+  const BADGES = [
+    { mark: "01", title: t("b1Title"), txt: t("b1Text") },
+    { mark: "02", title: t("b2Title"), txt: t("b2Text") },
+    { mark: "03", title: t("b3Title"), txt: t("b3Text") },
+    { mark: "04", title: t("b4Title"), txt: t("b4Text") },
+  ]
+
   return (
     <section
       style={{
@@ -56,10 +44,17 @@ export default function TrustBadges() {
             >
               {b.mark}
             </div>
-            <div className="serif" style={{ fontSize: 22, lineHeight: 1.15, marginBottom: 10 }}>
+            <div
+              className="serif"
+              style={{ fontSize: 22, lineHeight: 1.15, marginBottom: 10 }}
+            >
               {b.title}
             </div>
-            <div style={{ fontSize: 13, color: "var(--ink-3)", lineHeight: 1.55 }}>{b.txt}</div>
+            <div
+              style={{ fontSize: 13, color: "var(--ink-3)", lineHeight: 1.55 }}
+            >
+              {b.txt}
+            </div>
           </div>
         ))}
       </div>

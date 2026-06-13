@@ -98,24 +98,37 @@ const CartButtonMui = ({
         onClick={open as any}
         onMouseEnter={handleMouseEnter as any}
         className="btn btn-soft btn-sm"
-        style={{ borderRadius: 999, display: "flex", alignItems: "center", gap: 8 }}
+        style={{
+          borderRadius: 999,
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+        }}
         data-testid="nav-cart-link"
       >
         <svg width={16} height={16} viewBox="0 0 16 16" fill="none">
-          <path d="M2 4 H4 L5.5 12 H13 L14 6 H5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinejoin="round" />
+          <path
+            d="M2 4 H4 L5.5 12 H13 L14 6 H5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            fill="none"
+            strokeLinejoin="round"
+          />
           <circle cx="6" cy="14" r="0.8" fill="currentColor" />
           <circle cx="12" cy="14" r="0.8" fill="currentColor" />
         </svg>
-        Кошик
+        {t("cart")}
         {totalItems > 0 && (
-          <span style={{
-            background: "var(--accent)",
-            color: "white",
-            borderRadius: 999,
-            padding: "1px 7px",
-            fontSize: 11,
-            fontFamily: "var(--mono)",
-          }}>
+          <span
+            style={{
+              background: "var(--accent)",
+              color: "white",
+              borderRadius: 999,
+              padding: "1px 7px",
+              fontSize: 11,
+              fontFamily: "var(--mono)",
+            }}
+          >
             {totalItems}
           </span>
         )}
@@ -142,6 +155,12 @@ const CartButtonMui = ({
             maxWidth: 420,
             maxHeight: 500,
             mt: 1,
+            bgcolor: "var(--bg-card)",
+            color: "var(--ink)",
+            border: "1px solid var(--line)",
+            borderRadius: "4px",
+            boxShadow: "0 12px 40px rgba(31,26,20,0.12)",
+            backgroundImage: "none",
           },
           onMouseEnter: () => {
             if (activeTimer) {
@@ -154,7 +173,15 @@ const CartButtonMui = ({
         data-testid="nav-cart-dropdown"
       >
         <Box sx={{ p: 2, textAlign: "center" }}>
-          <Typography variant="h6" sx={{ fontWeight: 600 }}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontFamily: "var(--serif)",
+              fontWeight: 400,
+              fontSize: 24,
+              color: "var(--ink)",
+            }}
+          >
             {t("cart")}
           </Typography>
         </Box>
@@ -213,7 +240,10 @@ const CartButtonMui = ({
                           >
                             <LocalizedClientLink
                               href={`/products/${item.product_handle}`}
-                              style={{ textDecoration: "none", color: "inherit" }}
+                              style={{
+                                textDecoration: "none",
+                                color: "inherit",
+                              }}
                               data-testid="product-link"
                             >
                               {item.title}
@@ -251,7 +281,7 @@ const CartButtonMui = ({
                   </Box>
                 ))}
             </Box>
-            <Divider />
+            <Divider sx={{ borderColor: "var(--line-soft)" }} />
             <Box sx={{ p: 2 }}>
               <Stack spacing={2}>
                 <Box
@@ -282,6 +312,18 @@ const CartButtonMui = ({
                   fullWidth
                   size="large"
                   data-testid="go-to-cart-button"
+                  sx={{
+                    bgcolor: "var(--ink)",
+                    color: "var(--bg-card)",
+                    borderRadius: "999px",
+                    textTransform: "none",
+                    fontWeight: 600,
+                    boxShadow: "none",
+                    "&:hover": {
+                      bgcolor: "var(--accent)",
+                      boxShadow: "none",
+                    },
+                  }}
                 >
                   {t("goToCart")}
                 </Button>
@@ -295,8 +337,8 @@ const CartButtonMui = ({
                 width: 24,
                 height: 24,
                 borderRadius: "50%",
-                bgcolor: "grey.900",
-                color: "white",
+                bgcolor: "var(--ink)",
+                color: "var(--bg-card)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -306,7 +348,7 @@ const CartButtonMui = ({
             >
               <Typography variant="caption">0</Typography>
             </Box>
-            <Typography variant="body2" sx={{ mb: 2 }}>
+            <Typography variant="body2" sx={{ mb: 2, color: "var(--ink-2)" }}>
               {t("emptyBag")}
             </Typography>
             <Button
@@ -314,6 +356,18 @@ const CartButtonMui = ({
               href="/store"
               variant="outlined"
               onClick={close}
+              sx={{
+                borderRadius: "999px",
+                textTransform: "none",
+                fontWeight: 600,
+                borderColor: "var(--ink)",
+                color: "var(--ink)",
+                "&:hover": {
+                  bgcolor: "var(--ink)",
+                  color: "var(--bg-card)",
+                  borderColor: "var(--ink)",
+                },
+              }}
             >
               {t("exploreProducts")}
             </Button>
@@ -325,4 +379,3 @@ const CartButtonMui = ({
 }
 
 export default CartButtonMui
-

@@ -8,7 +8,7 @@ import {
   Transition,
 } from "@headlessui/react"
 import { Fragment, useEffect, useMemo, useState, useTransition } from "react"
-import { useParams, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import ReactCountryFlag from "react-country-flag"
 
 import { StateType } from "@lib/hooks/use-toggle-state"
@@ -77,7 +77,6 @@ const LanguageSelect = ({
   const [current, setCurrent] = useState<LanguageOption | undefined>(undefined)
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
-  const { countryCode } = useParams()
 
   const { state, close } = toggleState
 
@@ -97,7 +96,7 @@ const LanguageSelect = ({
 
   useEffect(() => {
     if (currentLocale) {
-      const normalizedCurrent = normalizeLocale(currentLocale);
+      const normalizedCurrent = normalizeLocale(currentLocale)
       const option = options.find(
         (o) => normalizeLocale(o.code) === normalizedCurrent
       )
@@ -107,16 +106,10 @@ const LanguageSelect = ({
     }
   }, [options, currentLocale])
 
-  useEffect(() => {
-    if (countryCode) {
-      console.log('countryCode', countryCode)
-    }
-  }, [options, countryCode])
-
   const handleChange = (option: LanguageOption) => {
-    const normalizedOptionCode = normalizeLocale(option.code || "");
-    const normalizedCurrent = normalizeLocale(currentLocale || "");
-    
+    const normalizedOptionCode = normalizeLocale(option.code || "")
+    const normalizedCurrent = normalizeLocale(currentLocale || "")
+
     if (normalizedOptionCode === normalizedCurrent) {
       close()
       return
@@ -124,7 +117,7 @@ const LanguageSelect = ({
 
     startTransition(async () => {
       try {
-        await updateLocale(option.code || "")ф  
+        await updateLocale(option.code || "")
         router.refresh()
         setTimeout(() => {
           close()
@@ -138,9 +131,11 @@ const LanguageSelect = ({
 
   const selectedValue = useMemo(() => {
     if (currentLocale) {
-      return options.find(
-        (o) => o.code.toLowerCase() === currentLocale.toLowerCase()
-      ) ?? DEFAULT_OPTION
+      return (
+        options.find(
+          (o) => o.code.toLowerCase() === currentLocale.toLowerCase()
+        ) ?? DEFAULT_OPTION
+      )
     }
     return DEFAULT_OPTION
   }, [currentLocale, options])
