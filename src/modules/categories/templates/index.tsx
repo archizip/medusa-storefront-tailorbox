@@ -26,18 +26,21 @@ export default async function CategoryTemplate({
 
   if (!category || !countryCode) notFound()
 
-  const parents = [] as HttpTypes.StoreProductCategory[]
-
-  const getParents = (category: HttpTypes.StoreProductCategory) => {
-    if (category.parent_category) {
-      parents.push(category.parent_category)
-      getParents(category.parent_category)
-    }
-  }
-
-  getParents(category)
-
   const allCategories = await listCategories({ limit: 100 }).catch(() => [])
+
+  const categoriesById = new Map((allCategories ?? []).map((c) => [c.id, c]))
+
+  // Full breadcrumb chain (root → … → immediate parent). `getCategoryByHandle`
+  // loads only the closest parent, so walk the whole chain via the flat list.
+  const parents: HttpTypes.StoreProductCategory[] = []
+  let breadcrumbParentId = (categoriesById.get(category.id) ?? category)
+    .parent_category?.id
+  while (breadcrumbParentId) {
+    const parent = categoriesById.get(breadcrumbParentId)
+    if (!parent) break
+    parents.unshift(parent)
+    breadcrumbParentId = parent.parent_category?.id
+  }
 
   // Medusa's `category_id` filter is not recursive, so a parent category would
   // show no products of its own when items live in leaf categories. Collect the
