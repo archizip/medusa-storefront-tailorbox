@@ -104,9 +104,6 @@ export default function FooterClient({
             >
               Трикотаж для тих, хто шиє маленькими партіями та з душею.
             </p>
-            <div style={{ marginTop: 24, fontSize: 13, color: "#a89880" }}>
-              📞 +38 (067) 555-12-34 · ✉ hello@tailorbox.ua
-            </div>
           </div>
 
           {/* Магазин */}

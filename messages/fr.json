@@ -347,13 +347,6 @@
       "intro": "Écrivez ou appelez — nous répondons chaque jour.",
       "blocks": [
         {
-          "heading": "Téléphone et e-mail",
-          "items": [
-            "+38 (067) 555-12-34",
-            "hello@tailorbox.ua"
-          ]
-        },
-        {
           "heading": "Horaires",
           "text": "Lun–Ven, 10h00–18h00 (heure de Kyiv)."
         },
@@ -393,7 +386,7 @@
         },
         {
           "heading": "Comment retourner",
-          "text": "Écrivez-nous à hello@tailorbox.ua avec votre numéro de commande, nous vous guiderons."
+          "text": "Contactez-nous avec votre numéro de commande, nous vous guiderons."
         },
         {
           "heading": "Exceptions",
@@ -454,7 +447,7 @@
         },
         {
           "heading": "Comment commander",
-          "text": "Écrivez à hello@tailorbox.ua ou appelez — nous établirons un tarif selon vos volumes."
+          "text": "Contactez-nous — nous établirons un tarif selon vos volumes."
         }
       ]
     },
