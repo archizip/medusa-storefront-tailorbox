@@ -102,7 +102,8 @@ function MegaMenu({
         gap: 24,
         boxShadow: "0 12px 40px rgba(31,26,20,0.08)",
         borderRadius: 4,
-        maxWidth: 720,
+        width: 680,
+        maxWidth: "calc(100vw - 40px)",
         zIndex: 100,
       }}
     >
