@@ -38,9 +38,6 @@ export default async function CategoryTemplate({
   getParents(category)
 
   const allCategories = await listCategories({ limit: 100 }).catch(() => [])
-  const parentCategories = (allCategories ?? [])
-    .filter((c) => c?.handle && c?.name && !c?.parent_category)
-    .sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""))
 
   // Medusa's `category_id` filter is not recursive, so a parent category would
   // show no products of its own when items live in leaf categories. Collect the
@@ -69,7 +66,7 @@ export default async function CategoryTemplate({
     >
       <RefinementList
         sortBy={sort}
-        categories={parentCategories}
+        categories={allCategories ?? []}
         currentCategory={category.handle}
         data-testid="sort-by-container"
       />

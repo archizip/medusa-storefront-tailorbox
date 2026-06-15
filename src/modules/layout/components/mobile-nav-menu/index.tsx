@@ -20,6 +20,7 @@ import CountrySelectMui from "@modules/layout/components/country-select-mui"
 import LanguageSelectMui from "@modules/layout/components/language-select-mui"
 import { HttpTypes } from "@medusajs/types"
 import { Locale } from "@lib/data/locales"
+import { buildCategoryTree, CategoryTreeNode } from "@lib/util/category-tree"
 
 type MobileNavMenuProps = {
   regions: HttpTypes.StoreRegion[] | null
@@ -38,12 +39,37 @@ const MobileNavMenu = ({
 }: MobileNavMenuProps) => {
   const [open, setOpen] = useState(false)
   const t = useTranslations("common")
-  
-  const parentCategories = categories?.filter((c) => !c.parent_category) || []
+
+  const categoryRoots = buildCategoryTree(categories)
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen)
   }
+
+  const renderCategoryNodes = (
+    nodes: CategoryTreeNode[],
+    depth = 0
+  ): React.ReactNode[] =>
+    nodes.flatMap((node) => [
+      <ListItem key={node.category.id} disablePadding>
+        <ListItemButton
+          component={LocalizedClientLink}
+          href={`/categories/${node.category.handle}`}
+          onClick={toggleDrawer(false)}
+          sx={{ pl: 2 + depth * 2 }}
+        >
+          <ListItemText
+            primary={node.category.name}
+            primaryTypographyProps={
+              depth === 0 ? { fontWeight: 600 } : undefined
+            }
+          />
+        </ListItemButton>
+      </ListItem>,
+      ...(node.children.length > 0
+        ? renderCategoryNodes(node.children, depth + 1)
+        : []),
+    ])
 
   return (
     <>
@@ -70,7 +96,14 @@ const MobileNavMenu = ({
           },
         }}
       >
-        <Box sx={{ width: "100%", height: "100%", display: "flex", flexDirection: "column" }}>
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           {/* Header */}
           <Box
             sx={{
@@ -115,17 +148,7 @@ const MobileNavMenu = ({
                 </ListItemButton>
               </ListItem>
             )}
-            {parentCategories.map((category) => (
-              <ListItem key={category.id} disablePadding>
-                <ListItemButton
-                  component={LocalizedClientLink}
-                  href={`/categories/${category.handle}`}
-                  onClick={toggleDrawer(false)}
-                >
-                  <ListItemText primary={category.name} />
-                </ListItemButton>
-              </ListItem>
-            ))}
+            {renderCategoryNodes(categoryRoots)}
             <ListItem disablePadding>
               <ListItemButton
                 component={LocalizedClientLink}
@@ -158,7 +181,11 @@ const MobileNavMenu = ({
           <Box sx={{ p: 2, display: "flex", flexDirection: "column", gap: 2 }}>
             {locales && locales.length > 0 && (
               <Box>
-                <Typography variant="caption" color="text.secondary" sx={{ mb: 1, display: "block" }}>
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                  sx={{ mb: 1, display: "block" }}
+                >
                   {t("language")}
                 </Typography>
                 <LanguageSelectMui
@@ -169,7 +196,11 @@ const MobileNavMenu = ({
             )}
             {regions && regions.length > 0 && (
               <Box>
-                <Typography variant="caption" color="text.secondary" sx={{ mb: 1, display: "block" }}>
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                  sx={{ mb: 1, display: "block" }}
+                >
                   {t("country")}
                 </Typography>
                 <CountrySelectMui regions={regions} />
@@ -183,4 +214,3 @@ const MobileNavMenu = ({
 }
 
 export default MobileNavMenu
-

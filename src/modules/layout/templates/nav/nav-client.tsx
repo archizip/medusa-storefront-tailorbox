@@ -6,6 +6,7 @@ import { Locale } from "@lib/data/locales"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import MobileNavMenu from "@modules/layout/components/mobile-nav-menu"
 import { useTranslations } from "@lib/util/i18n"
+import { buildCategoryTree, CategoryTreeNode } from "@lib/util/category-tree"
 
 type NavClientProps = {
   regions: HttpTypes.StoreRegion[] | null
@@ -23,6 +24,51 @@ type NavClientProps = {
   }
 }
 
+// Renders a category and any nested descendants (any depth) as small links.
+function MegaMenuLeaves({
+  nodes,
+  onClose,
+}: {
+  nodes: CategoryTreeNode[]
+  onClose: () => void
+}) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      {nodes.map((node) => (
+        <div key={node.category.id}>
+          <LocalizedClientLink
+            href={`/categories/${node.category.handle}`}
+            onClick={onClose}
+            style={{
+              fontSize: 14,
+              color: "var(--ink-2)",
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+            }}
+          >
+            {node.category.name}
+            <span
+              style={{
+                color: "var(--ink-4)",
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+              }}
+            >
+              →
+            </span>
+          </LocalizedClientLink>
+          {node.children.length > 0 && (
+            <div style={{ marginLeft: 12, marginTop: 8 }}>
+              <MegaMenuLeaves nodes={node.children} onClose={onClose} />
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
+
 function MegaMenu({
   categories,
   allLabel,
@@ -32,13 +78,12 @@ function MegaMenu({
   allLabel: string
   onClose: () => void
 }) {
-  // Build the menu from real backend categories: top-level ones become
-  // column headers, their children (if any) are listed beneath.
-  const topLevel = categories.filter(
-    (c) => c?.handle && c?.name && !c?.parent_category
-  )
+  // Build the full nested tree so every category is visible at once: top-level
+  // ones become section headers, their children become column headers, and any
+  // deeper descendants are listed beneath.
+  const roots = buildCategoryTree(categories)
 
-  if (topLevel.length === 0) {
+  if (roots.length === 0) {
     return null
   }
 
@@ -53,71 +98,67 @@ function MegaMenu({
         border: "1px solid var(--line)",
         padding: "28px 32px",
         display: "flex",
-        flexWrap: "wrap",
-        gap: "28px 60px",
+        flexDirection: "column",
+        gap: 24,
         boxShadow: "0 12px 40px rgba(31,26,20,0.08)",
         borderRadius: 4,
         maxWidth: 720,
         zIndex: 100,
       }}
     >
-      {topLevel.map((category) => {
-        const children = (category.category_children ?? []).filter(
-          (c) => c?.handle && c?.name
-        )
-        return (
-          <div key={category.id} style={{ minWidth: 160 }}>
-            <LocalizedClientLink
-              href={`/categories/${category.handle}`}
-              onClick={onClose}
-              className="serif"
+      {roots.map((root) => (
+        <div key={root.category.id}>
+          <LocalizedClientLink
+            href={`/categories/${root.category.handle}`}
+            onClick={onClose}
+            className="serif"
+            style={{
+              display: "block",
+              fontSize: 22,
+              color: "var(--ink)",
+              textDecoration: "none",
+              marginBottom: root.children.length ? 16 : 0,
+            }}
+          >
+            {root.category.name}
+          </LocalizedClientLink>
+          {root.children.length > 0 && (
+            <div
               style={{
-                display: "block",
-                fontSize: 22,
-                marginBottom: children.length ? 12 : 0,
-                color: "var(--ink)",
-                textDecoration: "none",
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "24px 48px",
               }}
             >
-              {category.name}
-            </LocalizedClientLink>
-            {children.length > 0 && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {children.map((child) => (
+              {root.children.map((child) => (
+                <div key={child.category.id} style={{ minWidth: 150 }}>
                   <LocalizedClientLink
-                    key={child.id}
-                    href={`/categories/${child.handle}`}
+                    href={`/categories/${child.category.handle}`}
                     onClick={onClose}
+                    className="serif"
                     style={{
-                      fontSize: 14,
-                      color: "var(--ink-2)",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 6,
+                      display: "block",
+                      fontSize: 17,
+                      color: "var(--ink)",
+                      textDecoration: "none",
+                      marginBottom: child.children.length ? 10 : 0,
                     }}
                   >
-                    {child.name}
-                    <span
-                      style={{
-                        color: "var(--ink-4)",
-                        fontFamily: "var(--mono)",
-                        fontSize: 11,
-                      }}
-                    >
-                      →
-                    </span>
+                    {child.category.name}
                   </LocalizedClientLink>
-                ))}
-              </div>
-            )}
-          </div>
-        )
-      })}
+                  {child.children.length > 0 && (
+                    <MegaMenuLeaves nodes={child.children} onClose={onClose} />
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
 
       {/* Link to the full catalog */}
       <div
         style={{
-          width: "100%",
           borderTop: "1px solid var(--line-soft)",
           paddingTop: 16,
         }}

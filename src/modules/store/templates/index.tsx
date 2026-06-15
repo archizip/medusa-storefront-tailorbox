@@ -23,9 +23,6 @@ const StoreTemplate = async ({
   const t = await getTranslations("store")
 
   const categories = await listCategories({ limit: 100 }).catch(() => [])
-  const parentCategories = (categories ?? [])
-    .filter((c) => c?.handle && c?.name && !c?.parent_category)
-    .sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""))
 
   return (
     <div
@@ -57,7 +54,7 @@ const StoreTemplate = async ({
       </div>
 
       <div className="flex flex-col gap-6 small:flex-row small:gap-10 small:items-start">
-        <RefinementList sortBy={sort} categories={parentCategories} />
+        <RefinementList sortBy={sort} categories={categories ?? []} />
         <div className="w-full flex-1 min-w-0">
           <Suspense fallback={<SkeletonProductGrid />}>
             <PaginatedProducts
