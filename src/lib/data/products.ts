@@ -52,6 +52,8 @@ export const listProducts = async ({
 
   const next = {
     ...(await getCacheOptions("products")),
+    // Revalidate periodically so catalog changes (new products, images)
+    // appear without a manual redeploy / data-cache purge.
     revalidate: 60,
   }
 

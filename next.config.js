@@ -45,6 +45,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "medusa-server-testing.s3.us-east-1.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "tailorbox-uploads-prod.s3.eu-west-3.amazonaws.com",
+      },
       ...(S3_HOSTNAME && S3_PATHNAME
         ? [
             {
