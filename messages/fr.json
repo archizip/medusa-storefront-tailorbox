@@ -252,7 +252,26 @@
     "allCategories": "Tous les tissus",
     "noProducts": "Aucun produit trouvé",
     "fabrics": "Tissus",
-    "viewAll": "Tous les tissus"
+    "viewAll": "Tous les tissus",
+    "hideFilters": "Masquer les filtres",
+    "showFilters": "Afficher les filtres",
+    "resultsLabel": "tissus",
+    "theme": "Motif",
+    "material": "Matière",
+    "density": "Densité",
+    "densityUnit": "g/m²",
+    "price": "Prix",
+    "priceFrom": "De",
+    "priceTo": "À",
+    "inStockOnly": "En stock uniquement",
+    "clearAll": "Tout effacer",
+    "themes": {
+      "geometric": "Géométrique",
+      "polkaDot": "Pois",
+      "stripes": "Rayures",
+      "animals": "Animaux",
+      "cat": "Chats"
+    }
   },
   "nav": {
     "announcement": "LIVRAISON GRATUITE PAR NOVA POSHTA DÈS 1500 ₴ · ÉCHANTILLONS DE TISSU GRATUITS",

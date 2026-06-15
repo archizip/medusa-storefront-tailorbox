@@ -1,12 +1,10 @@
 import { notFound } from "next/navigation"
-import { Suspense } from "react"
 
 import { listCategories } from "@lib/data/categories"
-import InteractiveLink from "@modules/common/components/interactive-link"
-import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
-import RefinementList from "@modules/store/components/refinement-list"
+import { listProducts } from "@lib/data/products"
+import { getRegion } from "@lib/data/regions"
+import ProductFilters from "@modules/store/components/product-filters"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
-import PaginatedProducts from "@modules/store/templates/paginated-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
 
@@ -21,9 +19,6 @@ export default async function CategoryTemplate({
   page?: string
   countryCode: string
 }) {
-  const pageNumber = page ? parseInt(page) : 1
-  const sort = sortBy || "created_at"
-
   if (!category || !countryCode) notFound()
 
   const allCategories = await listCategories({ limit: 100 }).catch(() => [])
@@ -62,71 +57,83 @@ export default async function CategoryTemplate({
     stack.push(...(childrenByParent.get(id) ?? []))
   }
 
+  const [region, productsResult] = await Promise.all([
+    getRegion(countryCode),
+    listProducts({
+      pageParam: 1,
+      queryParams: { limit: 100, category_id: categoryIds },
+      countryCode,
+    }),
+  ])
+
   return (
     <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
+      className="px-4 small:px-8 py-10"
+      style={{ maxWidth: 1360, margin: "0 auto" }}
       data-testid="category-container"
     >
-      <RefinementList
-        sortBy={sort}
-        categories={allCategories ?? []}
-        currentCategory={category.handle}
-        data-testid="sort-by-container"
-      />
-      <div className="w-full">
-        <div className="flex flex-row mb-8 text-2xl-semi gap-4">
-          {parents &&
-            parents.map((parent) => (
-              <span key={parent.id} className="text-ui-fg-subtle">
-                <LocalizedClientLink
-                  className="mr-4 hover:text-black"
-                  href={`/categories/${parent.handle}`}
-                  data-testid="sort-by-link"
-                >
-                  {parent.handle ? parent.name : parent.name}
-                </LocalizedClientLink>
-                /
-              </span>
-            ))}
-          <h1 data-testid="category-page-title">
-            {category.handle ? category.name : category.name}
+      {/* Breadcrumb + title */}
+      <div style={{ marginBottom: 32 }}>
+        <div
+          className="serif"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "baseline",
+            gap: 12,
+            fontSize: "clamp(28px, 4vw, 48px)",
+            lineHeight: 1.1,
+            letterSpacing: "-0.02em",
+          }}
+        >
+          {parents.map((parent) => (
+            <span
+              key={parent.id}
+              style={{
+                display: "inline-flex",
+                alignItems: "baseline",
+                gap: 12,
+              }}
+            >
+              <LocalizedClientLink
+                href={`/categories/${parent.handle}`}
+                style={{ color: "var(--ink-3)" }}
+                data-testid="sort-by-link"
+              >
+                {parent.name}
+              </LocalizedClientLink>
+              <span style={{ color: "var(--ink-4)" }}>/</span>
+            </span>
+          ))}
+          <h1
+            style={{ margin: 0, color: "var(--ink)" }}
+            data-testid="category-page-title"
+          >
+            {category.name}
           </h1>
         </div>
         {category.description && (
-          <div className="mb-8 text-base-regular">
-            <p>
-              {category.handle ? category.description : category.description}
-            </p>
-          </div>
+          <p
+            style={{
+              marginTop: 16,
+              maxWidth: 640,
+              color: "var(--ink-2)",
+              lineHeight: 1.6,
+            }}
+          >
+            {category.description}
+          </p>
         )}
-        {category.category_children && (
-          <div className="mb-8 text-base-large">
-            <ul className="grid grid-cols-1 gap-2">
-              {category.category_children?.map((c) => (
-                <li key={c.id}>
-                  <InteractiveLink href={`/categories/${c.handle}`}>
-                    {c.handle ? c.name : c.name}
-                  </InteractiveLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        <Suspense
-          fallback={
-            <SkeletonProductGrid
-              numberOfProducts={category.products?.length ?? 8}
-            />
-          }
-        >
-          <PaginatedProducts
-            sortBy={sort}
-            page={pageNumber}
-            categoryId={categoryIds}
-            countryCode={countryCode}
-          />
-        </Suspense>
       </div>
+
+      {region && (
+        <ProductFilters
+          products={productsResult.response.products}
+          region={region}
+          categories={allCategories ?? []}
+          currentCategory={category.handle}
+        />
+      )}
     </div>
   )
 }

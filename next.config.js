@@ -1,5 +1,5 @@
 const checkEnvVariables = require("./check-env-variables")
-const createNextIntlPlugin = require('next-intl/plugin');
+const createNextIntlPlugin = require("next-intl/plugin")
 
 checkEnvVariables()
 
@@ -9,7 +9,7 @@ checkEnvVariables()
 const S3_HOSTNAME = process.env.MEDUSA_CLOUD_S3_HOSTNAME
 const S3_PATHNAME = process.env.MEDUSA_CLOUD_S3_PATHNAME
 
-const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts")
 
 /**
  * @type {import('next').NextConfig}
@@ -48,6 +48,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "tailorbox-uploads-prod.s3.eu-west-3.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
       },
       ...(S3_HOSTNAME && S3_PATHNAME
         ? [

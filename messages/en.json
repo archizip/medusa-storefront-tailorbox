@@ -251,7 +251,26 @@
     "allCategories": "All fabrics",
     "noProducts": "No products found",
     "fabrics": "Fabrics",
-    "viewAll": "View all fabrics"
+    "viewAll": "View all fabrics",
+    "hideFilters": "Hide filters",
+    "showFilters": "Show filters",
+    "resultsLabel": "fabrics",
+    "theme": "Print theme",
+    "material": "Material",
+    "density": "Density",
+    "densityUnit": "gsm",
+    "price": "Price",
+    "priceFrom": "From",
+    "priceTo": "To",
+    "inStockOnly": "In stock only",
+    "clearAll": "Clear all",
+    "themes": {
+      "geometric": "Geometric",
+      "polkaDot": "Polka dot",
+      "stripes": "Stripes",
+      "animals": "Animals",
+      "cat": "Cats"
+    }
   },
   "nav": {
     "announcement": "FREE NOVA POSHTA DELIVERY FROM ₴1500 · FABRIC SAMPLES — FREE",

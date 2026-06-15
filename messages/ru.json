@@ -251,7 +251,26 @@
     "allCategories": "Все ткани",
     "noProducts": "Товары не найдены",
     "fabrics": "Ткани",
-    "viewAll": "Все ткани"
+    "viewAll": "Все ткани",
+    "hideFilters": "Скрыть фильтры",
+    "showFilters": "Показать фильтры",
+    "resultsLabel": "тканей",
+    "theme": "Тематика принта",
+    "material": "Материал",
+    "density": "Плотность",
+    "densityUnit": "г/м²",
+    "price": "Цена",
+    "priceFrom": "От",
+    "priceTo": "До",
+    "inStockOnly": "Только в наличии",
+    "clearAll": "Сбросить",
+    "themes": {
+      "geometric": "Геометрия",
+      "polkaDot": "Горошек",
+      "stripes": "Полоски",
+      "animals": "Животные",
+      "cat": "Кошки"
+    }
   },
   "nav": {
     "announcement": "БЕСПЛАТНАЯ ДОСТАВКА НОВОЙ ПОЧТОЙ ОТ 1500 ₴ · ОБРАЗЦЫ ТКАНИ — БЕСПЛАТНО",

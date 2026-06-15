@@ -1,12 +1,10 @@
-import { Suspense } from "react"
 import { getTranslations } from "next-intl/server"
 
 import { listCategories } from "@lib/data/categories"
-import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
-import RefinementList from "@modules/store/components/refinement-list"
+import { listProducts } from "@lib/data/products"
+import { getRegion } from "@lib/data/regions"
+import ProductFilters from "@modules/store/components/product-filters"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
-
-import PaginatedProducts from "./paginated-products"
 
 const StoreTemplate = async ({
   sortBy,
@@ -17,12 +15,17 @@ const StoreTemplate = async ({
   page?: string
   countryCode: string
 }) => {
-  const pageNumber = page ? parseInt(page) : 1
-  const sort = sortBy || "created_at"
-
   const t = await getTranslations("store")
 
-  const categories = await listCategories({ limit: 100 }).catch(() => [])
+  const [categories, region, productsResult] = await Promise.all([
+    listCategories({ limit: 100 }).catch(() => []),
+    getRegion(countryCode),
+    listProducts({
+      pageParam: 1,
+      queryParams: { limit: 100 },
+      countryCode,
+    }),
+  ])
 
   return (
     <div
@@ -34,7 +37,7 @@ const StoreTemplate = async ({
       data-testid="category-container"
     >
       {/* Page header */}
-      <div style={{ marginBottom: 40 }}>
+      <div style={{ marginBottom: 32 }}>
         <div className="uppercase-label" style={{ marginBottom: 12 }}>
           {t("catalog")}
         </div>
@@ -53,18 +56,13 @@ const StoreTemplate = async ({
         </h1>
       </div>
 
-      <div className="flex flex-col gap-6 small:flex-row small:gap-10 small:items-start">
-        <RefinementList sortBy={sort} categories={categories ?? []} />
-        <div className="w-full flex-1 min-w-0">
-          <Suspense fallback={<SkeletonProductGrid />}>
-            <PaginatedProducts
-              sortBy={sort}
-              page={pageNumber}
-              countryCode={countryCode}
-            />
-          </Suspense>
-        </div>
-      </div>
+      {region && (
+        <ProductFilters
+          products={productsResult.response.products}
+          region={region}
+          categories={categories ?? []}
+        />
+      )}
     </div>
   )
 }

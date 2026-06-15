@@ -71,7 +71,7 @@ export const listProducts = async ({
           region_id: region?.id,
           ...(locale && { locale }), // Add locale query parameter if available
           fields:
-            "*variants.calculated_price,+variants.inventory_quantity,*variants.images,+metadata,+tags,",
+            "*variants.calculated_price,+variants.inventory_quantity,*variants.images,+metadata,+tags,*options,*options.values,",
           ...queryParams,
         },
         headers,

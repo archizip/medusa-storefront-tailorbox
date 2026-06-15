@@ -252,7 +252,26 @@
     "allCategories": "Всі тканини",
     "noProducts": "Товарів не знайдено",
     "fabrics": "Тканини",
-    "viewAll": "Усі тканини"
+    "viewAll": "Усі тканини",
+    "hideFilters": "Сховати фільтри",
+    "showFilters": "Показати фільтри",
+    "resultsLabel": "тканин",
+    "theme": "Тематика принта",
+    "material": "Матеріал",
+    "density": "Щільність",
+    "densityUnit": "г/м²",
+    "price": "Ціна",
+    "priceFrom": "Від",
+    "priceTo": "До",
+    "inStockOnly": "Тільки в наявності",
+    "clearAll": "Очистити",
+    "themes": {
+      "geometric": "Геометрія",
+      "polkaDot": "Горошок",
+      "stripes": "Смужки",
+      "animals": "Тварини",
+      "cat": "Котики"
+    }
   },
   "nav": {
     "announcement": "БЕЗКОШТОВНА ДОСТАВКА НОВОЮ ПОШТОЮ ВІД 1500 ₴ · ЗРАЗКИ ТКАНИНИ — БЕЗКОШТОВНО",
