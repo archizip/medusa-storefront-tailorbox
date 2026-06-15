@@ -4,6 +4,7 @@ import { useState, useRef } from "react"
 import { HttpTypes } from "@medusajs/types"
 import { Locale } from "@lib/data/locales"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import MobileNavMenu from "@modules/layout/components/mobile-nav-menu"
 import { useTranslations } from "@lib/util/i18n"
 
 type NavClientProps = {
@@ -202,50 +203,70 @@ export default function NavClient({
           gap: 32,
         }}
       >
-        {/* Logo */}
-        <LocalizedClientLink
-          href="/"
+        {/* Left cluster: mobile menu trigger + logo */}
+        <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 10,
-            textDecoration: "none",
-            color: "var(--ink)",
+            gap: 8,
             flexShrink: 0,
           }}
-          data-testid="nav-store-link"
         >
-          <svg width={28} height={28} viewBox="0 0 32 32">
-            <rect
-              x="2"
-              y="2"
-              width="28"
-              height="28"
-              rx="2"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
+          <div className="small:hidden">
+            <MobileNavMenu
+              regions={regions}
+              locales={locales}
+              currentLocale={currentLocale}
+              categories={categories}
+              collections={collections}
             />
-            <path
-              d="M2 12 L30 12 M2 20 L30 20 M12 2 L12 30 M20 2 L20 30"
-              stroke="currentColor"
-              strokeWidth="1"
-              opacity="0.4"
-            />
-            <circle cx="16" cy="16" r="3" fill="currentColor" />
-          </svg>
-          <span
-            className="serif"
-            style={{ fontSize: 22, letterSpacing: "-0.01em" }}
+          </div>
+
+          {/* Logo */}
+          <LocalizedClientLink
+            href="/"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              textDecoration: "none",
+              color: "var(--ink)",
+              flexShrink: 0,
+            }}
+            data-testid="nav-store-link"
           >
-            TailorBox
-          </span>
-        </LocalizedClientLink>
+            <svg width={28} height={28} viewBox="0 0 32 32">
+              <rect
+                x="2"
+                y="2"
+                width="28"
+                height="28"
+                rx="2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+              <path
+                d="M2 12 L30 12 M2 20 L30 20 M12 2 L12 30 M20 2 L20 30"
+                stroke="currentColor"
+                strokeWidth="1"
+                opacity="0.4"
+              />
+              <circle cx="16" cy="16" r="3" fill="currentColor" />
+            </svg>
+            <span
+              className="serif"
+              style={{ fontSize: 22, letterSpacing: "-0.01em" }}
+            >
+              TailorBox
+            </span>
+          </LocalizedClientLink>
+        </div>
 
         {/* Desktop nav */}
         <nav
+          className="hidden small:flex"
           style={{
-            display: "flex",
             gap: 4,
             fontSize: 14,
             alignItems: "center",

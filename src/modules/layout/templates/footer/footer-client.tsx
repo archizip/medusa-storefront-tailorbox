@@ -78,18 +78,20 @@ export default function FooterClient({
         marginTop: 80,
       }}
     >
-      <div style={{ maxWidth: 1360, margin: "0 auto", padding: "0 32px" }}>
+      <div
+        className="px-5 small:px-8"
+        style={{ maxWidth: 1360, margin: "0 auto" }}
+      >
         {/* Main grid */}
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr",
-            gap: 40,
-            marginBottom: 50,
-          }}
+          className="grid grid-cols-2 gap-10 small:grid-cols-[2fr_1fr_1fr_1fr_1fr] small:gap-10"
+          style={{ marginBottom: 50 }}
         >
           {/* Brand column */}
-          <div style={{ color: "var(--bg-card)" }}>
+          <div
+            className="col-span-2 small:col-span-1"
+            style={{ color: "var(--bg-card)" }}
+          >
             <Logo />
             <p
               className="serif"
@@ -117,12 +119,10 @@ export default function FooterClient({
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               {(parentCategories.length > 0
-                ? parentCategories
-                    .slice(0, 5)
-                    .map((c) => ({
-                      label: c.name,
-                      href: `/categories/${c.handle}`,
-                    }))
+                ? parentCategories.slice(0, 5).map((c) => ({
+                    label: c.name,
+                    href: `/categories/${c.handle}`,
+                  }))
                 : shopLinks
               ).map((link) => (
                 <LocalizedClientLink
@@ -225,11 +225,10 @@ export default function FooterClient({
 
         {/* Bottom bar */}
         <div
+          className="flex flex-col gap-3 small:flex-row small:justify-between"
           style={{
             paddingTop: 24,
             borderTop: "1px solid rgba(255,255,255,0.1)",
-            display: "flex",
-            justifyContent: "space-between",
             fontSize: 12,
             color: "#7a6b58",
             fontFamily: "var(--mono)",

@@ -29,10 +29,10 @@ const StoreTemplate = async ({
 
   return (
     <div
+      className="px-4 small:px-8 py-10"
       style={{
         maxWidth: 1360,
         margin: "0 auto",
-        padding: "40px 32px",
       }}
       data-testid="category-container"
     >
@@ -56,9 +56,9 @@ const StoreTemplate = async ({
         </h1>
       </div>
 
-      <div style={{ display: "flex", gap: 40, alignItems: "flex-start" }}>
+      <div className="flex flex-col gap-6 small:flex-row small:gap-10 small:items-start">
         <RefinementList sortBy={sort} categories={parentCategories} />
-        <div style={{ flex: 1, minWidth: 0 }}>
+        <div className="w-full flex-1 min-w-0">
           <Suspense fallback={<SkeletonProductGrid />}>
             <PaginatedProducts
               sortBy={sort}
