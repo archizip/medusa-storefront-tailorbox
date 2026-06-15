@@ -42,6 +42,26 @@ export default async function CategoryTemplate({
     .filter((c) => c?.handle && c?.name && !c?.parent_category)
     .sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""))
 
+  // Medusa's `category_id` filter is not recursive, so a parent category would
+  // show no products of its own when items live in leaf categories. Collect the
+  // current category plus every descendant (any depth) and filter by all of them.
+  const childrenByParent = new Map<string, string[]>()
+  for (const c of allCategories ?? []) {
+    const parentId = c?.parent_category?.id
+    if (!parentId || !c?.id) continue
+    const siblings = childrenByParent.get(parentId) ?? []
+    siblings.push(c.id)
+    childrenByParent.set(parentId, siblings)
+  }
+
+  const categoryIds: string[] = []
+  const stack = [category.id]
+  while (stack.length) {
+    const id = stack.pop()!
+    categoryIds.push(id)
+    stack.push(...(childrenByParent.get(id) ?? []))
+  }
+
   return (
     <div
       className="flex flex-col small:flex-row small:items-start py-6 content-container"
@@ -102,7 +122,7 @@ export default async function CategoryTemplate({
           <PaginatedProducts
             sortBy={sort}
             page={pageNumber}
-            categoryId={category.id}
+            categoryId={categoryIds}
             countryCode={countryCode}
           />
         </Suspense>
