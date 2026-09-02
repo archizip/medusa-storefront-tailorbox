@@ -2,6 +2,7 @@ import { Container, clx } from "@medusajs/ui"
 import Image from "next/image"
 import React from "react"
 
+import { resolveImageUrl } from "@lib/util/image-url"
 import PlaceholderImage from "@modules/common/icons/placeholder-image"
 
 type ThumbnailProps = {
@@ -22,7 +23,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   className,
   "data-testid": dataTestid,
 }) => {
-  const initialImage = thumbnail || images?.[0]?.url
+  const initialImage = resolveImageUrl(thumbnail || images?.[0]?.url)
 
   return (
     <Container

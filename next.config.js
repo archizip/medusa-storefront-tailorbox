@@ -9,6 +9,35 @@ checkEnvVariables()
 const S3_HOSTNAME = process.env.MEDUSA_CLOUD_S3_HOSTNAME
 const S3_PATHNAME = process.env.MEDUSA_CLOUD_S3_PATHNAME
 
+/**
+ * The Medusa backend can serve product images itself (the `local` file
+ * provider stores them under `/static`), so its host has to be allowed in the
+ * image optimizer as well.
+ */
+const MEDUSA_BACKEND_URL =
+  process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || process.env.MEDUSA_BACKEND_URL
+
+const backendRemotePattern = () => {
+  if (!MEDUSA_BACKEND_URL) {
+    return []
+  }
+
+  try {
+    const { protocol, hostname, port } = new URL(MEDUSA_BACKEND_URL)
+
+    return [
+      {
+        protocol: protocol.replace(":", ""),
+        hostname,
+        ...(port ? { port } : {}),
+      },
+    ]
+  } catch {
+    console.warn(`Invalid MEDUSA_BACKEND_URL: ${MEDUSA_BACKEND_URL}`)
+    return []
+  }
+}
+
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts")
 
 /**
@@ -27,8 +56,16 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  env: {
+    // Needed in client components (cart dropdown thumbnails) to rewrite image
+    // URLs the backend stored against localhost.
+    ...(MEDUSA_BACKEND_URL
+      ? { NEXT_PUBLIC_MEDUSA_BACKEND_URL: MEDUSA_BACKEND_URL }
+      : {}),
+  },
   images: {
     remotePatterns: [
+      ...backendRemotePattern(),
       {
         protocol: "http",
         hostname: "localhost",

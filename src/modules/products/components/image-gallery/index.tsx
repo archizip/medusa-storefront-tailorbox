@@ -1,6 +1,7 @@
 import { HttpTypes } from "@medusajs/types"
 import Image from "next/image"
 
+import { resolveImageUrl } from "@lib/util/image-url"
 import PlaceholderImage from "@modules/common/icons/placeholder-image"
 
 type ImageGalleryProps = {
@@ -8,7 +9,9 @@ type ImageGalleryProps = {
 }
 
 const ImageGallery = ({ images }: ImageGalleryProps) => {
-  const withUrl = images.filter((image) => !!image.url)
+  const withUrl = images
+    .map((image) => ({ ...image, url: resolveImageUrl(image.url) }))
+    .filter((image): image is typeof image & { url: string } => !!image.url)
 
   return (
     <div className="flex items-start relative">
@@ -22,7 +25,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 id={image.id}
               >
                 <Image
-                  src={image.url!}
+                  src={image.url}
                   priority={index <= 2 ? true : false}
                   className="absolute inset-0 mix-blend-multiply"
                   alt={`Product image ${index + 1}`}
