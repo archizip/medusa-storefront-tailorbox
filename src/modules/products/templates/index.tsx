@@ -2,9 +2,11 @@ import React, { Suspense } from "react"
 
 import ImageGallery from "@modules/products/components/image-gallery"
 import ProductActions from "@modules/products/components/product-actions"
+import ProductBreadcrumbs from "@modules/products/components/product-breadcrumbs"
 import ProductOnboardingCta from "@modules/products/components/product-onboarding-cta"
-import ProductTabs from "@modules/products/components/product-tabs"
+import ProductServiceBox from "@modules/products/components/product-service-box"
 import RelatedProducts from "@modules/products/components/related-products"
+import ProductDetails from "@modules/products/templates/product-details"
 import ProductInfo from "@modules/products/templates/product-info"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
 import { notFound } from "next/navigation"
@@ -17,6 +19,7 @@ type ProductTemplateProps = {
   region: HttpTypes.StoreRegion
   countryCode: string
   images: HttpTypes.StoreProductImage[]
+  selectedVariantId?: string
 }
 
 const ProductTemplate: React.FC<ProductTemplateProps> = ({
@@ -24,6 +27,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   region,
   countryCode,
   images,
+  selectedVariantId,
 }) => {
   if (!product || !product.id) {
     return notFound()
@@ -31,34 +35,41 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
   return (
     <>
-      <div
-        className="content-container  flex flex-col small:flex-row small:items-start py-6 relative"
-        data-testid="product-container"
-      >
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-6">
-          <ProductInfo product={product} />
-          <ProductTabs product={product} />
-        </div>
-        <div className="block w-full relative">
-          <ImageGallery images={images} />
-        </div>
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-12">
-          <ProductOnboardingCta />
-          <Suspense
-            fallback={
-              <ProductActions
-                disabled={true}
-                product={product}
-                region={region}
-              />
-            }
-          >
-            <ProductActionsWrapper id={product.id} region={region} />
-          </Suspense>
+      <div className="content-container py-6" data-testid="product-container">
+        <Suspense fallback={<div className="h-4" />}>
+          <ProductBreadcrumbs product={product} />
+        </Suspense>
+
+        <div className="mt-8 grid grid-cols-1 gap-10 small:grid-cols-2 small:gap-x-14 small:items-start">
+          <ImageGallery images={images} title={product.title} />
+
+          <div className="flex flex-col gap-y-6 small:sticky small:top-28">
+            <ProductOnboardingCta />
+            <ProductInfo product={product} />
+
+            <hr className="hr-thin" />
+
+            <Suspense
+              fallback={
+                <ProductActions
+                  disabled={true}
+                  product={product}
+                  region={region}
+                />
+              }
+            >
+              <ProductActionsWrapper id={product.id} region={region} />
+            </Suspense>
+
+            <ProductServiceBox />
+          </div>
         </div>
       </div>
+
+      <ProductDetails product={product} selectedVariantId={selectedVariantId} />
+
       <div
-        className="content-container my-16 small:my-32"
+        className="content-container my-16 small:my-20"
         data-testid="related-products-container"
       >
         <Suspense fallback={<SkeletonRelatedProducts />}>

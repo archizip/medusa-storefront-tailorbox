@@ -1,6 +1,7 @@
 import { listProducts } from "@lib/data/products"
 import { getRegion } from "@lib/data/regions"
 import { HttpTypes } from "@medusajs/types"
+import { getTranslations } from "next-intl/server"
 import Product from "../product-preview"
 
 type RelatedProductsProps = {
@@ -12,14 +13,17 @@ export default async function RelatedProducts({
   product,
   countryCode,
 }: RelatedProductsProps) {
-  const region = await getRegion(countryCode)
+  const [region, t] = await Promise.all([
+    getRegion(countryCode),
+    getTranslations("product"),
+  ])
 
   if (!region) {
     return null
   }
 
   // edit this function to define your related products logic
-  const queryParams: HttpTypes.StoreProductListParams = {}
+  const queryParams: HttpTypes.StoreProductListParams = { limit: 6 }
   if (region?.id) {
     queryParams.region_id = region.id
   }
@@ -37,9 +41,9 @@ export default async function RelatedProducts({
     queryParams,
     countryCode,
   }).then(({ response }) => {
-    return response.products.filter(
-      (responseProduct) => responseProduct.id !== product.id
-    )
+    return response.products
+      .filter((responseProduct) => responseProduct.id !== product.id)
+      .slice(0, 5)
   })
 
   if (!products.length) {
@@ -47,17 +51,10 @@ export default async function RelatedProducts({
   }
 
   return (
-    <div className="product-page-constraint">
-      <div className="flex flex-col items-center text-center mb-16">
-        <span className="text-base-regular text-gray-600 mb-6">
-          Related products
-        </span>
-        <p className="text-2xl-regular text-ui-fg-base max-w-lg">
-          You might also want to check out these products.
-        </p>
-      </div>
+    <div>
+      <h2 className="uppercase-label mb-8">{t("similarProducts")}</h2>
 
-      <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-6 gap-y-8">
+      <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-5 gap-x-6 gap-y-8">
         {products.map((product) => (
           <li key={product.id}>
             <Product region={region} product={product} />
