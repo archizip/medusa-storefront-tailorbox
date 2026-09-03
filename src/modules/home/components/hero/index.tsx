@@ -56,7 +56,8 @@ const Hero = () => {
             {t("season")}
           </div>
 
-          <h1
+          {/* h1 у блока каталога — он идёт первым на странице */}
+          <h2
             className="serif"
             style={{
               fontSize: "clamp(52px, 7vw, 88px)",
@@ -73,7 +74,7 @@ const Hero = () => {
             </em>
             <br />
             {t("titleEnd")}
-          </h1>
+          </h2>
 
           <p
             style={{

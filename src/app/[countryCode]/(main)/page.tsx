@@ -1,10 +1,12 @@
+import { Suspense } from "react"
 import { Metadata } from "next"
 import { getTranslations } from "next-intl/server"
 
 import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
 import CategoriesGrid from "@modules/home/components/categories-grid"
-import FabricTypesQuickNav from "@modules/home/components/fabric-types-nav"
+import CatalogBrowser from "@modules/home/components/catalog-browser"
+import CatalogBrowserSkeleton from "@modules/home/components/catalog-browser/skeleton"
 import TrustBadges from "@modules/home/components/trust-badges"
 import GuideBand from "@modules/home/components/guide-band"
 import { listCollections } from "@lib/data/collections"
@@ -215,8 +217,11 @@ export default async function Home(props: {
 
   return (
     <>
+      {/* Каталог виден сразу, до всего остального контента */}
+      <Suspense fallback={<CatalogBrowserSkeleton />}>
+        <CatalogBrowser />
+      </Suspense>
       <Hero />
-      <FabricTypesQuickNav />
       <CategoriesGrid />
       <TrustBadges />
       <FeaturedProducts collections={collections} region={region} />

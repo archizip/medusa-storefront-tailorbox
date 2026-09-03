@@ -134,6 +134,18 @@
     "total": "Total"
   },
   "home": {
+    "catalog": {
+      "label": "00 — Catalogue",
+      "title": "Tout le catalogue, tout de suite",
+      "expand": "Afficher tout le catalogue",
+      "collapse": "Réduire le catalogue",
+      "allFabrics": "Tous les tissus",
+      "viewCategory": "Voir tout →",
+      "subcategories": "{count, plural, one {# sous-catégorie} other {# sous-catégories}}",
+      "products": "{count, plural, one {# tissu} other {# tissus}}",
+      "inSection": "Dans cette rubrique",
+      "emptyCategory": "Cette rubrique n'a pas encore de sous-catégories — ouvrez-la pour voir les tissus."
+    },
     "meta": {
       "title": "TailorBox — Tissus pour marques et ateliers",
       "description": "Jersey, molleton, interlock, bord-côte. Commandez dès 0,5 m. Livraison gratuite dès 1500 ₴."
@@ -213,10 +225,6 @@
       "viewAll": "Tout voir →",
       "subcategories": "{count} sous-catégories →",
       "browse": "Découvrir →"
-    },
-    "fabricTypes": {
-      "label": "Type :",
-      "all": "Tous"
     }
   },
   "footer": {
