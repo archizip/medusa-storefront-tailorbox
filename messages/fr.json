@@ -31,7 +31,8 @@
     "new": "Nouveau",
     "signIn": "S'identifier",
     "help": "Aide",
-    "findStore": "Trouver un magasin"
+    "findStore": "Trouver un magasin",
+    "breadcrumbs": "Fil d'Ariane"
   },
   "checkout": {
     "inYourCart": "Dans votre panier",
@@ -105,26 +106,81 @@
     "description": "Description",
     "specifications": "Spécifications",
     "reviews": "Avis",
-    "productInformation": "Informations sur le produit",
-    "shippingReturns": "Livraison et retours",
-    "material": "Matériau",
-    "countryOfOrigin": "Pays d'origine",
-    "type": "Type",
-    "weight": "Poids",
-    "width": "Largeur",
-    "dimensions": "Dimensions",
-    "fastDelivery": "Livraison rapide",
-    "fastDeliveryDescription": "Votre colis arrivera dans 3-5 jours ouvrables à votre point de retrait ou à votre domicile.",
-    "simpleExchanges": "Échanges simples",
-    "simpleExchangesDescription": "La taille ne convient pas ? Pas de souci - nous échangerons votre produit contre un nouveau.",
-    "easyReturns": "Retours faciles",
-    "easyReturnsDescription": "Retournez simplement votre produit et nous vous rembourserons. Sans poser de questions – nous ferons de notre mieux pour que votre retour se passe sans problème.",
     "pricePerMeter": "prix au mètre",
     "inStock": "en stock",
     "addOneMeter": "+ 1 m",
     "select": "Choisir",
     "from": "À partir de",
-    "original": "Prix initial"
+    "original": "Prix initial",
+    "unitCm": "cm",
+    "unitGsm": "g/m²",
+    "unitMeter": "m",
+    "total": "Total",
+    "seeFullDescription": "Voir la description complète",
+    "fullDescription": "Description complète",
+    "additionalInformation": "Informations complémentaires",
+    "similarProducts": "Produits similaires",
+    "openGallery": "Ouvrir l'image en plein écran",
+    "closeGallery": "Fermer la galerie",
+    "previousImage": "Image précédente",
+    "nextImage": "Image suivante",
+    "zoomIn": "Zoom avant",
+    "zoomOut": "Zoom arrière",
+    "lengthInMeters": "Longueur en mètres",
+    "increaseLength": "Ajouter un mètre",
+    "decreaseLength": "Retirer un mètre",
+    "specs": {
+      "reference": "Référence",
+      "composition": "Composition",
+      "width": "Laize / Largeur",
+      "weight": "Poids",
+      "density": "Densité",
+      "properties": "Propriétés techniques",
+      "usage": "Usage",
+      "print": "Imprimé",
+      "season": "Saison",
+      "type": "Type",
+      "origin": "Origine tissage",
+      "care": "Entretien"
+    },
+    "metrageGuide": {
+      "title": "Guide des métrages",
+      "intro": "Métrage conseillé pour un tissu en 145 cm de laize :",
+      "note": "Prévoyez 10 à 15 cm de plus pour les raccords de motif et le rétrécissement.",
+      "garments": {
+        "dress": {
+          "label": "Robe",
+          "length": "2–2,5 m"
+        },
+        "skirt": {
+          "label": "Jupe",
+          "length": "1–1,5 m"
+        },
+        "blouse": {
+          "label": "Blouse ou chemise",
+          "length": "1,5–2 m"
+        },
+        "trousers": {
+          "label": "Pantalon",
+          "length": "1,5–2 m"
+        },
+        "accessories": {
+          "label": "Accessoires",
+          "length": "0,5–1 m"
+        }
+      }
+    },
+    "service": {
+      "deliveryTitle": "Livraison",
+      "deliveryLeadTime": "Les commandes sont coupées et préparées sous 1 à 2 jours ouvrés.",
+      "deliveryNote": "Les frais de livraison sont calculés au moment du paiement.",
+      "badges": {
+        "returns": "Retour gratuit 30 jours",
+        "payment": "Paiement sécurisé",
+        "care": "Commandes préparées avec soin"
+      }
+    },
+    "specLine": "{label} : {value}"
   },
   "cartTotals": {
     "subtotalExclShippingTaxes": "Sous-total (hors livraison et taxes)",
@@ -134,6 +190,18 @@
     "total": "Total"
   },
   "home": {
+    "catalog": {
+      "label": "00 — Catalogue",
+      "title": "Tout le catalogue, tout de suite",
+      "expand": "Afficher tout le catalogue",
+      "collapse": "Réduire le catalogue",
+      "allFabrics": "Tous les tissus",
+      "viewCategory": "Voir tout →",
+      "subcategories": "{count, plural, one {# sous-catégorie} other {# sous-catégories}}",
+      "products": "{count, plural, one {# tissu} other {# tissus}}",
+      "inSection": "Dans cette rubrique",
+      "emptyCategory": "Cette rubrique n'a pas encore de sous-catégories — ouvrez-la pour voir les tissus."
+    },
     "meta": {
       "title": "TailorBox — Tissus pour marques et ateliers",
       "description": "Jersey, molleton, interlock, bord-côte. Commandez dès 0,5 m. Livraison gratuite dès 1500 ₴."
@@ -213,10 +281,6 @@
       "viewAll": "Tout voir →",
       "subcategories": "{count} sous-catégories →",
       "browse": "Découvrir →"
-    },
-    "fabricTypes": {
-      "label": "Type :",
-      "all": "Tous"
     }
   },
   "footer": {
@@ -532,5 +596,74 @@
     "needHelp": "Besoin d'aide ?",
     "contactLink": "Contact",
     "returnsExchanges": "Retours et échanges"
+  },
+  "productTags": {
+    "density-heavy": "Lourd (250+ g/m²)",
+    "density-light": "Léger (jusqu'à 180 g/m²)",
+    "density-medium": "Moyen (180-250 g/m²)",
+    "feature-antibacterial": "Antibactérien",
+    "feature-breathable": "Respirant",
+    "feature-brushed": "Gratté",
+    "feature-brushed-interior": "Gratté intérieur",
+    "feature-eco-friendly": "Écologique",
+    "feature-moisture-wicking": "Évacuation de l'humidité",
+    "feature-non-stretch": "Non extensible",
+    "feature-organic": "Biologique",
+    "feature-smooth": "Lisse",
+    "feature-stretch": "Extensible",
+    "feature-textured": "Texturé",
+    "print-abstract": "Abstrait",
+    "print-abstract-geometric": "Géométrie abstraite",
+    "print-animals": "Animaux",
+    "print-botanical": "Botanique",
+    "print-cars": "Voitures",
+    "print-cartoon": "Dessins animés",
+    "print-check": "Vichy",
+    "print-cherry-blossom": "Cerisier",
+    "print-christmas": "Noël",
+    "print-circles": "Cercles",
+    "print-city": "Ville",
+    "print-daisies": "Pâquerettes",
+    "print-dinosaurs": "Dinosaures",
+    "print-easter": "Pâques",
+    "print-floral": "Fleuri",
+    "print-forest": "Forêt",
+    "print-geometric": "Géométrique",
+    "print-gradient": "Dégradé",
+    "print-halloween": "Halloween",
+    "print-holiday": "Fêtes",
+    "print-kids": "Enfants",
+    "print-large-flowers": "Grandes fleurs",
+    "print-marble": "Marbre",
+    "print-nature": "Nature",
+    "print-ocean": "Océan",
+    "print-polka-dot": "Pois",
+    "print-princess": "Princesse",
+    "print-roses": "Roses",
+    "print-small-flowers": "Petites fleurs",
+    "print-space": "Espace",
+    "print-splatter": "Éclaboussures",
+    "print-squares": "Carrés",
+    "print-stripes": "Rayures",
+    "print-superheroes": "Super-héros",
+    "print-tie-dye": "Tie-dye",
+    "print-toys": "Jouets",
+    "print-triangles": "Triangles",
+    "print-tropical": "Tropical",
+    "print-unicorns": "Licornes",
+    "print-valentine": "Saint-Valentin",
+    "print-watercolor": "Aquarelle",
+    "print-zigzag": "Zigzag",
+    "purpose-adult": "Vêtements adultes",
+    "purpose-children": "Vêtements enfants",
+    "purpose-clothing": "Vêtements",
+    "purpose-homewear": "Vêtements de maison",
+    "purpose-sportswear": "Sport",
+    "purpose-underwear": "Sous-vêtements",
+    "season-all-season": "Toutes saisons",
+    "season-autumn": "Automne",
+    "season-spring": "Printemps",
+    "season-summer": "Été",
+    "season-winter": "Hiver"
   }
 }

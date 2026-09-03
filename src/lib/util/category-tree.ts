@@ -43,3 +43,28 @@ export function buildCategoryTree(
 
   return roots
 }
+
+/**
+ * Ancestor chain for a category, root first and ending with the category
+ * itself. `listCategories` exposes only each category's direct parent, so the
+ * chain is walked through a flat lookup built from that list. Ids already seen
+ * are skipped, so a mis-configured parent cycle cannot hang the render.
+ */
+export function getCategoryChain(
+  categoryId: string,
+  categoriesById: Map<string, HttpTypes.StoreProductCategory>
+): HttpTypes.StoreProductCategory[] {
+  const chain: HttpTypes.StoreProductCategory[] = []
+  const seen = new Set<string>()
+
+  let currentId: string | undefined = categoryId
+  while (currentId && !seen.has(currentId)) {
+    seen.add(currentId)
+    const category = categoriesById.get(currentId)
+    if (!category) break
+    chain.unshift(category)
+    currentId = category.parent_category?.id
+  }
+
+  return chain
+}

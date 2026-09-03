@@ -57,3 +57,6 @@ dump.rdb
 /blob-report/
 /playwright/.cache/
 /playwright/.auth
+
+# Playwright MCP scratch output (screenshots, console logs, page snapshots)
+.playwright-mcp/

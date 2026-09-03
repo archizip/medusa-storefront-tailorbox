@@ -31,7 +31,8 @@
     "search": "Search",
     "signIn": "Sign In",
     "help": "Help",
-    "findStore": "Find a Store"
+    "findStore": "Find a Store",
+    "breadcrumbs": "Breadcrumb"
   },
   "checkout": {
     "inYourCart": "In your cart",
@@ -105,25 +106,81 @@
     "description": "Description",
     "specifications": "Specifications",
     "reviews": "Reviews",
-    "productInformation": "Product Information",
-    "shippingReturns": "Shipping & Returns",
-    "material": "Material",
-    "countryOfOrigin": "Country of origin",
-    "type": "Type",
-    "weight": "Weight",
-    "dimensions": "Dimensions",
-    "fastDelivery": "Fast delivery",
-    "fastDeliveryDescription": "Your package will arrive in 3-5 business days at your pick up location or in the comfort of your home.",
-    "simpleExchanges": "Simple exchanges",
-    "simpleExchangesDescription": "Is the fit not quite right? No worries - we'll exchange your product for a new one.",
-    "easyReturns": "Easy returns",
-    "easyReturnsDescription": "Just return your product and we'll refund your money. No questions asked – we'll do our best to make sure your return is hassle-free.",
     "pricePerMeter": "price per meter",
     "inStock": "in stock",
     "addOneMeter": "+ 1 m",
     "select": "Select",
     "from": "From",
-    "original": "Original"
+    "original": "Original",
+    "unitCm": "cm",
+    "unitGsm": "g/m²",
+    "unitMeter": "m",
+    "total": "Total",
+    "seeFullDescription": "See the full description",
+    "fullDescription": "Full description",
+    "additionalInformation": "Additional information",
+    "similarProducts": "Similar products",
+    "openGallery": "Open the image full screen",
+    "closeGallery": "Close the gallery",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "lengthInMeters": "Length in metres",
+    "increaseLength": "Add one metre",
+    "decreaseLength": "Remove one metre",
+    "specs": {
+      "reference": "Reference",
+      "composition": "Composition",
+      "width": "Width",
+      "weight": "Weight",
+      "density": "Density",
+      "properties": "Technical properties",
+      "usage": "Suggested use",
+      "print": "Print",
+      "season": "Season",
+      "type": "Type",
+      "origin": "Weaving origin",
+      "care": "Care"
+    },
+    "metrageGuide": {
+      "title": "Length guide",
+      "intro": "Recommended length for fabric 145 cm wide:",
+      "note": "Add 10–15 cm for pattern matching and shrinkage.",
+      "garments": {
+        "dress": {
+          "label": "Dress",
+          "length": "2–2.5 m"
+        },
+        "skirt": {
+          "label": "Skirt",
+          "length": "1–1.5 m"
+        },
+        "blouse": {
+          "label": "Blouse or shirt",
+          "length": "1.5–2 m"
+        },
+        "trousers": {
+          "label": "Trousers",
+          "length": "1.5–2 m"
+        },
+        "accessories": {
+          "label": "Accessories",
+          "length": "0.5–1 m"
+        }
+      }
+    },
+    "service": {
+      "deliveryTitle": "Delivery",
+      "deliveryLeadTime": "Orders are cut and prepared within 1–2 working days.",
+      "deliveryNote": "Shipping is calculated at checkout.",
+      "badges": {
+        "returns": "30-day free returns",
+        "payment": "Secure payment",
+        "care": "Orders prepared with care"
+      }
+    },
+    "specLine": "{label}: {value}"
   },
   "cartTotals": {
     "subtotalExclShippingTaxes": "Subtotal (excl. shipping and taxes)",
@@ -133,6 +190,18 @@
     "total": "Total"
   },
   "home": {
+    "catalog": {
+      "label": "00 — Catalog",
+      "title": "The whole catalog, up front",
+      "expand": "Expand full catalog",
+      "collapse": "Collapse catalog",
+      "allFabrics": "All fabrics",
+      "viewCategory": "View all →",
+      "subcategories": "{count, plural, one {# subcategory} other {# subcategories}}",
+      "products": "{count, plural, one {# fabric} other {# fabrics}}",
+      "inSection": "In this section",
+      "emptyCategory": "This section has no subcategories yet — open it to see the fabrics."
+    },
     "meta": {
       "title": "TailorBox — Fabrics for brands and ateliers",
       "description": "Single jersey, fleece, interlock, ribbing. Order from 0.5 m. Free delivery from ₴1500."
@@ -212,10 +281,6 @@
       "viewAll": "View all →",
       "subcategories": "{count} subcategories →",
       "browse": "Browse →"
-    },
-    "fabricTypes": {
-      "label": "Type:",
-      "all": "All"
     }
   },
   "footer": {
@@ -531,5 +596,74 @@
     "needHelp": "Need help?",
     "contactLink": "Contact",
     "returnsExchanges": "Returns & exchanges"
+  },
+  "productTags": {
+    "density-heavy": "Heavy (250+ gsm)",
+    "density-light": "Light (up to 180 gsm)",
+    "density-medium": "Medium (180–250 gsm)",
+    "feature-antibacterial": "Antibacterial",
+    "feature-breathable": "Breathable",
+    "feature-brushed": "Brushed",
+    "feature-brushed-interior": "Brushed inside",
+    "feature-eco-friendly": "Eco-friendly",
+    "feature-moisture-wicking": "Moisture-wicking",
+    "feature-non-stretch": "Non-stretch",
+    "feature-organic": "Organic",
+    "feature-smooth": "Smooth",
+    "feature-stretch": "Stretch",
+    "feature-textured": "Textured",
+    "print-abstract": "Abstract",
+    "print-abstract-geometric": "Abstract geometric",
+    "print-animals": "Animals",
+    "print-botanical": "Botanical",
+    "print-cars": "Cars",
+    "print-cartoon": "Cartoon",
+    "print-check": "Gingham check",
+    "print-cherry-blossom": "Cherry blossom",
+    "print-christmas": "Christmas",
+    "print-circles": "Circles",
+    "print-city": "City",
+    "print-daisies": "Daisies",
+    "print-dinosaurs": "Dinosaurs",
+    "print-easter": "Easter",
+    "print-floral": "Floral",
+    "print-forest": "Forest",
+    "print-geometric": "Geometric",
+    "print-gradient": "Gradient",
+    "print-halloween": "Halloween",
+    "print-holiday": "Holiday",
+    "print-kids": "Kids",
+    "print-large-flowers": "Large flowers",
+    "print-marble": "Marble",
+    "print-nature": "Nature",
+    "print-ocean": "Ocean",
+    "print-polka-dot": "Polka dot",
+    "print-princess": "Princess",
+    "print-roses": "Roses",
+    "print-small-flowers": "Small flowers",
+    "print-space": "Space",
+    "print-splatter": "Splatter",
+    "print-squares": "Squares",
+    "print-stripes": "Stripes",
+    "print-superheroes": "Superheroes",
+    "print-tie-dye": "Tie-dye",
+    "print-toys": "Toys",
+    "print-triangles": "Triangles",
+    "print-tropical": "Tropical",
+    "print-unicorns": "Unicorns",
+    "print-valentine": "Valentine",
+    "print-watercolor": "Watercolor",
+    "print-zigzag": "Zigzag",
+    "purpose-adult": "Adult clothing",
+    "purpose-children": "Children's clothing",
+    "purpose-clothing": "Clothing",
+    "purpose-homewear": "Homewear",
+    "purpose-sportswear": "Sportswear",
+    "purpose-underwear": "Underwear",
+    "season-all-season": "All seasons",
+    "season-autumn": "Autumn",
+    "season-spring": "Spring",
+    "season-summer": "Summer",
+    "season-winter": "Winter"
   }
 }

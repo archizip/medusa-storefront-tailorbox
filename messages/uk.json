@@ -31,7 +31,8 @@
     "new": "Новинки",
     "signIn": "Увійти",
     "help": "Допомога",
-    "findStore": "Знайти магазин"
+    "findStore": "Знайти магазин",
+    "breadcrumbs": "Навігаційний ланцюжок"
   },
   "checkout": {
     "inYourCart": "У вашому кошику",
@@ -105,26 +106,81 @@
     "description": "Опис",
     "specifications": "Характеристики",
     "reviews": "Відгуки",
-    "productInformation": "Інформація про товар",
-    "shippingReturns": "Доставка та повернення",
-    "material": "Матеріал",
-    "countryOfOrigin": "Країна походження",
-    "type": "Тип",
-    "weight": "Вага",
-    "width": "Ширина",
-    "dimensions": "Розміри",
-    "fastDelivery": "Швидка доставка",
-    "fastDeliveryDescription": "Ваше замовлення прибуде через 3-5 робочих днів до місця отримання або додому.",
-    "simpleExchanges": "Прості обміни",
-    "simpleExchangesDescription": "Розмір не підходить? Не хвилюйтеся - ми обміняємо ваш товар на новий.",
-    "easyReturns": "Легкі повернення",
-    "easyReturnsDescription": "Просто поверніть товар, і ми повернемо гроші. Без запитань - ми зробимо все можливе, щоб ваше повернення пройшло без проблем.",
     "pricePerMeter": "ціна за метр",
     "inStock": "у наявності",
     "addOneMeter": "+ 1 м",
     "select": "Оберіть",
     "from": "від",
-    "original": "Початкова"
+    "original": "Початкова",
+    "unitCm": "см",
+    "unitGsm": "г/м²",
+    "unitMeter": "м",
+    "total": "Разом",
+    "seeFullDescription": "Дивитися повний опис",
+    "fullDescription": "Повний опис",
+    "additionalInformation": "Додаткова інформація",
+    "similarProducts": "Схожі товари",
+    "openGallery": "Відкрити зображення на весь екран",
+    "closeGallery": "Закрити галерею",
+    "previousImage": "Попереднє зображення",
+    "nextImage": "Наступне зображення",
+    "zoomIn": "Збільшити",
+    "zoomOut": "Зменшити",
+    "lengthInMeters": "Довжина в метрах",
+    "increaseLength": "Додати метр",
+    "decreaseLength": "Зменшити на метр",
+    "specs": {
+      "reference": "Артикул",
+      "composition": "Склад",
+      "width": "Ширина",
+      "weight": "Грамаж",
+      "density": "Щільність",
+      "properties": "Технічні властивості",
+      "usage": "Призначення",
+      "print": "Принт",
+      "season": "Сезон",
+      "type": "Тип",
+      "origin": "Країна виробництва",
+      "care": "Догляд"
+    },
+    "metrageGuide": {
+      "title": "Гід із метражу",
+      "intro": "Рекомендований метраж для тканини шириною 145 см:",
+      "note": "Додайте 10–15 см на збіг малюнка та усадку.",
+      "garments": {
+        "dress": {
+          "label": "Сукня",
+          "length": "2–2,5 м"
+        },
+        "skirt": {
+          "label": "Спідниця",
+          "length": "1–1,5 м"
+        },
+        "blouse": {
+          "label": "Блуза або сорочка",
+          "length": "1,5–2 м"
+        },
+        "trousers": {
+          "label": "Штани",
+          "length": "1,5–2 м"
+        },
+        "accessories": {
+          "label": "Аксесуари",
+          "length": "0,5–1 м"
+        }
+      }
+    },
+    "service": {
+      "deliveryTitle": "Доставка",
+      "deliveryLeadTime": "Замовлення розкроюємо та збираємо за 1–2 робочі дні.",
+      "deliveryNote": "Вартість доставки розраховується під час оформлення.",
+      "badges": {
+        "returns": "Безкоштовне повернення 30 днів",
+        "payment": "Безпечна оплата",
+        "care": "Замовлення збираємо з турботою"
+      }
+    },
+    "specLine": "{label}: {value}"
   },
   "cartTotals": {
     "subtotalExclShippingTaxes": "Підсумок (без доставки та податків)",
@@ -134,6 +190,18 @@
     "total": "Всього"
   },
   "home": {
+    "catalog": {
+      "label": "00 — Каталог",
+      "title": "Увесь каталог відразу",
+      "expand": "Розгорнути весь каталог",
+      "collapse": "Згорнути каталог",
+      "allFabrics": "Усі тканини",
+      "viewCategory": "Дивитись усе →",
+      "subcategories": "{count, plural, one {# підкатегорія} few {# підкатегорії} many {# підкатегорій} other {# підкатегорії}}",
+      "products": "{count, plural, one {# тканина} few {# тканини} many {# тканин} other {# тканини}}",
+      "inSection": "У цьому розділі",
+      "emptyCategory": "У цьому розділі поки немає підкатегорій — відкрийте його, щоб побачити тканини."
+    },
     "meta": {
       "title": "TailorBox — Тканини для брендів і ательє",
       "description": "Кулірка, футер, інтерлок, рібана. Замовляйте від 0.5 м. Безкоштовна доставка від 1500 ₴."
@@ -213,10 +281,6 @@
       "viewAll": "Дивитися всі →",
       "subcategories": "{count} підкатегорій →",
       "browse": "Переглянути →"
-    },
-    "fabricTypes": {
-      "label": "Тип:",
-      "all": "Всі"
     }
   },
   "footer": {
@@ -532,5 +596,74 @@
     "needHelp": "Потрібна допомога?",
     "contactLink": "Контакти",
     "returnsExchanges": "Повернення та обмін"
+  },
+  "productTags": {
+    "density-heavy": "Щільний (250+ г/м²)",
+    "density-light": "Легкий (до 180 г/м²)",
+    "density-medium": "Середній (180-250 г/м²)",
+    "feature-antibacterial": "Антибактеріальний",
+    "feature-breathable": "Дихаючий",
+    "feature-brushed": "З начосом",
+    "feature-brushed-interior": "З начосом всередині",
+    "feature-eco-friendly": "Екологічний",
+    "feature-moisture-wicking": "Вологовідвідний",
+    "feature-non-stretch": "Без стрейчу",
+    "feature-organic": "Органічний",
+    "feature-smooth": "Гладкий",
+    "feature-stretch": "Стрейч",
+    "feature-textured": "Текстурований",
+    "print-abstract": "Абстрактний",
+    "print-abstract-geometric": "Абстрактна геометрія",
+    "print-animals": "Тварини",
+    "print-botanical": "Ботанічний",
+    "print-cars": "Машинки",
+    "print-cartoon": "Мультяшні персонажі",
+    "print-check": "Клітинка",
+    "print-cherry-blossom": "Сакура",
+    "print-christmas": "Новорічний",
+    "print-circles": "Кола",
+    "print-city": "Місто",
+    "print-daisies": "Ромашки",
+    "print-dinosaurs": "Динозаври",
+    "print-easter": "Великодній",
+    "print-floral": "Квітковий",
+    "print-forest": "Ліс",
+    "print-geometric": "Геометричний",
+    "print-gradient": "Градієнт",
+    "print-halloween": "Хелловін",
+    "print-holiday": "Святковий",
+    "print-kids": "Дитячий",
+    "print-large-flowers": "Великі квіти",
+    "print-marble": "Мармур",
+    "print-nature": "Природа",
+    "print-ocean": "Океан",
+    "print-polka-dot": "Горошок",
+    "print-princess": "Принцеси",
+    "print-roses": "Троянди",
+    "print-small-flowers": "Дрібні квіти",
+    "print-space": "Космос",
+    "print-splatter": "Плями",
+    "print-squares": "Квадрати",
+    "print-stripes": "Смужки",
+    "print-superheroes": "Супергерої",
+    "print-tie-dye": "Тай-дай",
+    "print-toys": "Іграшки",
+    "print-triangles": "Трикутники",
+    "print-tropical": "Тропічний",
+    "print-unicorns": "Єдинороги",
+    "print-valentine": "День святого Валентина",
+    "print-watercolor": "Акварель",
+    "print-zigzag": "Зигзаг",
+    "purpose-adult": "Дорослий одяг",
+    "purpose-children": "Дитячий одяг",
+    "purpose-clothing": "Одяг",
+    "purpose-homewear": "Домашній одяг",
+    "purpose-sportswear": "Спортивний одяг",
+    "purpose-underwear": "Нижня білизна",
+    "season-all-season": "Всесезонний",
+    "season-autumn": "Осінній",
+    "season-spring": "Весняний",
+    "season-summer": "Літній",
+    "season-winter": "Зимовий"
   }
 }
