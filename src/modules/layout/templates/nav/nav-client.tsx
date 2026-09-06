@@ -5,6 +5,8 @@ import { HttpTypes } from "@medusajs/types"
 import { Locale } from "@lib/data/locales"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import MobileNavMenu from "@modules/layout/components/mobile-nav-menu"
+import LanguageSelectMui from "@modules/layout/components/language-select-mui"
+import CountrySelectMui from "@modules/layout/components/country-select-mui"
 import { useTranslations } from "@lib/util/i18n"
 import { buildCategoryTree, CategoryTreeNode } from "@lib/util/category-tree"
 
@@ -383,10 +385,27 @@ export default function NavClient({
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 4,
+            gap: 8,
             flexShrink: 0,
           }}
         >
+          <div
+            className="hidden small:flex"
+            data-testid="header-locale-controls"
+            style={{ alignItems: "center", gap: 8 }}
+          >
+            {locales && locales.length > 0 && (
+              <LanguageSelectMui
+                locales={locales}
+                currentLocale={currentLocale}
+                compact
+              />
+            )}
+            {regions && regions.length > 0 && (
+              <CountrySelectMui regions={regions} compact />
+            )}
+          </div>
+
           <button
             className="btn-ghost"
             title={tCommon("search")}

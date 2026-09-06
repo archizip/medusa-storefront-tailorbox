@@ -23,9 +23,13 @@ type CountryOption = {
 
 type CountrySelectMuiProps = {
   regions: HttpTypes.StoreRegion[]
+  compact?: boolean
 }
 
-const CountrySelectMui = ({ regions }: CountrySelectMuiProps) => {
+const CountrySelectMui = ({
+  regions,
+  compact = false,
+}: CountrySelectMuiProps) => {
   const [current, setCurrent] = useState<string>("")
   const { countryCode } = useParams()
   const currentPath = usePathname().split(`/${countryCode}`)[1]
@@ -62,20 +66,22 @@ const CountrySelectMui = ({ regions }: CountrySelectMuiProps) => {
     }
   }
 
-  const currentOption = options?.find((o) => o.country === current)
-
   return (
     <FormControl
       size="small"
       sx={{
-        minWidth: { xs: 120, sm: 140, md: 160 },
-        width: { xs: "100%", sm: "auto" },
+        minWidth: compact
+          ? { xs: 110, sm: 130 }
+          : { xs: 120, sm: 140, md: 160 },
+        width: compact ? "auto" : { xs: "100%", sm: "auto" },
       }}
     >
       <Select
         value={current}
         onChange={handleChange}
         displayEmpty
+        data-testid="country-select"
+        inputProps={{ "aria-label": t("country") }}
         sx={{
           height: { xs: 32, sm: 36 },
           fontSize: { xs: "0.75rem", sm: "0.875rem" },
