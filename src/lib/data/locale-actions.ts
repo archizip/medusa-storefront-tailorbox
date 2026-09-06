@@ -2,18 +2,28 @@
 
 import { sdk } from "@lib/config"
 import { revalidateTag } from "next/cache"
-import { cookies as nextCookies } from "next/headers"
+import { cookies as nextCookies, headers } from "next/headers"
+import { normalizeLocale } from "@lib/util/normalize-locale"
+import {
+  LOCALE_COOKIE_NAME,
+  LOCALE_REQUEST_HEADER,
+} from "@lib/util/resolve-locale"
 import { getAuthHeaders, getCacheTag, getCartId, removeCartId } from "./cookies"
 
-const LOCALE_COOKIE_NAME = "_medusa_locale"
-
 /**
- * Gets the current locale from cookies
+ * Gets the current locale from the cookie, or the middleware header on
+ * the first request before the cookie is visible to Server Components.
  */
 export const getLocale = async (): Promise<string | null> => {
   try {
     const cookies = await nextCookies()
-    return cookies.get(LOCALE_COOKIE_NAME)?.value ?? null
+    const fromCookie = cookies.get(LOCALE_COOKIE_NAME)?.value
+    if (fromCookie) {
+      return fromCookie
+    }
+
+    const headerStore = await headers()
+    return headerStore.get(LOCALE_REQUEST_HEADER)
   } catch {
     return null
   }
@@ -27,8 +37,9 @@ export const setLocaleCookie = async (locale: string) => {
   cookies.set(LOCALE_COOKIE_NAME, locale, {
     maxAge: 60 * 60 * 24 * 365, // 1 year
     httpOnly: false, // Allow client-side access
-    sameSite: "strict",
+    sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
+    path: "/",
   })
 }
 
@@ -37,7 +48,8 @@ export const setLocaleCookie = async (locale: string) => {
  * Also updates the cart with the new locale if one exists.
  */
 export const updateLocale = async (localeCode: string): Promise<string> => {
-  await setLocaleCookie(localeCode)
+  const locale = normalizeLocale(localeCode)
+  await setLocaleCookie(locale)
 
   // Update cart with the new locale if a cart exists
   const cartId = await getCartId()
@@ -47,7 +59,7 @@ export const updateLocale = async (localeCode: string): Promise<string> => {
         ...(await getAuthHeaders()),
       }
 
-      await sdk.store.cart.update(cartId, { locale: localeCode }, {}, headers)
+      await sdk.store.cart.update(cartId, { locale }, {}, headers)
 
       const cartCacheTag = await getCacheTag("carts")
       if (cartCacheTag) {
@@ -55,8 +67,9 @@ export const updateLocale = async (localeCode: string): Promise<string> => {
       }
     } catch (error: any) {
       // If cart is not found, remove the cart ID from cookies
-      const errorMessage = error?.message || error?.error?.message || String(error || "")
-      const isCartNotFound = 
+      const errorMessage =
+        error?.message || error?.error?.message || String(error || "")
+      const isCartNotFound =
         errorMessage.includes("not found") ||
         errorMessage.includes("Cart id not found") ||
         error?.status === 404 ||
@@ -90,5 +103,5 @@ export const updateLocale = async (localeCode: string): Promise<string> => {
     revalidateTag(collectionsCacheTag)
   }
 
-  return localeCode
+  return locale
 }
